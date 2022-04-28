@@ -10,7 +10,7 @@ const config = {
     // 指定打包模式：'none' | 'development' | 'production'
     mode: 'development',
     // 指定入口文件
-    entry: './src/index.ts',
+    entry: './src/index.tsx',
     // 指定打包文件所在目录
     output: {
         // 指定打包文件的目录
