@@ -16,13 +16,11 @@
 
 ## Maintainers
 
-[@FantiGA](https://github.com/FantiGA)
 [@swancai](https://github.com/swancai)
 
 ## Contributing
-
-[@swancai](https://github.com/swancai)
+[@FantiGA](https://github.com/FantiGA)
 
 ## License
 
-[MIT](LICENSE)  © 2022 FantiGA
+[MIT](LICENSE)
