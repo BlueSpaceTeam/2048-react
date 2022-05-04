@@ -1,0 +1,44 @@
+body,dl,dd,ul,ol,h1,h2,h3,h4,h5,h6,pre,form,input,textarea,p,hr,thead,tbody,tfoot,th,td{margin:0;padding:0;}
+ul,ol{list-style:none;}
+html{-ms-text-size-adjust:none;-webkit-text-size-adjust:none;text-size-adjust:none;}
+body{line-height:1.5; font-size:14px;-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;-webkit-tap-highlight-color: rgba(0,0,0,0);}
+body,button,input,select,textarea{font-family:"PingFang SC","microsoft yahei";}
+.bold,b,strong{font-weight:bold;}
+i,em{font-style:normal;}
+table{border-collapse:collapse;border-spacing:0;}
+table th,table td{border:1px solid #ddd;padding:5px;}
+table th{font-weight:inherit;border-bottom-width:2px;border-bottom-color:#ccc;}
+img{border:none;width:auto\9;max-width:100%;vertical-align:top;display:block;}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;vertical-align:baseline;}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;}
+button[disabled],input[disabled]{cursor:default;}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}
+input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}
+input:focus{outline:none;}
+select[size],select[multiple],select[size][multiple]{border:1px solid #AAA;padding:0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block;}
+audio,canvas,video,progress{display:inline-block;}
+input::-webkit-input-speech-button {display: none;}
+button,input,textarea{-webkit-tap-highlight-color: rgba(0,0,0,0);}
+button{ padding: 0; }
+button{background: transparent;}
+input{border: none; background: transparent;}
+dialog { padding: 0;}
+/*链接*/
+a{text-decoration:none;outline:none;background:transparent;}
+a:link,a:visited,a:active,a:focus,a.active{outline:none;text-decoration:none;}
+a.line{text-decoration:underline;}
+
+/*文本换行*/
+.word-break{display:block;word-break:break-all;}/*不截断单词换行*/
+.word-wrap{display:block;word-wrap:break-word;}/*截断单词换行*/
+
+/*省略号*/
+.ellipsis{display:block;overflow:hidden;text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;-webkit-text-overflow:ellipsis;-moz-text-overflow:ellipsis;white-space:nowrap;}/*单行省略*/
+.ellipsis-2{display:-webkit-box;overflow:hidden;word-break:break-all;-webkit-box-orient:vertical;-webkit-line-clamp:2;}/*多行省略*/
+
+/*清除浮动*/
+.clear:after{content:'';display:block;clear:both;}
+.clear{zoom:1;}/*触发IE的hasLayout属性，该属性IE独有*/
