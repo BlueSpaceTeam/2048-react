@@ -1,18 +1,11 @@
 import React from 'react'
 
+import Square from './components/Square'
+import Board from './components/Board'
+
 export default function App() {
-  const Squares = new Array(16).fill(null).map((n, idx) => {
-    return idx % 2 === 0 
-      ? (
-        <div className="square">
-          <div className="number">{idx}</div>
-        </div>
-      )
-      : (
-        <div className="square">
-          <div className="number show">{idx}</div>
-        </div>
-      )
+  const Squares = new Array(16).fill(0).map((n, idx) => {
+    return <Square num={2**(idx + 1)} />
   })
   return (
     <div className="game">
