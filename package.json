@@ -45,8 +45,6 @@
     "core-js": "^3.21.1",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
-    "less": "^4.1.2",
-    "less-loader": "^10.2.0",
     "postcss": "^8.4.12",
     "postcss-loader": "^6.2.1",
     "postcss-preset-env": "^7.4.3",

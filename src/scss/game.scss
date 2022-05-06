@@ -2,30 +2,38 @@
 
 %text {
     color: #756f68;
-    font-size: 30px;
-    line-height: 44px;
+    // font-size: 30px;
+    // line-height: 44px;
+    font-size: 0.3rem;
+    line-height: 0.44rem;
     text-align: center;
 }
 
 body {
     background-color: #fdf9ef;
+    width: 100vw;
+    height: 100vh;
 }
 
 .game {
     box-sizing: border-box;
+    margin: 0 auto;
+    // padding: 30px;
+    padding: 0.3rem;
     max-width: 750px;
     min-width: 320px;
-    margin: 0 auto;
-    padding: 30px;
 }
 
 header {
     display: grid;
-    grid-template-columns: repeat(3, 218px);
-    grid-gap: 18px;
+    // grid-template-columns: repeat(3, 218px);
+    // grid-gap: 18px;
     grid-template-areas: "logo score bestScore"
                         "logo btnNew btnUndo";
-    height: 218px;
+    // height: 218px;
+    grid-template-columns: repeat(3, 2.18rem);
+    grid-gap: 0.18rem;
+    height: 2.18rem;
     color: #fff;
     text-align: center;
 }
@@ -33,14 +41,17 @@ header {
 .logo,
 .score,
 .btn {
-    border-radius: 8px;
+    // border-radius: 8px;
+    border-radius: 0.08rem;
 }
 
 .logo {
     grid-row-start: span 2;
-    line-height: 218px;
+    // line-height: 218px;
+    line-height: 2.18rem;
     background-color: #f4c949;
-    font-size: 48px;
+    // font-size: 48px;
+    font-size: 0.48rem;
     font-weight: 600;
 }
 
@@ -48,11 +59,13 @@ header {
     display: inline-grid;
     place-content: center;
     background-color: #3f3932;
-    font-size: 34px;
+    // font-size: 34px;
+    font-size: 0.34rem;
     font-weight: 500;
 
     .key {
-        font-size: 24px;
+        // font-size: 24px;
+        font-size: 0.24rem;
     }
 }
 
@@ -60,28 +73,36 @@ header {
     border: none;
     background-color: #ff4e2c;
     color: inherit;
-    font-size: 34px;
+    // font-size: 34px;
+    font-size: 0.34rem;
     font-weight: 600;
 }
 
 .desc {
-    margin: 36px 0 44px;
+    // margin: 36px 0 44px;
+    margin: 0.36rem 0 0.44rem;
     @extend %text;
 }
 
 .board {
     display: grid;
-    grid-template-columns: repeat(4, 150px);
+    // grid-template-columns: repeat(4, 150px);
+    grid-template-columns: repeat(4, 1.5rem);
     place-content: space-evenly space-evenly;
-    width: 690px;
-    height: 690px;
+    // width: 690px;
+    // height: 690px;
+    width: 6.9rem;
+    height: 6.9rem;
     background-color: #a8927e;
-    border-radius: 8px;
+    // border-radius: 8px;
+    border-radius: 0.08rem;
 }
 
 .square {
-    height: 150px;
-    line-height: 150px;
+    // height: 150px;
+    // line-height: 150px;
+    height: 1.5rem;
+    line-height: 1.5rem;
     background-color: #c4ae9a;
     border-radius: inherit;
     overflow: hidden;
@@ -139,18 +160,22 @@ header {
     }
 
     &.fs-3 { 
-        font-size: 56px;
+        // font-size: 56px;
+        font-size: 0.56rem;
     }
     &.fs-4 {
-        font-size: 50px;
+        // font-size: 50px;
+        font-size: 0.5rem;
     }
     &.fs-5 {
-        font-size: 40px;
+        // font-size: 40px;
+        font-size: 0.4rem;
     }
 }
 
 footer {
     display: grid;
-    margin-top: 44px;
+    // margin-top: 44px;
+    margin-top: 0.44rem;
     @extend %text;
 }

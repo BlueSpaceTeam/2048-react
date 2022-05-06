@@ -7,6 +7,7 @@
  * @FilePath: /2048-react/src/index.tsx
  */
 import './scss/game.scss';
+import './fontSize';
 
 import React from 'react';
 import { createRoot } from 'react-dom/client'
