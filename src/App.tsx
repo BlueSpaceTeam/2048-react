@@ -1,33 +1,21 @@
 import React from 'react'
 
-import Square from './components/Square'
+import Score from './components/Score'
 import Board from './components/Board'
 
 export default function App() {
-  const Squares = new Array(16).fill(0).map((n, idx) => {
-    return <Square num={2**(idx + 1)} />
-  })
   return (
     <div className="game">
       <header>
         <div className="logo">2048</div>
-        <div className="score">
-          <span className="key">SCORE</span>
-          <span>345</span>
-        </div>
-        <div className="score best">
-          <span className="key">BEST</span>
-          <span>34.5K</span>
-        </div>
-        <button className="btn btn-new">NEW</button>
-        <button className="btn btn-undo">UNDO</button>
+        <Score name="SCORE" num={345} />
+        <Score name="BEST" num={'34.5K'} />
+        <button className="btn btn-new" onClick={() => alert('new')}>NEW</button>
+        <button className="btn btn-undo" onClick={() => alert('undo')}>UNDO</button>
       </header>
       <main>
         <p className="desc">Join the numbers and get to the 2048 tile!</p>
-
-        <div className="board">
-          {Squares}
-        </div>
+        <Board />
       </main>
       <footer>
         <span>Written in React and Typescript</span>

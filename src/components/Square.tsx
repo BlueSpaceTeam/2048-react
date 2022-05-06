@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 // 求对数 Math.log(8)/Math.log(2) = 3 <=>  2**3 = 8
 
