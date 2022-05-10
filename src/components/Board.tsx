@@ -67,6 +67,7 @@ export default function Board (props: any) {
 	// }
 	// 当前格对应一元数组的下标 —— 函数式编程
 	const getSequareIdx: (row: number, col: number) => number = (row, col) => (row - 1) * MATRIX_COL + (col - 1)
+	// const getCol = startPointer = (preColIdx + 1) / MATRIX_COL / (row - 1)
 
 	type dir = Direction
 
@@ -131,23 +132,27 @@ export default function Board (props: any) {
 				if (MATRIX_ROW > 1) {
 					// 从第1列开始
 					for (let col: number = 1; col <= MATRIX_COL; col++) {
-						// 最后一个下标序号
-						// const preEndIdx: number = col - 1
-						const preEndIdx: number = getSequareIdx(1, col)
 						// 每行和前一行的下标相差值
 						const rowIdxDelta: number = MATRIX_COL
+						// 行的开始指针，根据是否合并而更改移动后能比较的方块的最小下标值，默认从第1列开始
+						let startPointer: number = 1
+
 						// 从第2行开始往移动方向合并
 						for (let row: number = 2; row <= MATRIX_ROW; row++) {
+							// 最后一个下标序号
+							const preEndIdx: number = getSequareIdx(startPointer, col)
 							// 每行开始值对应一元数组的下标
 							const curRowIdx: number = getSequareIdx(row, col)
 							if (arr[curRowIdx]) { // 当前行有值的情况
-								console.log(`col=${col}, row=${row}, squaresIdx=${curRowIdx}`)
+								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squaresIdx=${curRowIdx}`)
 								// preRowIdx ：移动方向的前一行Idx
 								for (let preRowIdx: number = getSequareIdx(row - 1, col); preRowIdx >= preEndIdx; preRowIdx -= rowIdxDelta) {
 									if (arr[preRowIdx]) {
 										if (arr[curRowIdx] === arr[preRowIdx]) { // 合并
 											arr[preRowIdx] *= 2
 											arr[curRowIdx] = 0
+											// 最后+1是因为起始指针从合并的下一位开始
+											startPointer = (preRowIdx - col + 1) / MATRIX_COL + 1 + 1
 										} else if ((curRowIdx - preRowIdx) / rowIdxDelta > 1) { // curRowIdx - preRowIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preRowIdx + rowIdxDelta] = arr[curRowIdx]
 											arr[curRowIdx] = 0
@@ -170,22 +175,27 @@ export default function Board (props: any) {
 				if (MATRIX_ROW > 1) {
 					// 从第1列开始
 					for (let col: number = 1; col <= MATRIX_COL; col++) {
-						// 最后一个下标序号
-						const preEndIdx: number = getSequareIdx(MATRIX_ROW, col)
 						// 每行和前一行的下标相差值
 						const rowIdxDelta: number = MATRIX_COL
+						// 行的开始指针，根据是否合并而更改移动后能比较的方块的最小下标值，默认从第1列开始
+						let startPointer: number = MATRIX_ROW
+
 						// 从倒数第2行开始往移动方向合并
 						for (let row: number = MATRIX_ROW - 1; row >= 1; row--) {
+							// 最后一个下标序号
+							const preEndIdx: number = getSequareIdx(startPointer, col)
 							// 每行开始值对应一元数组的下标
 							const curRowIdx: number = getSequareIdx(row, col)
 							if (arr[curRowIdx]) { // 当前行有值的情况
-								console.log(`col=${col}, row=${row}, squaresIdx=${curRowIdx}`)
+								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squaresIdx=${curRowIdx}`)
 								// preRowIdx ：移动方向的前一行Idx
 								for (let preRowIdx: number = getSequareIdx(row + 1, col); preRowIdx <= preEndIdx; preRowIdx += rowIdxDelta) {
 									if (arr[preRowIdx]) {
 										if (arr[curRowIdx] === arr[preRowIdx]) { // 合并
 											arr[preRowIdx] *= 2
 											arr[curRowIdx] = 0
+											// 最后-1是因为起始指针从合并的下一位开始
+											startPointer = (preRowIdx - col + 1) / MATRIX_COL + 1 - 1
 										} else if ((preRowIdx - curRowIdx) / rowIdxDelta > 1) { // curRowIdx - preRowIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preRowIdx - rowIdxDelta] = arr[curRowIdx]
 											arr[curRowIdx] = 0
@@ -208,25 +218,27 @@ export default function Board (props: any) {
 				if (MATRIX_COL > 1) {
 					// 从第1行开始
 					for (let row: number = 1; row <= MATRIX_ROW; row++) {
-						// 最后一个下标序号
-						const preEndIdx: number = getSequareIdx(row, 1)
-						// TODO 如果合并过，可改preEndIdx-同时改回isAddedPreSquare = false
-
 						// 每列和前一列的下标相差值
 						const colIdxDelta: number = 1
+						// 列的开始指针，根据是否合并而更改移动后能比较的方块的最小下标值，默认从第1列开始
+						let startPointer: number = 1
 
 						// 从第2列开始往移动方向合并
 						for (let col: number = 2; col <= MATRIX_COL; col++) {
+							// 最后一个下标序号
+							const preEndIdx: number = getSequareIdx(row, startPointer)
 							// 每列开始值对应一元数组的下标
 							const curColIdx: number = getSequareIdx(row, col)
 							if (arr[curColIdx]) { // 当前列有值的情况
-								console.log(`col=${col}, row=${row}, squaresIdx=${curColIdx}`)
+								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squaresIdx=${curColIdx}`)
 								// preColIdx ：移动方向的前一列Idx
 								for (let preColIdx: number = getSequareIdx(row, col - 1); preColIdx >= preEndIdx; preColIdx -= colIdxDelta) {
 									if (arr[preColIdx]) {
 										if (arr[curColIdx] === arr[preColIdx]) { // 合并
 											arr[preColIdx] *= 2
 											arr[curColIdx] = 0
+											// 最后+1是因为起始指针从合并的下一位开始
+											startPointer = preColIdx + 1 - (row - 1) * MATRIX_COL + 1
 										} else if ((curColIdx - preColIdx) / colIdxDelta > 1) { // curColIdx - preColIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preColIdx + colIdxDelta] = arr[curColIdx]
 											arr[curColIdx] = 0
@@ -249,22 +261,27 @@ export default function Board (props: any) {
 				if (MATRIX_COL > 1) {
 					// 从第1行开始
 					for (let row: number = 1; row <= MATRIX_ROW; row++) {
-						// 最后一个下标序号
-						const preEndIdx: number = getSequareIdx(row, MATRIX_COL)
 						// 每列和前一列的下标相差值
 						const colIdxDelta: number = 1
+						// 列的开始指针，根据是否合并而更改移动后能比较的方块的最小下标值，默认从第1列开始
+						let startPointer: number = MATRIX_COL
+
 						// 从倒数第2列开始往移动方向合并
 						for (let col: number = MATRIX_COL - 1; col >= 1; col--) {
+							// 最后一个下标序号
+							const preEndIdx: number = getSequareIdx(row, startPointer)
 							// 每列开始值对应一元数组的下标
 							const curColIdx: number = getSequareIdx(row, col)
 							if (arr[curColIdx]) { // 当前列有值的情况
-								console.log(`col=${col}, row=${row}, squaresIdx=${curColIdx}`)
+								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squaresIdx=${curColIdx}`)
 								// preColIdx ：移动方向的前一列Idx
 								for (let preColIdx: number = getSequareIdx(row, col + 1); preColIdx <= preEndIdx; preColIdx += colIdxDelta) {
 									if (arr[preColIdx]) {
 										if (arr[curColIdx] === arr[preColIdx]) { // 合并
 											arr[preColIdx] *= 2
 											arr[curColIdx] = 0
+											// 最后-1是因为起始指针从合并的下一位开始
+											startPointer = preColIdx + 1 - (row - 1) * MATRIX_COL - 1
 										} else if ((preColIdx - curColIdx) / colIdxDelta > 1) { // curColIdx - preColIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preColIdx - colIdxDelta] = arr[curColIdx]
 											arr[curColIdx] = 0
