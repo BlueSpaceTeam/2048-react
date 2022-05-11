@@ -29,6 +29,12 @@ export default function Board (props: any) {
     const SquaresUI: JSX.Element[] = squares.map((n, idx) => {
       return <Square num={n} key={idx} />
     })
+	// 当前格对应一元数组的下标 —— 函数式编程
+	const getSequareIdx: (row: number, col: number) => number = (row, col) => (row - 1) * MATRIX_COL + (col - 1)
+	// 获取行号
+	const getRow: (col: number, squareIdx: number) => number = (col, squareIdx) => (squareIdx - col + 1) / MATRIX_COL + 1
+	// 获取列号
+	const getCol: (row: number, squareIdx: number) => number = (row, squareIdx) => squareIdx + 1 - (row - 1) * MATRIX_COL
 
 	// 获取方向
 	function getDirection (curX: number, curY: number, minDistance: number) : Direction | null {
@@ -61,15 +67,6 @@ export default function Board (props: any) {
 
 		return direction
 	}
-	// 当前格对应一元数组的下标
-	// function getSequareIdx (row: number, col: number): number {
-	// 	return (row - 1) * MATRIX_COL + (col - 1)	
-	// }
-	// 当前格对应一元数组的下标 —— 函数式编程
-	const getSequareIdx: (row: number, col: number) => number = (row, col) => (row - 1) * MATRIX_COL + (col - 1)
-	// const getCol = startPointer = (preColIdx + 1) / MATRIX_COL / (row - 1)
-
-	type dir = Direction
 
 	// 触摸事件
 	function handleTouchStart (e: any) {
@@ -144,7 +141,7 @@ export default function Board (props: any) {
 							// 每行开始值对应一元数组的下标
 							const curRowIdx: number = getSequareIdx(row, col)
 							if (arr[curRowIdx]) { // 当前行有值的情况
-								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squaresIdx=${curRowIdx}`)
+								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squareIdx=${curRowIdx}`)
 								// preRowIdx ：移动方向的前一行Idx
 								for (let preRowIdx: number = getSequareIdx(row - 1, col); preRowIdx >= preEndIdx; preRowIdx -= rowIdxDelta) {
 									if (arr[preRowIdx]) {
@@ -152,7 +149,7 @@ export default function Board (props: any) {
 											arr[preRowIdx] *= 2
 											arr[curRowIdx] = 0
 											// 最后+1是因为起始指针从合并的下一位开始
-											startPointer = (preRowIdx - col + 1) / MATRIX_COL + 1 + 1
+											startPointer = getRow(col, preRowIdx) + 1
 										} else if ((curRowIdx - preRowIdx) / rowIdxDelta > 1) { // curRowIdx - preRowIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preRowIdx + rowIdxDelta] = arr[curRowIdx]
 											arr[curRowIdx] = 0
@@ -187,7 +184,7 @@ export default function Board (props: any) {
 							// 每行开始值对应一元数组的下标
 							const curRowIdx: number = getSequareIdx(row, col)
 							if (arr[curRowIdx]) { // 当前行有值的情况
-								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squaresIdx=${curRowIdx}`)
+								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squareIdx=${curRowIdx}`)
 								// preRowIdx ：移动方向的前一行Idx
 								for (let preRowIdx: number = getSequareIdx(row + 1, col); preRowIdx <= preEndIdx; preRowIdx += rowIdxDelta) {
 									if (arr[preRowIdx]) {
@@ -195,7 +192,7 @@ export default function Board (props: any) {
 											arr[preRowIdx] *= 2
 											arr[curRowIdx] = 0
 											// 最后-1是因为起始指针从合并的下一位开始
-											startPointer = (preRowIdx - col + 1) / MATRIX_COL + 1 - 1
+											startPointer = getRow(col, preRowIdx) - 1
 										} else if ((preRowIdx - curRowIdx) / rowIdxDelta > 1) { // curRowIdx - preRowIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preRowIdx - rowIdxDelta] = arr[curRowIdx]
 											arr[curRowIdx] = 0
@@ -230,7 +227,7 @@ export default function Board (props: any) {
 							// 每列开始值对应一元数组的下标
 							const curColIdx: number = getSequareIdx(row, col)
 							if (arr[curColIdx]) { // 当前列有值的情况
-								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squaresIdx=${curColIdx}`)
+								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squareIdx=${curColIdx}`)
 								// preColIdx ：移动方向的前一列Idx
 								for (let preColIdx: number = getSequareIdx(row, col - 1); preColIdx >= preEndIdx; preColIdx -= colIdxDelta) {
 									if (arr[preColIdx]) {
@@ -238,7 +235,7 @@ export default function Board (props: any) {
 											arr[preColIdx] *= 2
 											arr[curColIdx] = 0
 											// 最后+1是因为起始指针从合并的下一位开始
-											startPointer = preColIdx + 1 - (row - 1) * MATRIX_COL + 1
+											startPointer = getCol(col, preColIdx) + 1
 										} else if ((curColIdx - preColIdx) / colIdxDelta > 1) { // curColIdx - preColIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preColIdx + colIdxDelta] = arr[curColIdx]
 											arr[curColIdx] = 0
@@ -273,7 +270,7 @@ export default function Board (props: any) {
 							// 每列开始值对应一元数组的下标
 							const curColIdx: number = getSequareIdx(row, col)
 							if (arr[curColIdx]) { // 当前列有值的情况
-								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squaresIdx=${curColIdx}`)
+								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squareIdx=${curColIdx}`)
 								// preColIdx ：移动方向的前一列Idx
 								for (let preColIdx: number = getSequareIdx(row, col + 1); preColIdx <= preEndIdx; preColIdx += colIdxDelta) {
 									if (arr[preColIdx]) {
@@ -281,7 +278,7 @@ export default function Board (props: any) {
 											arr[preColIdx] *= 2
 											arr[curColIdx] = 0
 											// 最后-1是因为起始指针从合并的下一位开始
-											startPointer = preColIdx + 1 - (row - 1) * MATRIX_COL - 1
+											startPointer = getCol(col, preColIdx) - 1
 										} else if ((preColIdx - curColIdx) / colIdxDelta > 1) { // curColIdx - preColIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preColIdx - colIdxDelta] = arr[curColIdx]
 											arr[curColIdx] = 0
@@ -304,13 +301,16 @@ export default function Board (props: any) {
 
 		// 如果完全相同，则不发生变化
 		if (JSON.stringify(squares) === JSON.stringify(arr)) return
-		// 法1：
-		setSequares(genNewNum(arr))
+		// // 法1：
+		// setSequares(genNewNum(arr))
 
 		// 法2：
-		// setSequares(arr)
-		// 为避免捕获过时的属性，需要异步函数获取
-		// setSequares(origin => genNewNum(origin))
+		setSequares(arr)
+		/**
+		 * 逻辑：为避免捕获过时的属性，setSequares需要异步函数获取
+		 * 优化：为体现先合并后随机顺序的逻辑，避免混淆，使用setTimeout。经人工调试不生硬，90ms比较符合视觉的展示
+		 **/ 
+		setTimeout(() => setSequares(origin => genNewNum(origin)), 90)
 	}
 
 	// 随机选一为0的square随机设置2或4
