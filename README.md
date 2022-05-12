@@ -14,6 +14,13 @@
 ```
 ```
 
+## TODOLIST
+1. 撤销功能
+2. 重新开局功能
+3. Game over 界面
+4. 确定计分方法
+
+
 ## Maintainers
 
 [@swancai](https://github.com/swancai)
