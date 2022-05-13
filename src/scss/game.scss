@@ -76,6 +76,11 @@ header {
     // font-size: 34px;
     font-size: 0.34rem;
     font-weight: 600;
+
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
 }
 
 .desc {

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 
 import Score from './components/Score'
 import Board from './components/Board'
+import GameButton from './components/GameButton'
 
 import {
 	MATRIX_ROW,
@@ -18,11 +19,16 @@ interface IAHistoryOfSquares {
 }
 
 export default function App() {
-	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{
-		squares: new Array(16).fill(0)
-	}])
-	const [score, setScore] = useState<number>(0)
+	// 只记录最近操作的2步，故包括初始数组最多长度为3
+	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{ squares: new Array(16).fill(0) }])
+	const [scores, setScores] = useState<number[]>([0])
+	const [isOver, setIsOver] =  useState<boolean>(false)
 
+	// btn-undo是否可点击
+	const disabledUndo: boolean = isOver || history.length < 3
+
+	// // 避免过于频繁操作导致异步操作产生错误
+	// let isLock: boolean = false
 	
 	// 当前格对应一元数组的下标 —— 函数式编程
 	const getSquareIdx: (row: number, col: number) => number = (row, col) => (row - 1) * MATRIX_COL + (col - 1)
@@ -46,15 +52,81 @@ export default function App() {
 		const idx = emptyIdxs[Math.round(Math.random() * (emptyIdxs.length - 1))]
 		// 随机设置2或4
 		arr[idx] =  Math.round(Math.random()) ? 2 : 4
-		// setSquares(arr)
 		console.log('Sequares=', arr)
 		return arr
+	}
+	// 垂直于当前方向的方向没有可以叠加的部分
+	function checkPerpendicularDirPossibility (direction: Direction, squares: number[]) : boolean {
+		let possibility = false
+		switch (direction) {
+			case UP :
+			case DOWN : {
+				// 垂直的方向为：LEFT
+				// 从第1行开始
+				for (let row: number = 1; row <= MATRIX_ROW; row++) {
+					if (possibility) break
+
+					// 从第2列开始往移动方向合并
+					for (let col: number = 2; col <= MATRIX_COL; col ++) {
+						if (possibility) break
+						// 每列开始值对应一元数组的下标
+						const curColIdx: number = getSquareIdx(row, col)
+						if (squares[curColIdx]) { // 当前列有值的情况
+							// preColIdx ：移动方向的前一列Idx
+							const preColIdx: number = getSquareIdx(row, col - 1)
+							if (
+								!squares[preColIdx] 
+								|| squares[preColIdx] && squares[curColIdx] === squares[preColIdx]
+							) { 
+								possibility = true
+							}
+						} else {
+							possibility = true
+						}
+					}	
+				}
+				break
+			}
+			case LEFT :
+			case RIGHT : {
+				// 垂直的方向为：UP
+				// 从第1列开始
+				for (let col: number = 1; col <= MATRIX_COL; col++) {
+					if (possibility) break
+
+					// 从第2行开始往移动方向合并
+					for (let row: number = 2; row <= MATRIX_ROW; row++) {
+						if (possibility) break
+						// 每行开始值对应一元数组的下标
+						const curRowIdx: number = getSquareIdx(row, col)
+						if (squares[curRowIdx]) { // 当前行有值的情况
+							// preRowIdx ：移动方向的前一行Idx
+							let preRowIdx: number = getSquareIdx(row - 1, col)
+							if (
+								!squares[preRowIdx] 
+								|| squares[preRowIdx] && squares[curRowIdx] === squares[preRowIdx]
+							) {
+								possibility = true	
+							}
+						} else {
+							possibility = true
+						}
+					}	
+				}
+				break
+			}
+		}
+		return possibility
 	}
 	/**
 	 * 移动处理
 	 * 
 	 **/
 	function handleMove (direction: Direction): void {
+		// console.log(`isLock = ${isLock}`)
+		// if (isLock) return
+
+		// isLock = true
 		const currentHistory: IAHistoryOfSquares = history[history.length - 1]
 		const arr: number[] = currentHistory.squares.slice()
 		let scoreDelta = 0 // 本轮新增的得分
@@ -243,82 +315,98 @@ export default function App() {
 
 		// 如果完全相同，则不发生变化
 		if (JSON.stringify(currentHistory.squares) === JSON.stringify(arr)) {
-			if (!arr.filter(n => !n).length) {
-				alert('Game Over !')
+			if (!checkPerpendicularDirPossibility(direction, arr)) {
+				setIsOver(true)
+				console.log('================ Game Over')
 			}
+			// isLock = false
 			return
 		}
 		setHistory(history.concat([{ squares: arr }]))
 		// 计算分数
 		if (scoreDelta) {
-			setScore(score => score + scoreDelta)
+			setScores(scores => {
+				const prevScore = scores[scores.length - 1]
+				const nowScore = prevScore + scoreDelta
+				return [ prevScore, nowScore ]
+			})
 		}
 		/**
 		 * 逻辑：为避免捕获过时的属性，setSquares需要异步函数获取
 		 * 优化：为体现先合并后随机顺序的逻辑，避免混淆，使用setTimeout。经人工调试不生硬，90ms比较符合视觉的展示
 		 **/ 
-		setTimeout(() => setHistory((originHistory: IAHistoryOfSquares[]) => {
+		setTimeout(() => setHistory((oldHistory: IAHistoryOfSquares[]) => {
 			// 当前历史的索引
-			const curHistoryIdx: number = originHistory.length - 1
+			const curHistoryIdx: number = oldHistory.length - 1
 			// 新历史集合
-			let newHistory: IAHistoryOfSquares[] = originHistory.slice(0, curHistoryIdx)
+			let newHistory: IAHistoryOfSquares[] = oldHistory.slice()
 			// 随机生成方块并替换当前历史
-			const curHistory: IAHistoryOfSquares = originHistory[curHistoryIdx]
-			newHistory.splice(curHistoryIdx, 1, { squares: genNewNum(curHistory.squares) })
+			newHistory.splice(curHistoryIdx, 1, { squares: genNewNum( newHistory[curHistoryIdx].squares) })
+			// 只保留初始记录 和 最近2次的操作记录
+			if (newHistory.length > 3) {
+				newHistory.splice(1, 1)
+			}
+			console.log(`History`, newHistory)
+			// isLock = false
 			return newHistory
 		}), 90)
 	}
 	// 开始游戏
 	function startGame () : void {
-		setHistory((originHistory: IAHistoryOfSquares[]) => {
-			// 当前历史的索引
-			const curHistoryIdx: number = 1
+		setHistory((oldHistory: IAHistoryOfSquares[]) => {
 			// 新历史集合
-			const newHistory: IAHistoryOfSquares[] = originHistory.slice(0, curHistoryIdx)
-			// 随机生成方块并替换当前历史
-			const curHistory: IAHistoryOfSquares = originHistory[curHistoryIdx]
-			return newHistory.splice(curHistoryIdx, 1, { squares: genNewNum(curHistory.squares) })
+			let newHistory: IAHistoryOfSquares[] = oldHistory.slice(0,1)
+			return newHistory.concat([{ squares: genNewNum(history[0].squares) }])
 		})
+		setScores([0])
+		setIsOver(false)
 	}
 	// 撤销上一步
 	function undoGame () : void {
-		setHistory((originHistory: IAHistoryOfSquares[]) => {
-			// 当前历史的索引
-			const curHistoryIdx: number = originHistory.length - 2
-			// 上一步历史集合
-			return originHistory.slice(0, curHistoryIdx)
-		})
+		if (history.length > 2) { // 除了初始数组外，存在上一步方可撤销
+			setHistory((oldHistory: IAHistoryOfSquares[]) => oldHistory.slice(0, oldHistory.length - 1))
+			setScores(scores => scores.slice(0, 1))
+		}
 	}
 
-    useEffect(() =>{
-		const currentHistory: IAHistoryOfSquares = history[history.length - 1]
-		const newSquares: number[] = genNewNum(currentHistory.squares)
-		const newHistory = history.concat([{ squares: newSquares }])
-		setHistory(newHistory)
+    useEffect(() => {
+		setHistory((oldHistory: IAHistoryOfSquares[]) => {
+			return oldHistory.concat([{ squares: genNewNum(history[0].squares) }])
+		})
 	}, []);
 
+	const [bestScore, setBestScore] = useState<number>(Number(localStorage.getItem('bestScore')))
+	// let bestScore: number = Number(localStorage.getItem('bestScore'))
+	useEffect(() => {
+		const nowScore: number = scores[scores.length - 1]
+		console.log('?', nowScore, bestScore)
+		if (isOver && nowScore > bestScore) {
+			localStorage.setItem('bestScore', nowScore + '')
+			setBestScore(nowScore)
+		}
+	}, [isOver])
 
-  return (
-    <div className="game">
-		<header>
-			<div className="logo">2048</div>
-			<Score name="SCORE" num={score} />
-			<Score name="BEST" num={'34.5K'} />
-			<button className="btn btn-new" onClick={() => startGame()}>NEW</button>
-			<button className="btn btn-undo" onClick={() => undoGame()}>UNDO</button>
-		</header>
-		<main>
-			<p className="desc">Join the numbers and get to the 2048 tile!</p>
-			<Board 
-				squares={history[history.length - 1].squares} 
-				onMove={(dir: Direction) => handleMove(dir)} 
-			/>
-		</main>
-		<footer>
-			<span>Written in React and Typescript</span>
-			<span>by Swan Cai</span>
-			<span>on May 4th, 2022.</span>
-		</footer>
-    </div>
-  )
+	return (
+		<div className="game">
+			<header>
+				<div className="logo">2048</div>
+				<Score name="SCORE" num={scores[scores.length - 1]} />
+				<Score name="BEST" num={bestScore} />
+				<GameButton name="NEW" onClick={() => startGame()} />
+				<GameButton name="UNDO" btnDisabled={disabledUndo} onClick={() => undoGame()} />
+			</header>
+			<main>
+				<p className="desc">Join the numbers and get to the 2048 tile!</p>
+				<Board 
+					squares={history[history.length - 1].squares} 
+					onMove={(dir: Direction) => handleMove(dir)} 
+				/>
+			</main>
+			<footer>
+				<span>Written in React and Typescript</span>
+				<span>by Swan Cai</span>
+				<span>on May 4th, 2022.</span>
+			</footer>
+		</div>
+	)
 }

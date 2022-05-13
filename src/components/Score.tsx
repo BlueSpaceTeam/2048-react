@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface PropScore {
+interface IPropScore {
     name: string,
     num: number | string
 }
@@ -9,7 +9,7 @@ interface PropScore {
 * 方块
 * @prop num, 当前数值
 */
-export default function Score (props: PropScore) {
+export default function Score (props: IPropScore) {
     return (
         <div className="score">
           <span className="key">{props.name || ''}</span>
