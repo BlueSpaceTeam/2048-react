@@ -3,12 +3,11 @@ import React from 'react'
 // 求对数 Math.log(8)/Math.log(2) = 3 <=>  2**3 = 8
 
 interface IPropSquare {
-    num: number
+    num: number // 当前数值
 }
 
 /*
 * 方块
-* @prop num, 当前数值
 */
 export default function Square (props: IPropSquare) {
     let numClass: string[] = ['number']

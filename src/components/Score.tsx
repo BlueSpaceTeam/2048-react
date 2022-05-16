@@ -1,13 +1,12 @@
 import React from 'react'
 
 interface IPropScore {
-    name: string,
-    num: number | string
+    name: string  // 分数名称
+    num: number | string  // 当前数值
 }
 
 /*
-* 方块
-* @prop num, 当前数值
+* 分数
 */
 export default function Score (props: IPropScore) {
     return (
