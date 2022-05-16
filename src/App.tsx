@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Score from './components/Score'
 import Board from './components/Board'
 import GameButton from './components/GameButton'
+import Modal from './components/Modal'
 
 import {
 	MATRIX_ROW,
@@ -407,6 +408,13 @@ export default function App() {
 				<span>by Swan Cai</span>
 				<span>on May 4th, 2022.</span>
 			</footer>
+
+			<Modal 
+				isShow={true} 
+				score={scores[scores.length - 1]}
+				bestScore={bestScore}
+				onRestart={() => startGame()}
+			/>
 		</div>
 	)
 }

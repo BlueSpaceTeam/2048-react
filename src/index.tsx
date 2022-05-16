@@ -7,6 +7,7 @@
  * @FilePath: /2048-react/src/index.tsx
  */
 import './scss/game.scss';
+import './scss/modal.scss';
 import './fontSize';
 
 import React from 'react';
