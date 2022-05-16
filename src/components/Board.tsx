@@ -55,13 +55,30 @@ export default function Board (props: any) {
 
 	// 触摸事件
 	function handleTouchStart (e: any) {
+		e.preventDefault()
+		e.stopPropagation()
 		console.log('handleTouchStart', e)
+		// // TODO: 多于一个手指不做反映
+		// if (e.touches.length > 1) return
+
 		coordinate.X = e.touches[0].clientX
 		coordinate.Y = e.touches[0].clientY
 	}
 	function handleTouchEnd (e: any) {
+		e.preventDefault()
+		e.stopPropagation()
 		console.log('handleTouchEnd', e)
-		const direction: Direction | null = getDirection(e.touches[0].clientX, e.touches[0].clientY, MIN_DISTANCE_M)
+		// TODO: 多于一个手指不做反映
+		// if (e.changedTouches.length > 1) return
+		// 不在区域内，不执行后续代码
+		if (!coordinate.X && !coordinate.Y) {
+			// reset
+			coordinate.X = 0
+			coordinate.Y = 0
+			return
+		}
+
+		const direction: Direction | null = getDirection(e.changedTouches[0].clientX, e.changedTouches[0].clientY, MIN_DISTANCE_M)
 		if (direction) {
 			onMove(direction)
 		}
@@ -69,14 +86,23 @@ export default function Board (props: any) {
 
 	// 鼠标事件
 	function handleMouseDown (e: any) {
+		e.preventDefault()
+		e.stopPropagation()
 		console.log('handleMouseDown', e, e.clientX, e.clientY)
 
 		coordinate.X = e.clientX
 		coordinate.Y = e.clientY
 	}
 	function handleMouseUp (e: any) {
+		e.preventDefault()
+		e.stopPropagation()
 		// 不在区域内，不执行后续代码
-		if (!coordinate.X && !coordinate.Y) return
+		if (!coordinate.X && !coordinate.Y) {
+			// reset
+			coordinate.X = 0
+			coordinate.Y = 0
+			return
+		}
 
 		const direction: Direction | null = getDirection(e.clientX, e.clientY, MIN_DISTANCE_PC)
 		console.log('handleMouseUp', e, e.clientX, e.clientY, direction)
@@ -87,6 +113,7 @@ export default function Board (props: any) {
 
 	// 键盘事件
 	function handleKeyUp (e: any) {
+		e.stopPropagation()
 		console.log('handleKeyUp', e)
 		switch (e.code) {
 			case UP :
