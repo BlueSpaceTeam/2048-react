@@ -2,39 +2,42 @@ import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
 interface IPropsModal {
-    isShow: boolean // 是否展示
+    // isShow: boolean // 是否展示
     score: number // 本次得分
     bestScore: number // 最高得分
     onRestart: () => void // 重新开始的方法
 }
 
 export default function Modal (props: IPropsModal) {
-    // if (props.isShow) return null
+    // if (!props.isShow) return null
 
     const modalRoot: HTMLElement = document.getElementById('modal')!
 
     const wrapperEle: HTMLElement = document.createElement('div')
+    wrapperEle.className = 'modal'
 
+    console.log('Modal, init = ', props.score , props.bestScore)
     // 是否现得分数超越过去最高分
     const isExceeded: boolean = props.score > props.bestScore
     const normalElem: JSX.Element = (
         <>
             <h1 className="title">Game Over</h1>
-            <div className="score">Current Score：<span>{props.score || 0}</span></div>
-            <div className="score best">Best Score：{props.bestScore || 0}</div>
+            <div className="p-score">Current Score：<span className="num cur">{props.score || 0}</span></div>
+            <div className="p-score best">Best Score：<span className="num">{props.bestScore || 0}</span></div>
         </>
     )
     const bestElem: JSX.Element = (
         <>
             <h1 className="title exceed">Congratulations</h1>
-            <div>You Has Got A Best Score: <span>{props.score || 0}</span></div>
+            <div className="p-score">You Has Got A Best Score: <span className="num cur best">{props.score || 0}</span></div>
         </>
     )
+    console.log('isExceeded = ', isExceeded)
 
     const modalEle: JSX.Element = (
-        <div className="modal">
+        <div className="modal-main">
             { isExceeded ? bestElem : normalElem }
-            <button onClick={props.onRestart}>重新开始</button>
+            <button  className="btn-restart" onClick={props.onRestart}>Restart</button>
             {/* <button>查看排行</button> */}
         </div>
     )
@@ -50,9 +53,13 @@ export default function Modal (props: IPropsModal) {
         // 则需添加 state 到 Modal 中，
         // 仅当 Modal 被插入 DOM 树中才能渲染子元素。
         modalRoot.appendChild(wrapperEle)
+        wrapperEle.classList.add('show')
 
         return () => {
-            modalRoot.removeChild(wrapperEle)
+            wrapperEle.classList.remove('show')
+            setTimeout(() => modalRoot.removeChild(wrapperEle), 2000)
+            
+            console.log('MODAL BE UNMOUNTED', wrapperEle)
         }
     })
 

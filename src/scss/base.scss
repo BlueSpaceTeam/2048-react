@@ -22,8 +22,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 audio,canvas,video,progress{display:inline-block;}
 input::-webkit-input-speech-button {display: none;}
 button,input,textarea{-webkit-tap-highlight-color: rgba(0,0,0,0);}
-button{ padding: 0; }
-button{background: transparent;}
+button{ border: none; padding: 0; background: transparent;}
 input{border: none; background: transparent;}
 dialog { padding: 0;}
 /*链接*/

@@ -17,9 +17,11 @@
 ## TODOLIST
 1. - [x] 撤销功能(也需要记录上一次分数)
 2. - [x] 重新开局功能
-3. - [ ] Game over 界面
+3. - [ ] Game over 界面 -- 仍有bugs: 无法出现Congratulation
 4. - [x] 确定计分方法
 5. - [ ] 多于2个手指不做反应
+6. - [ ] 排行榜
+7. - [ ] 路由没嵌入
 
 
 ## Maintainers

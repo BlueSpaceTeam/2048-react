@@ -24,7 +24,6 @@ export default function App() {
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{ squares: new Array(16).fill(0) }])
 	const [scores, setScores] = useState<number[]>([0])
 	const [isOver, setIsOver] =  useState<boolean>(false)
-
 	// btn-undo是否可点击
 	const disabledUndo: boolean = isOver || history.length < 3
 
@@ -369,6 +368,10 @@ export default function App() {
 			setScores(scores => scores.slice(0, 1))
 		}
 	}
+	// 重新开始
+	const restartGame: () => void = () => {
+		startGame()
+	} 
 
     useEffect(() => {
 		setHistory((oldHistory: IAHistoryOfSquares[]) => {
@@ -386,6 +389,17 @@ export default function App() {
 			setBestScore(nowScore)
 		}
 	}, [isOver])
+
+	console.log()
+
+	const ModalUI: JSX.Element | string = isOver ? (
+		<Modal 
+			score={scores[scores.length - 1]}
+			bestScore={bestScore}
+			onRestart={() => restartGame()}
+		/>
+	)
+	: ''
 
 	return (
 		<div className="game">
@@ -409,12 +423,7 @@ export default function App() {
 				<span>on May 4th, 2022.</span>
 			</footer>
 
-			<Modal 
-				isShow={true} 
-				score={scores[scores.length - 1]}
-				bestScore={bestScore}
-				onRestart={() => startGame()}
-			/>
+			{ModalUI}
 		</div>
 	)
 }
