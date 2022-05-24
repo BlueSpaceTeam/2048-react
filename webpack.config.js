@@ -92,31 +92,6 @@ const config = {
                 ],
                 include: /\.module\.css$/
             },
-            // 设置less文件的处理
-            {
-                test: /\.less$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    // 引入postcss
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                plugins: [
-                                    [
-                                        'postcss-preset-env',
-                                        {
-                                            browsers: 'last 2 versions'
-                                        }
-                                    ]
-                                ]
-                            }
-                        }
-                    },
-                    'less-loader',
-                ]
-            },
             // 设置sass文件处理
             {
                 test: /\.s[ac]ss$/i,
@@ -134,7 +109,7 @@ const config = {
                                         {
                                             browsers: 'last 2 versions'
                                         }
-                                    ]
+                                    ],
                                 ]
                             }
                         }
@@ -159,7 +134,7 @@ const config = {
             minify: {
                 removeComments: true, // 打包后移除html文件中的注释
             }
-        })
+        }),
     ]
 };
 
