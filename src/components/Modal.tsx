@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
+import { useNavigate } from 'react-router-dom'
 
 interface IPropsModal {
     // isShow: boolean // 是否展示
@@ -10,6 +11,7 @@ interface IPropsModal {
 
 export default function Modal (props: IPropsModal) {
     // if (!props.isShow) return null
+    let navigate = useNavigate()
 
     const modalRoot: HTMLElement = document.getElementById('modal')!
 
@@ -37,8 +39,9 @@ export default function Modal (props: IPropsModal) {
     const modalEle: JSX.Element = (
         <div className="modal-main">
             { isExceeded ? bestElem : normalElem }
-            <button  className="btn-restart" onClick={props.onRestart}>Restart</button>
-            {/* <button>查看排行</button> */}
+            <button className="btn-restart" onClick={props.onRestart}>Restart</button>
+            <button className="btn-restart" onClick={() => navigate('/')}>Home</button>
+            {/* <button>Check Ranking</button> */}
         </div>
     )
 

@@ -42,3 +42,18 @@ a.line{text-decoration:underline;}
 /*清除浮动*/
 .clear:after{content:'';display:block;clear:both;}
 .clear{zoom:1;}/*触发IE的hasLayout属性，该属性IE独有*/
+
+html {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    touch-action: none;
+    // touch-action:pan-y;
+}
+
+body {
+    background-color: #fdf9ef;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
