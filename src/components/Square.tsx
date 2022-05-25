@@ -1,3 +1,11 @@
+/*
+ * @Author: Swan Cai
+ * @Date: 2022-05-24 16:58:00
+ * @LastEditTime: 2022-05-24 16:58:00
+ * @LastEditors: Swan Cai
+ * @Description: 
+ * @FilePath: /2048-react/src/components/Square.tsx
+ */
 import React from 'react'
 
 // 求对数 Math.log(8)/Math.log(2) = 3 <=>  2**3 = 8

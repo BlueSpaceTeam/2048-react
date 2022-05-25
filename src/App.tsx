@@ -1,3 +1,11 @@
+/*
+ * @Author: fantiga
+ * @Date: 2022-04-28 15:18:31
+ * @LastEditTime: 2022-05-25 19:13:37
+ * @LastEditors: fantiga
+ * @Description: 
+ * @FilePath: /2048-react/src/App.tsx
+ */
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 

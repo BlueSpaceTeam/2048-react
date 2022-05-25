@@ -1,3 +1,11 @@
+/*
+ * @Author: Swan Cai
+ * @Date: 2022-05-24 16:58:00
+ * @LastEditTime: 2022-05-24 16:58:00
+ * @LastEditors: Swan Cai
+ * @Description: 
+ * @FilePath: /2048-react/src/components/Modal.tsx
+ */
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { useNavigate } from 'react-router-dom'

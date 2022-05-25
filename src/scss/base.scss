@@ -43,6 +43,8 @@ a.line{text-decoration:underline;}
 .clear:after{content:'';display:block;clear:both;}
 .clear{zoom:1;}/*触发IE的hasLayout属性，该属性IE独有*/
 
+
+/*主题配置*/
 html {
     width: 100vw;
     height: 100vh;
@@ -50,7 +52,7 @@ html {
     touch-action: none;
     // touch-action:pan-y;
 }
-
+/*主题配置*/
 body {
     background-color: #fdf9ef;
     width: 100vw;

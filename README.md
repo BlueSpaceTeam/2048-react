@@ -14,7 +14,7 @@
 ```
 ```
 
-## TODOLIST
+## TodoList
 1. - [x] #feat: 撤销功能(也需要记录上一次分数)
 2. - [x] #feat: 重新开局功能
 3. - [x] #feat: 确定计分方法
@@ -27,7 +27,7 @@
 
 ## Maintainers
 
-[@swancai](https://github.com/swancai)
+[@swancai](https://github.com/swancai) [@FantiGA](https://github.com/FantiGA)
 
 ## Contributing
 [@FantiGA](https://github.com/FantiGA)
