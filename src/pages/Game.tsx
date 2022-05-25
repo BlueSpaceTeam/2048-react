@@ -12,6 +12,7 @@ import Score from '../components/Score'
 import Board from '../components/Board'
 import GameButton from '../components/GameButton'
 import Modal from '../components/Modal'
+import ResultModal from '../components/ResultModal'
 
 import '../scss/game.scss'
 
@@ -28,12 +29,24 @@ import {
 interface IAHistoryOfSquares {
 	squares: number[]
 }
+// 自定义hook： 获取旧值 -- todo : 怎么写Typescript的类型， 泛型
+function usePrevious(value: any) {
+	const ref = useRef()
+	useEffect(() => {
+		ref.current = value
+	})
+	return ref.current
+}
 
 export default function Game() {
 	// 只记录最近操作的2步，故包括初始数组最多长度为3
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{ squares: new Array(16).fill(0) }])
 	const [scores, setScores] = useState<number[]>([0])
 	const [isOver, setIsOver] =  useState<boolean>(false)
+	const [bestScore, setBestScore] = useState<number>(Number(localStorage.getItem('bestScore') || 0))
+	// 最高分原始值
+	const preBestScore: number = usePrevious(bestScore) || 0
+	// 
 	// btn-undo是否可点击
 	const disabledUndo: boolean = isOver || history.length < 3
 
@@ -133,6 +146,7 @@ export default function Game() {
 	 * 
 	 **/
 	function handleMove (direction: Direction): void {
+		if (isOver) return
 		// console.log(`isLock = ${isLock}`)
 		// if (isLock) return
 
@@ -326,6 +340,11 @@ export default function Game() {
 		// 如果完全相同，则不发生变化
 		if (JSON.stringify(currentHistory.squares) === JSON.stringify(arr)) {
 			if (!checkPerpendicularDirPossibility(direction, arr)) {
+				const curScore: number = scores[scores.length -1]
+				if (curScore > preBestScore) {
+					setBestScore(curScore)
+					localStorage.setItem('bestScore', curScore + '')
+				}
 				setIsOver(true)
 				console.log('================ Game Over')
 			}
@@ -361,6 +380,7 @@ export default function Game() {
 			return newHistory
 		}), 90)
 	}
+	
 	// 开始游戏
 	function startGame () : void {
 		setHistory((oldHistory: IAHistoryOfSquares[]) => {
@@ -369,7 +389,6 @@ export default function Game() {
 			return newHistory.concat([{ squares: genNewNum(history[0].squares) }])
 		})
 		setScores([0])
-		setIsOver(false)
 	}
 	// 撤销上一步
 	function undoGame () : void {
@@ -378,36 +397,27 @@ export default function Game() {
 			setScores(scores => scores.slice(0, 1))
 		}
 	}
-	// 重新开始
-	const restartGame: () => void = () => {
-		startGame()
-	} 
 
+	// 初始化游戏界面
     useEffect(() => {
 		setHistory((oldHistory: IAHistoryOfSquares[]) => {
 			return oldHistory.concat([{ squares: genNewNum(history[0].squares) }])
 		})
 	}, []);
 
-	const [bestScore, setBestScore] = useState<number>(Number(localStorage.getItem('bestScore')))
-	// let bestScore: number = Number(localStorage.getItem('bestScore'))
-	useEffect(() => {
-		const nowScore: number = scores[scores.length - 1]
-		console.log('?', nowScore, bestScore)
-		if (isOver && nowScore > bestScore) {
-			localStorage.setItem('bestScore', nowScore + '')
-			setBestScore(nowScore)
-		}
-	}, [isOver])
-
-	const ModalUI: JSX.Element | string = isOver ? (
-		<Modal 
-			score={scores[scores.length - 1]}
-			bestScore={bestScore}
-			onRestart={() => restartGame()}
-		/>
+	// 控制Modal
+	const ModalUI: JSX.Element | null = isOver ? (
+		<Modal>
+			<ResultModal 
+				isShow={isOver} 
+				score={scores[scores.length - 1]}
+				bestScore={preBestScore}
+				onRestart={() => startGame()}
+				onClose={() => setIsOver(false)} 
+			/>
+		</Modal>
 	)
-	: ''
+	: null
 
 	return (
 		<div className="game">

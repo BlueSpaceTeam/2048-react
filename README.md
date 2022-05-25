@@ -20,7 +20,7 @@
 3. - [x] #feat: 确定计分方法
 4. - [x] #feat: 嵌入路由
 5. - [ ] #feat: 排行榜
-6. - [ ] #bugs: Game over 界面 无法出现Congratulation
+6. - [x] #bugs: Game over 界面 无法出现Congratulation
 7. - [ ] #bug: 游戏 要限制多于2个手指不做反应
 
 

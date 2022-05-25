@@ -1,4 +1,5 @@
 .modal {
+    // display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -6,19 +7,26 @@
     height: 100%;
     background-color: #fdf9ef;
     text-align: center;
-    transform: translateY(150%);
-    transition: all 0.1s;
+    opacity: 0.5;
+    transform: translateY(60%);
+    // transition: transform 0.3s, opacity 0.3s;
+    transition: transform 0.5s, opacity 0.5s;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     &.show {
+        opacity: 1;
         transform: translateY(0);
     }
 
     .modal-main {
-
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
     }
 
     .title {
@@ -26,7 +34,7 @@
         font-size: 0.8rem;
         font-style:oblique;
         -webkit-text-stroke: 0.06rem #3f3932;
-        animation: showBigger 1s 2s;
+        animation: showBigger 1s 0.1s;
 
         &.exceed {
             color: #f71d04;
@@ -50,7 +58,9 @@
         .num {
             font-weight: 600;
             &.cur {
-                font-size: 0.5rem;
+                margin-top: 0.2rem;
+                font-size: 0.8rem;
+                line-height: 0.9rem;
             }
             &.best {
                 color: #f71d04;
@@ -62,20 +72,28 @@
         }
 
         & + .p-score {
-            margin-top: 0.3rem;
+            margin-top: 0.5rem;
         }
     }
 
-    .btn-restart {
+    .btn {
         margin-top: 0.6rem;
-        padding: 0 0.6rem;
+        // padding: 0 0.6rem;
+        width: 3.1rem;
         height: 1rem;
         line-height: 1rem;
-        background-color: #f89e62;
         color: #fff;
         font-size: 0.32rem;
         letter-spacing: 0.02rem;
         border-radius: 0.08rem;
+    }
+
+    .btn-restart {
+        background-color: #f89e62;
+    }
+
+    .btn-home {
+        background-color: #c4ae9a;
     }
 }
 
