@@ -27,7 +27,7 @@ import {
 } from '../constants'
 
 interface IAHistoryOfSquares {
-	squares: number[]
+	squares?: number[]
 }
 // 自定义hook： 获取旧值 -- todo : 怎么写Typescript的类型， 泛型
 function usePrevious(value: any) {
@@ -38,7 +38,10 @@ function usePrevious(value: any) {
 	return ref.current
 }
 
-export default function Game() {
+/**
+ * 改函数式写法
+ */
+const Game: React.FC<IAHistoryOfSquares> = () => {
 	// 只记录最近操作的2步，故包括初始数组最多长度为3
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{ squares: new Array(16).fill(0) }])
 	const [scores, setScores] = useState<number[]>([0])
@@ -50,9 +53,6 @@ export default function Game() {
 	// btn-undo是否可点击
 	const disabledUndo: boolean = isOver || history.length < 3
 
-	// // 避免过于频繁操作导致异步操作产生错误
-	// let isLock: boolean = false
-	
 	// 当前格对应一元数组的下标 —— 函数式编程
 	const getSquareIdx: (row: number, col: number) => number = (row, col) => (row - 1) * MATRIX_COL + (col - 1)
 	// 获取行号
@@ -60,7 +60,7 @@ export default function Game() {
 	// 获取列号
 	const getCol: (row: number, squareIdx: number) => number = (row, squareIdx) => squareIdx + 1 - (row - 1) * MATRIX_COL
 	// 随机选一为0的square随机设置2或4
-	function genNewNum (squares: number[]): number[] {
+	function genNewNum(squares: number[]): number[] {
 		const arr = squares.slice()
 		const emptyIdxs: number[] = []
 		for (let i: number = 0; i < arr.length; i++) {
@@ -69,28 +69,28 @@ export default function Game() {
 			}
 		}
 		if (!emptyIdxs.length) { // 返回自身，避免用空数组覆盖原来结果
-			return arr 
+			return arr
 		}
 		// 从1到coutZero里随机生成一个位置
 		const idx = emptyIdxs[Math.round(Math.random() * (emptyIdxs.length - 1))]
 		// 随机设置2或4
-		arr[idx] =  Math.round(Math.random()) ? 2 : 4
+		arr[idx] = Math.round(Math.random()) ? 2 : 4
 		console.log('Sequares=', arr)
 		return arr
 	}
 	// 垂直于当前方向的方向没有可以叠加的部分
-	function checkPerpendicularDirPossibility (direction: Direction, squares: number[]) : boolean {
+	function checkPerpendicularDirPossibility(direction: Direction, squares: number[]): boolean {
 		let possibility = false
 		switch (direction) {
-			case UP :
-			case DOWN : {
+			case UP:
+			case DOWN: {
 				// 垂直的方向为：LEFT
 				// 从第1行开始
 				for (let row: number = 1; row <= MATRIX_ROW; row++) {
 					if (possibility) break
 
 					// 从第2列开始往移动方向合并
-					for (let col: number = 2; col <= MATRIX_COL; col ++) {
+					for (let col: number = 2; col <= MATRIX_COL; col++) {
 						if (possibility) break
 						// 每列开始值对应一元数组的下标
 						const curColIdx: number = getSquareIdx(row, col)
@@ -98,20 +98,20 @@ export default function Game() {
 							// preColIdx ：移动方向的前一列Idx
 							const preColIdx: number = getSquareIdx(row, col - 1)
 							if (
-								!squares[preColIdx] 
+								!squares[preColIdx]
 								|| squares[preColIdx] && squares[curColIdx] === squares[preColIdx]
-							) { 
+							) {
 								possibility = true
 							}
 						} else {
 							possibility = true
 						}
-					}	
+					}
 				}
 				break
 			}
-			case LEFT :
-			case RIGHT : {
+			case LEFT:
+			case RIGHT: {
 				// 垂直的方向为：UP
 				// 从第1列开始
 				for (let col: number = 1; col <= MATRIX_COL; col++) {
@@ -126,15 +126,15 @@ export default function Game() {
 							// preRowIdx ：移动方向的前一行Idx
 							let preRowIdx: number = getSquareIdx(row - 1, col)
 							if (
-								!squares[preRowIdx] 
+								!squares[preRowIdx]
 								|| squares[preRowIdx] && squares[curRowIdx] === squares[preRowIdx]
 							) {
-								possibility = true	
+								possibility = true
 							}
 						} else {
 							possibility = true
 						}
-					}	
+					}
 				}
 				break
 			}
@@ -147,15 +147,12 @@ export default function Game() {
 	 **/
 	function handleMove (direction: Direction): void {
 		if (isOver) return
-		// console.log(`isLock = ${isLock}`)
-		// if (isLock) return
-
-		// isLock = true
+		
 		const currentHistory: IAHistoryOfSquares = history[history.length - 1]
-		const arr: number[] = currentHistory.squares.slice()
+		const arr: number[] = currentHistory.squares!.slice()
 		let scoreDelta = 0 // 本轮新增的得分
 		switch (direction) {
-			case UP : {
+			case UP: {
 				if (MATRIX_ROW > 1) {
 					// 从第1列开始
 					for (let col: number = 1; col <= MATRIX_COL; col++) {
@@ -194,12 +191,12 @@ export default function Game() {
 									// 继续往移动方向进方向寻找
 								}
 							}
-						}	
+						}
 					}
 				}
 				break
 			}
-			case DOWN : {
+			case DOWN: {
 				// 从倒数第2行开始往移动方向合并
 				if (MATRIX_ROW > 1) {
 					// 从第1列开始
@@ -239,12 +236,12 @@ export default function Game() {
 									// 继续往移动方向进方向寻找
 								}
 							}
-						}	
+						}
 					}
 				}
 				break
 			}
-			case LEFT : {
+			case LEFT: {
 				// 从第2列开始往移动方向合并
 				if (MATRIX_COL > 1) {
 					// 从第1行开始
@@ -255,7 +252,7 @@ export default function Game() {
 						let startPointer: number = 1
 
 						// 从第2列开始往移动方向合并
-						for (let col: number = 2; col <= MATRIX_COL; col ++) {
+						for (let col: number = 2; col <= MATRIX_COL; col++) {
 							// 最后一个下标序号
 							const preEndIdx: number = getSquareIdx(row, startPointer)
 							// 每列开始值对应一元数组的下标
@@ -284,12 +281,12 @@ export default function Game() {
 									// 继续往移动方向进方向寻找
 								}
 							}
-						}	
+						}
 					}
 				}
 				break
 			}
-			case RIGHT : {
+			case RIGHT: {
 				// 从倒数第2列开始往移动方向合并
 				if (MATRIX_COL > 1) {
 					// 从第1行开始
@@ -329,7 +326,7 @@ export default function Game() {
 									// 继续往移动方向进方向寻找
 								}
 							}
-						}	
+						}
 					}
 				}
 				break
@@ -348,7 +345,6 @@ export default function Game() {
 				setIsOver(true)
 				console.log('================ Game Over')
 			}
-			// isLock = false
 			return
 		}
 		setHistory(history.concat([{ squares: arr }]))
@@ -357,41 +353,40 @@ export default function Game() {
 			setScores(scores => {
 				const prevScore = scores[scores.length - 1]
 				const nowScore = prevScore + scoreDelta
-				return [ prevScore, nowScore ]
+				return [prevScore, nowScore]
 			})
 		}
 		/**
 		 * 逻辑：为避免捕获过时的属性，setSquares需要异步函数获取
 		 * 优化：为体现先合并后随机顺序的逻辑，避免混淆，使用setTimeout。经人工调试不生硬，90ms比较符合视觉的展示
-		 **/ 
+		 **/
 		setTimeout(() => setHistory((oldHistory: IAHistoryOfSquares[]) => {
 			// 当前历史的索引
 			const curHistoryIdx: number = oldHistory.length - 1
 			// 新历史集合
 			let newHistory: IAHistoryOfSquares[] = oldHistory.slice()
 			// 随机生成方块并替换当前历史
-			newHistory.splice(curHistoryIdx, 1, { squares: genNewNum( newHistory[curHistoryIdx].squares) })
+			newHistory.splice(curHistoryIdx, 1, { squares: genNewNum(newHistory[curHistoryIdx].squares!) })
 			// 只保留初始记录 和 最近2次的操作记录
 			if (newHistory.length > 3) {
 				newHistory.splice(1, 1)
 			}
 			console.log(`History`, newHistory)
-			// isLock = false
 			return newHistory
 		}), 90)
 	}
 	
 	// 开始游戏
-	function startGame () : void {
+	function startGame(): void {
 		setHistory((oldHistory: IAHistoryOfSquares[]) => {
 			// 新历史集合
-			let newHistory: IAHistoryOfSquares[] = oldHistory.slice(0,1)
-			return newHistory.concat([{ squares: genNewNum(history[0].squares) }])
+			let newHistory: IAHistoryOfSquares[] = oldHistory.slice(0, 1)
+			return newHistory.concat([{ squares: genNewNum(history[0].squares!) }])
 		})
 		setScores([0])
 	}
 	// 撤销上一步
-	function undoGame () : void {
+	function undoGame(): void {
 		if (history.length > 2) { // 除了初始数组外，存在上一步方可撤销
 			setHistory((oldHistory: IAHistoryOfSquares[]) => oldHistory.slice(0, oldHistory.length - 1))
 			setScores(scores => scores.slice(0, 1))
@@ -401,7 +396,7 @@ export default function Game() {
 	// 初始化游戏界面
     useEffect(() => {
 		setHistory((oldHistory: IAHistoryOfSquares[]) => {
-			return oldHistory.concat([{ squares: genNewNum(history[0].squares) }])
+			return oldHistory.concat([{ squares: genNewNum(history[0].squares!) }])
 		})
 	}, []);
 
@@ -430,9 +425,9 @@ export default function Game() {
 			</header>
 			<main>
 				<p className="desc">Join the numbers and get to the 2048 tile!</p>
-				<Board 
-					squares={history[history.length - 1].squares} 
-					onMove={(dir: Direction) => handleMove(dir)} 
+				<Board
+					squares={history[history.length - 1].squares}
+					onMove={(dir: Direction) => handleMove(dir)}
 				/>
 			</main>
 			<footer>
@@ -445,3 +440,5 @@ export default function Game() {
 		</div>
 	)
 }
+
+export default Game
