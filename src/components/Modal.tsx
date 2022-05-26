@@ -1,19 +1,22 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-25 20:02:00
+ * @LastEditTime: 2022-05-26 08:52:00
  * @LastEditors: Swan Cai
  * @Description: 
  * @FilePath: /2048-react/src/components/Modal.tsx
  */
-import react, { useState, useEffect }  from 'react'
+import { useEffect }  from 'react'
 import ReactDOM from 'react-dom'
 
 interface IPropsModal {
     children: JSX.Element | JSX.Element[] | string | number | null 
 }
 
-export default function Modal (props: IPropsModal) {
+/**
+ * modal portal
+ **/
+const Modal: React.FC<IPropsModal> = (props) => {
     const modalRoot: HTMLElement = document.getElementById('modal')!
 
     // const [wrapperEle] = useState<HTMLElement>(document.createElement('div'))
@@ -40,3 +43,5 @@ export default function Modal (props: IPropsModal) {
 
    return ReactDOM.createPortal(props.children, wrapperEle)
 }
+
+export default Modal

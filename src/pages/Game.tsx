@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-25 20:02:00
+ * @LastEditTime: 2022-05-26 08:52:00
  * @LastEditors: Swan Cai
  * @Description: 
  * @FilePath: /2048-react/src/pages/Game.tsx
@@ -27,7 +27,7 @@ import {
 } from '../constants'
 
 interface IAHistoryOfSquares {
-	squares?: number[]
+	squares: number[]
 }
 // 自定义hook： 获取旧值 -- todo : 怎么写Typescript的类型， 泛型
 function usePrevious(value: any) {
@@ -39,9 +39,12 @@ function usePrevious(value: any) {
 }
 
 /**
+ * 游戏
+ */
+/**
  * 改函数式写法
  */
-const Game: React.FC<IAHistoryOfSquares> = () => {
+const Game: React.FC<{}> = ({}) => {
 	// 只记录最近操作的2步，故包括初始数组最多长度为3
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{ squares: new Array(16).fill(0) }])
 	const [scores, setScores] = useState<number[]>([0])

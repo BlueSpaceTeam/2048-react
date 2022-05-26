@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-24 16:58:00
+ * @LastEditTime: 2022-05-26 08:52:00
  * @LastEditors: Swan Cai
  * @Description: 
  * @FilePath: /2048-react/src/components/Board.tsx
@@ -18,8 +18,11 @@ import {
 	UP,
 	Direction
 } from '../constants'
-
-export default function Board (props: any) {
+interface IPropBoard {
+    squares: number[] // 方块集
+    onMove: (dir: Direction) => void // 处理移动结果
+}
+const Board: React.FC<IPropBoard> = (props) => {
 	const { squares, onMove } = props
 	let coordinate = {
 		X: 0,
@@ -150,3 +153,4 @@ export default function Board (props: any) {
         </div>
     )
 } 
+export default Board

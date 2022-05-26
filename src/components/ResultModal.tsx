@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-25 20:02:00
+ * @LastEditTime: 2022-05-26 08:52:00
  * @LastEditors: Swan Cai
  * @Description: 
  * @FilePath: /2048-react/src/components/ResultModal.tsx
@@ -16,7 +16,11 @@ interface IPropsResultModal {
     onRestart: () => void // 重新开始的方法
     onClose: () => void // 关闭弹窗
 }
-export default function ResultModal (props: IPropsResultModal) {
+
+/**
+ * modal结果内容
+ **/ 
+const ResultModal: React.FC<IPropsResultModal> = (props) => {
     let navigate = useNavigate()
     const [modalClass, setModalClass] = useState<string>('modal')
 
@@ -70,3 +74,5 @@ export default function ResultModal (props: IPropsResultModal) {
         </div>
     )
 }
+
+export default ResultModal

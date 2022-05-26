@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-24 16:58:00
+ * @LastEditTime: 2022-05-26 08:52:00
  * @LastEditors: Swan Cai
  * @Description: 
  * @FilePath: /2048-react/src/components/Score.tsx
@@ -16,7 +16,7 @@ interface IPropScore {
 /*
 * 分数
 */
-export default function Score (props: IPropScore) {
+const Score: React.FC<IPropScore> = (props) => {
     return (
         <div className="score">
           <span className="key">{props.name || ''}</span>
@@ -24,3 +24,5 @@ export default function Score (props: IPropScore) {
         </div>
     )
 }
+
+export default Score
