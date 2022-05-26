@@ -81,7 +81,7 @@ const Game: React.FC<{}> = ({}) => {
 		console.log('Sequares=', arr)
 		return arr
 	}
-	// 垂直于当前方向的方向没有可以叠加的部分
+	// 检查垂直于用户移动方向的方向上是否存在合并或者移动的可能性
 	function checkPerpendicularDirPossibility(direction: Direction, squares: number[]): boolean {
 		let possibility = false
 		switch (direction) {
