@@ -6,7 +6,7 @@
  * @Description: 
  * @FilePath: /2048-react/src/pages/Ranking.tsx
  */
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 
 /* *
  * 排行榜
