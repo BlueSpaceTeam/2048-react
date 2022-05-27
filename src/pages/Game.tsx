@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-27 16:59:36
+ * @LastEditTime: 2022-05-27 17:49:46
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/src/pages/Game.tsx
@@ -30,8 +30,8 @@ interface IAHistoryOfSquares {
 	squares: number[]
 }
 
-// 自定义hook： 获取旧值 -- todo : 怎么写Typescript的类型， 泛型
-function usePrevious(value: number): number {
+// 自定义hook： 获取旧值
+function usePrevious<T extends number>(value: T): number {
 	const ref = useRef<number>(0)
 	useEffect(() => {
 		ref.current = value
