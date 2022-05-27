@@ -1,8 +1,8 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-26 08:52:00
- * @LastEditors: Swan Cai
+ * @LastEditTime: 2022-05-27 17:34:54
+ * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/src/components/Board.tsx
  */
@@ -19,8 +19,8 @@ import {
 	Direction
 } from '../constants'
 interface IPropBoard {
-    squares: number[] // 方块集
-    onMove: (dir: Direction) => void // 处理移动结果
+	squares: number[] // 方块集
+	onMove: (dir: Direction) => void // 处理移动结果
 }
 const Board: React.FC<IPropBoard> = (props) => {
 	const { squares, onMove } = props
@@ -29,11 +29,11 @@ const Board: React.FC<IPropBoard> = (props) => {
 		Y: 0
 	}
 
-    const SquaresUI: JSX.Element[] = squares.map((n: number, idx: React.Key | null | undefined) => {
-      return <Square num={n} key={idx} />
-    })
+	const SquaresUI: JSX.Element[] = squares.map((n: number, idx: React.Key | null | undefined) => {
+		return <Square num={n} key={idx} />
+	})
 	// 获取方向
-	function getDirection (curX: number, curY: number, minDistance: number) : Direction | null {
+	function getDirection(curX: number, curY: number, minDistance: number): Direction | null {
 		// 判断方向
 		const deltaX: number = curX - coordinate.X
 		const deltaY: number = curY - coordinate.Y
@@ -43,7 +43,7 @@ const Board: React.FC<IPropBoard> = (props) => {
 
 		// 定义鼠标移动不小于100，才认为是要操作，避免过敏误操作界面
 		if (absDeltaX < minDistance && absDeltaY < minDistance) return null
-		
+
 		// delta正值，认为是↓ 或 →，否则是↑ 或 ←
 		const dirX: Direction = deltaX > 0 ? RIGHT : LEFT
 		const dirY: Direction = deltaY > 0 ? DOWN : UP
@@ -65,7 +65,7 @@ const Board: React.FC<IPropBoard> = (props) => {
 	}
 
 	// 触摸事件
-	function handleTouchStart (e: any) {
+	function handleTouchStart(e: React.TouchEvent) {
 		e.preventDefault()
 		e.stopPropagation()
 		console.log('handleTouchStart', e)
@@ -75,7 +75,7 @@ const Board: React.FC<IPropBoard> = (props) => {
 		coordinate.X = e.touches[0].clientX
 		coordinate.Y = e.touches[0].clientY
 	}
-	function handleTouchEnd (e: any) {
+	function handleTouchEnd(e: React.TouchEvent) {
 		e.preventDefault()
 		e.stopPropagation()
 		console.log('handleTouchEnd', e)
@@ -96,7 +96,7 @@ const Board: React.FC<IPropBoard> = (props) => {
 	}
 
 	// 鼠标事件
-	function handleMouseDown (e: any) {
+	function handleMouseDown(e: React.MouseEvent) {
 		e.preventDefault()
 		e.stopPropagation()
 		console.log('handleMouseDown', e, e.clientX, e.clientY)
@@ -104,7 +104,7 @@ const Board: React.FC<IPropBoard> = (props) => {
 		coordinate.X = e.clientX
 		coordinate.Y = e.clientY
 	}
-	function handleMouseUp (e: any) {
+	function handleMouseUp(e: React.MouseEvent) {
 		e.preventDefault()
 		e.stopPropagation()
 		// 不在区域内，不执行后续代码
@@ -123,14 +123,14 @@ const Board: React.FC<IPropBoard> = (props) => {
 	}
 
 	// 键盘事件
-	function handleKeyUp (e: any) {
+	function handleKeyUp(e: KeyboardEvent) {
 		e.stopPropagation()
 		console.log('handleKeyUp', e)
 		switch (e.code) {
-			case UP :
-			case RIGHT :
-			case DOWN :
-			case LEFT : {
+			case UP:
+			case RIGHT:
+			case DOWN:
+			case LEFT: {
 				const direction: Direction = e.code
 				if (direction) {
 					onMove(direction)
@@ -140,17 +140,17 @@ const Board: React.FC<IPropBoard> = (props) => {
 		}
 	}
 	document.onkeyup = handleKeyUp
-  
-    return (
-        <div 
-			className="board" 
-			onMouseDown={handleMouseDown} 
+
+	return (
+		<div
+			className="board"
+			onMouseDown={handleMouseDown}
 			onMouseUp={handleMouseUp}
 			onTouchStart={handleTouchStart}
 			onTouchEnd={handleTouchEnd}
 		>
-          {SquaresUI}
-        </div>
-    )
-} 
+			{SquaresUI}
+		</div>
+	)
+}
 export default Board
