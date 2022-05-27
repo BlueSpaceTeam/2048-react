@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-27 17:49:46
+ * @LastEditTime: 2022-05-27 18:03:31
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/src/pages/Game.tsx
@@ -14,7 +14,7 @@ import GameButton from '../components/GameButton'
 import Modal from '../components/Modal'
 import ResultModal from '../components/ResultModal'
 
-import '../scss/game.scss'
+import { usePrevious } from '../utils/hooks'
 
 import {
 	MATRIX_ROW,
@@ -24,19 +24,12 @@ import {
 	DOWN,
 	UP,
 	Direction
-} from '../constants'
+} from '../utils/constants'
+
+import '../scss/game.scss'
 
 interface IAHistoryOfSquares {
 	squares: number[]
-}
-
-// 自定义hook： 获取旧值
-function usePrevious<T extends number>(value: T): number {
-	const ref = useRef<number>(0)
-	useEffect(() => {
-		ref.current = value
-	}, [value])
-	return ref.current
 }
 
 /**

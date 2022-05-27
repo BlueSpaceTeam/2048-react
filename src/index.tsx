@@ -1,13 +1,13 @@
 /*
  * @Author: fantiga
  * @Date: 2022-04-28 15:18:31
- * @LastEditTime: 2022-05-24 16:58:00
- * @LastEditors: Swan Cai
+ * @LastEditTime: 2022-05-27 17:54:51
+ * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/src/index.tsx
  */
 import './scss/modal.scss'
-import './fontSize'
+import './utils/fontSize'
 
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'

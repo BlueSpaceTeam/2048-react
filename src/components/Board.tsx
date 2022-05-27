@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-27 17:34:54
+ * @LastEditTime: 2022-05-27 17:56:09
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/src/components/Board.tsx
@@ -17,7 +17,7 @@ import {
 	DOWN,
 	UP,
 	Direction
-} from '../constants'
+} from '../utils/constants'
 interface IPropBoard {
 	squares: number[] // 方块集
 	onMove: (dir: Direction) => void // 处理移动结果
