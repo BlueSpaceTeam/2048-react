@@ -1,8 +1,8 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-26 08:52:00
- * @LastEditors: Swan Cai
+ * @LastEditTime: 2022-05-27 16:59:36
+ * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/src/pages/Game.tsx
  */
@@ -29,30 +29,28 @@ import {
 interface IAHistoryOfSquares {
 	squares: number[]
 }
+
 // 自定义hook： 获取旧值 -- todo : 怎么写Typescript的类型， 泛型
-function usePrevious(value: any) {
-	const ref = useRef()
+function usePrevious(value: number): number {
+	const ref = useRef<number>(0)
 	useEffect(() => {
 		ref.current = value
-	})
+	}, [value])
 	return ref.current
 }
 
 /**
  * 游戏
  */
-/**
- * 改函数式写法
- */
-const Game: React.FC<{}> = ({}) => {
+const Game: React.FC<{}> = ({ }) => {
 	// 只记录最近操作的2步，故包括初始数组最多长度为3
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{ squares: new Array(16).fill(0) }])
 	const [scores, setScores] = useState<number[]>([0])
-	const [isOver, setIsOver] =  useState<boolean>(false)
+	const [isOver, setIsOver] = useState<boolean>(false)
 	const [bestScore, setBestScore] = useState<number>(Number(localStorage.getItem('bestScore') || 0))
 	// 最高分原始值
 	const preBestScore: number = usePrevious(bestScore) || 0
-	// 
+
 	// btn-undo是否可点击
 	const disabledUndo: boolean = isOver || history.length < 3
 
@@ -148,9 +146,9 @@ const Game: React.FC<{}> = ({}) => {
 	 * 移动处理
 	 * 
 	 **/
-	function handleMove (direction: Direction): void {
+	function handleMove(direction: Direction): void {
 		if (isOver) return
-		
+
 		const currentHistory: IAHistoryOfSquares = history[history.length - 1]
 		const arr: number[] = currentHistory.squares!.slice()
 		let scoreDelta = 0 // 本轮新增的得分
@@ -340,7 +338,7 @@ const Game: React.FC<{}> = ({}) => {
 		// 如果完全相同，则不发生变化
 		if (JSON.stringify(currentHistory.squares) === JSON.stringify(arr)) {
 			if (!checkPerpendicularDirPossibility(direction, arr)) {
-				const curScore: number = scores[scores.length -1]
+				const curScore: number = scores[scores.length - 1]
 				if (curScore > preBestScore) {
 					setBestScore(curScore)
 					localStorage.setItem('bestScore', curScore + '')
@@ -378,7 +376,7 @@ const Game: React.FC<{}> = ({}) => {
 			return newHistory
 		}), 90)
 	}
-	
+
 	// 开始游戏
 	function startGame(): void {
 		setHistory((oldHistory: IAHistoryOfSquares[]) => {
@@ -397,7 +395,7 @@ const Game: React.FC<{}> = ({}) => {
 	}
 
 	// 初始化游戏界面
-    useEffect(() => {
+	useEffect(() => {
 		setHistory((oldHistory: IAHistoryOfSquares[]) => {
 			return oldHistory.concat([{ squares: genNewNum(history[0].squares!) }])
 		})
@@ -406,16 +404,16 @@ const Game: React.FC<{}> = ({}) => {
 	// 控制Modal
 	const ModalUI: JSX.Element | null = isOver ? (
 		<Modal>
-			<ResultModal 
-				isShow={isOver} 
+			<ResultModal
+				isShow={isOver}
 				score={scores[scores.length - 1]}
 				bestScore={preBestScore}
 				onRestart={() => startGame()}
-				onClose={() => setIsOver(false)} 
+				onClose={() => setIsOver(false)}
 			/>
 		</Modal>
 	)
-	: null
+		: null
 
 	return (
 		<div className="game">

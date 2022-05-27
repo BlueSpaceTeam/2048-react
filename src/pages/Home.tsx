@@ -1,8 +1,8 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-26 08:53:00
- * @LastEditors: Swan Cai
+ * @LastEditTime: 2022-05-26 17:00:47
+ * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/src/pages/Home.tsx
  */
@@ -13,9 +13,6 @@ import '../scss/home.scss'
 /* *
  * 首页
  * */
-/**
- * 改函数式写法
- */
 const Home: React.FC<{}> = ({}) => {
     let navigate = useNavigate()
     return (
