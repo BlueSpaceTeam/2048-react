@@ -1,7 +1,7 @@
 '''
 Author: fantiga
 Date: 2022-06-02 18:05:59
-LastEditTime: 2022-06-04 14:25:24
+LastEditTime: 2022-06-06 17:51:57
 LastEditors: fantiga
 Description: 
 FilePath: /2048-react/server/query.py
@@ -18,7 +18,7 @@ app = Flask(__name__)
 class Db():
     def __init__(self) -> None:
         # 数据库文件
-        self.db_file = 'db.sqlite3'
+        self.db_file = 'bs_2048.db'
         self.db = os.path.join(os.path.dirname(__file__), self.db_file)
         # 连接到SQLite数据库
         # 如果文件不存在，会自动在当前目录创建
@@ -28,7 +28,9 @@ class Db():
 
     # 插入记录并返回新id
     def insertTableData(self, sql):
+        # print('sql', sql)
         self.cur.execute(sql)
+        # print('lastrowid', self.cur.lastrowid)
         lastrowid = self.cur.lastrowid
         self.conn.commit()
         return lastrowid
@@ -49,32 +51,10 @@ class Db():
         self.conn.close()
 
 
-@app.route('/query', methods=['POST'])
-def query():
-    # 接收到的数据
-    user_name = request.form['user_name']
-    user_score = int(request.form['user_score'])
-
-    now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+def getAll():
     db = Db()
-
     # 拼接sql语句
-    sql = 'INSERT INTO "main"."bs_2048_server_rankdata" ("user_name", "user_score", "created_time") VALUES("' + \
-        user_name + '", ' + str(user_score) + ', "' + now + '")'
-
-    # 最新的id
-    lastrowid = db.insertTableData(sql)
-
-    # 保存当前的记录数据
-    current_data = {
-        "id": lastrowid,
-        "user_name": user_name,
-        "user_score": user_score,
-        "created_time": now
-    }
-
-    # 拼接sql语句
-    sql = 'SELECT id, user_name, user_score, created_time from "main"."bs_2048_server_rankdata" ORDER BY "user_score" DESC LIMIT 10'
+    sql = "SELECT id, user_name, user_score, created_time from \"main\".\"bs_2048_server_rankdata\" ORDER BY \"user_score\" DESC LIMIT 10"
     fields, fetch_data = db.selectTableData(sql)
 
     # 定义表结构的列表
@@ -97,12 +77,48 @@ def query():
         # 字典存入list中
         sql_list.append(result)
 
-    json = {
-        "current_data": current_data,
-        "rank_data": sql_list
-    }
-
     db.closeDatabase()
+
+    return sql_list
+
+
+@app.route('/query', methods=['POST'])
+def query():
+    # 接收到的数据
+    action = request.form['action']
+
+    if action == 'add':
+        user_name = request.form['user_name']
+        user_score = int(request.form['user_score'])
+        now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        db = Db()
+
+        # 拼接sql语句
+        sql = "INSERT INTO \"main\".\"bs_2048_server_rankdata\" (\"user_name\", \"user_score\", \"created_time\") VALUES('" + \
+            user_name + "', '" + str(user_score) + "', '" + now + "')"
+
+        # 最新的id
+        lastrowid = db.insertTableData(sql)
+
+        db.closeDatabase()
+
+        # 保存当前的记录数据
+        current_data = {
+            "id": lastrowid,
+            "user_name": user_name,
+            "user_score": user_score,
+            "created_time": now
+        }
+
+        json = {
+            "current_data": current_data,
+            "rank_data": getAll()
+        }
+
+    elif action == 'get':
+        json = {
+            "rank_data": getAll()
+        }
 
     return json
 

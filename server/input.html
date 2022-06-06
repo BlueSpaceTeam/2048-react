@@ -1,24 +1,28 @@
 <!--
  * @Author: fantiga
  * @Date: 2022-06-03 17:40:29
- * @LastEditTime: 2022-06-03 19:06:28
+ * @LastEditTime: 2022-06-06 17:53:53
  * @LastEditors: fantiga
  * @Description: 
- * @FilePath: /2048-react/input.html
+ * @FilePath: /2048-react/server/input.html
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <form method="post" action="http://127.0.0.1:5000/query">
+        <input type="hidden" name="action" value="get" />
         <input type="text" name="user_name" />
         <input type="number" name="user_score" />
         <button type="submit">提交</button>
     </form>
 </body>
+
 </html>
