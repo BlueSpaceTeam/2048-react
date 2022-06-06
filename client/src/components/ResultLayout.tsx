@@ -1,0 +1,37 @@
+/*
+ * @Author: Swan Cai
+ * @Date: 2022-05-24 16:58:00
+ * @LastEditTime: 2022-06-06 15:49:00
+ * @LastEditors: Swan Cai
+ * @Description: 
+ * @FilePath: /2048-react/src/components/ResultModal.tsx
+ */
+import React from 'react'
+
+interface IResultLayout {
+    bestScore: number // 最高分
+    score: number // 当前分数
+}
+
+const ResultLayout: React.FC<IResultLayout> = (props) => {
+    // 是否现得分数超越过去最高分
+    const isExceeded: boolean = props.score > props.bestScore
+    
+    const NormalElem: JSX.Element = (
+        <>
+            <h1 className="title">Game Over</h1>
+            <div className="p-score">Current Score：<span className="num cur">{props.score || 0}</span></div>
+            <div className="p-score best">Best Score：<span className="num">{ props.bestScore || 0}</span></div>
+        </>
+    )
+    const BestElem: JSX.Element = (
+        <>
+            <h1 className="title exceed">Congratulations</h1>
+            <div className="p-score">You Has Got A Best Score: <span className="num cur best">{props.score || 0}</span></div>
+            
+        </>
+    )
+    return props.score > props.bestScore ? BestElem : NormalElem
+}
+
+export default ResultLayout

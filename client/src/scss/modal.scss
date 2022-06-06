@@ -1,7 +1,6 @@
 $form-width: 4rem;
 
 .modal {
-    // display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +10,6 @@ $form-width: 4rem;
     text-align: center;
     opacity: 0.5;
     transform: translateY(60%);
-    // transition: transform 0.3s, opacity 0.3s;
     transition: transform 0.5s, opacity 0.5s;
 
     display: flex;
@@ -78,12 +76,6 @@ $form-width: 4rem;
         }
     }
 
-    .submit-tip {
-        margin-top: 0.6rem;
-        color: #f71d04;
-        font-size: 0.32rem;
-    }
-
     .input-wrap {
         width: $form-width;
         margin-top: 0.6rem;
@@ -119,6 +111,7 @@ $form-width: 4rem;
         margin-top: 0.3rem;
     }
 
+    .btn-no-submit,
     .btn-home {
         background-color: #c4ae9a;
     }
