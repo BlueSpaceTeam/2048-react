@@ -1,72 +1,101 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-26 08:54:00
+ * @LastEditTime:2022-06-06 15:49:00
  * @LastEditors: Swan Cai
  * @Description: 
  * @FilePath: /2048-react/src/pages/Ranking.tsx
  */
 import React from 'react'
 
-import RankItem from '../components/RankItem'
+import RankList from '../components/RankList'
 
 import '../scss/ranking.scss'
 
 interface IRankItem {
-    id: string // id
-    name: string  // 用户名
-    score: number // 得分
-}
-interface IRankingList {
-    map: Function
-    [index: number]: IRankItem
-    length: number
+    id: string | number // id
+    user_name: string  // 用户名
+    user_score: number // 得分
+    created_time: string // 创建时间
 }
 
 /* *
  * 排行榜
  * */ 
 const Ranking: React.FC<{}> = ({}) => {
-    const list = ([
+    const list: IRankItem[] = ([
         {
             id: 1,
-            name: '张飞',
-            score: 12345678,
+            user_name: '张飞',
+            user_score: 12345678,
+            created_time: '2022-12-30 12:56:54',
         },
         {
             id: 2,
-            name: '张飞haahhhahahahhahah',
-            score: 12348,
+            user_name: '张飞haahhhahahahhahah',
+            user_score: 12348,
+            created_time: 'just now',
         },
         {
             id: 3,
-            name: '张飞haaahahhahah',
-            score: 1234890900900900,
+            user_name: '张飞haaahahhahah',
+            user_score: 1234890900900900,
+            created_time: '25 hours before',
         },
         {
             id: 4,
-            name: '张飞hah',
-            score: 900900,
+            user_name: '张飞hah',
+            user_score: 900900,
+            created_time: '56 min before',
         },
-    ]) as unknown as IRankingList
+        {
+            id: 5,
+            user_name: '张飞hah',
+            user_score: 900900,
+            created_time: '2022-12-30',
+        },
+        {
+            id: 6,
+            user_name: '张飞hah',
+            user_score: 900900,
+            created_time: 'yesterday',
+        },
+        {
+            id: 7,
+            user_name: '张飞haaahahhahah',
+            user_score: 1234890900900900,
+            created_time: '25 hours before',
+        },
+        {
+            id: 8,
+            user_name: '张飞hah',
+            user_score: 900900,
+            created_time: '56 min before',
+        },
+        // {
+        //     id: 9,
+        //     user_name: '张飞hah',
+        //     user_score: 900900,
+        //     created_time: '2022-12-30',
+        // },
+        // {
+        //     id: 10,
+        //     user_name: '张飞hah',
+        //     user_score: 900900,
+        //     created_time: 'yesterday',
+        // },
+        // {
+        //     id: 11,
+        //     user_name: '张飞hah111111',
+        //     user_score: 900900,
+        //     created_time: 'yesterday',
+        // },
+    ])
 
     return (
         <div className="ranking">
             <h1 className="title">RANKING</h1>
-            <ol className="container">
-                {
-                    list.map((obj: IRankItem, idx: number) => {
-                        return (
-                            <RankItem 
-                                key={obj.id}
-                                position={idx + 1} 
-                                name={obj.name}
-                                score={obj.score}
-                            />
-                        )
-                    })
-                }
-            </ol>
+            <RankList list={list} />
         </div>
     )
 }

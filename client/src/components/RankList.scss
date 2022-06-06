@@ -1,0 +1,72 @@
+.rank-list {
+    padding: 0.2rem 0;
+    background-color: rgba($color: #696662, $alpha: 0.2);
+    border-radius: 0.08rem;
+}
+
+.rank-wrap {
+    max-height: calc(100vh - 3rem);
+    max-height: calc(100vh - 3rem - env(safe-area-inset-bottom));
+    max-height: calc(100vh - 3rem - constant(safe-area-inset-bottom));
+    overflow-y: auto;
+
+    /* 去掉滚动条 */
+    &::-webkit-scrollbar{
+        display:none;
+    }
+
+    &.mine {
+        max-height: calc(100vh - 7rem);
+        max-height: calc(100vh - 7rem - env(safe-area-inset-bottom));
+        max-height: calc(100vh - 7rem - constant(safe-area-inset-bottom));
+    }
+}
+
+.rank-item {
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 0;
+    font-size: 0.28rem;
+    text-align: center;
+    word-break: break-all;
+
+    .position,
+    .name,
+    .score,
+    .time {
+        box-sizing: border-box;
+        padding: 0 0.1rem;
+    }
+
+    .position {
+        width: 1rem;
+        font-size: 0.3rem;
+        font-style: italic;
+
+        &.txt {
+            color: #366dd8;
+        }
+
+        &.first {
+            color: #fa2306;
+        }
+        &.second {
+            color: #f89811;
+        }
+        &.third {
+            color: #cea20a;
+        }
+    }
+
+    .name,
+    .score {
+        width: 2rem;
+    }
+    .time {
+        width: 1.9rem;
+    }
+
+    &.mine {
+        border-bottom: 0.01rem solid #d4cfc7;
+    }
+}

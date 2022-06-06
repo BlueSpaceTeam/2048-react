@@ -1,13 +1,93 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-26 08:52:00
+ * @LastEditTime:2022-06-06 15:49:00
  * @LastEditors: Swan Cai
  * @Description: 
  * @FilePath: /2048-react/src/components/ResultModal.tsx
  */
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import ResultLayout from './ResultLayout'
+import RankList from './RankList'
+
+// TODEL
+interface IRankItem {
+    id: string | number // id
+    user_name: string  // 用户名
+    user_score: number // 得分
+    created_time: string // 创建时间
+}
+const list: IRankItem[] = ([
+    {
+        id: 1,
+        user_name: '张飞',
+        user_score: 12345678,
+        created_time: '2022-12-30 12:56:54',
+    },
+    {
+        id: 2,
+        user_name: '张飞haahhhahahahhahah',
+        user_score: 12348,
+        created_time: 'just now',
+    },
+    {
+        id: 3,
+        user_name: '张飞haaahahhahah',
+        user_score: 1234890900900900,
+        created_time: '25 hours before',
+    },
+    {
+        id: 4,
+        user_name: '张飞hah',
+        user_score: 900900,
+        created_time: '56 min before',
+    },
+    {
+        id: 5,
+        user_name: '张飞hah',
+        user_score: 900900,
+        created_time: '2022-12-30',
+    },
+    {
+        id: 6,
+        user_name: '张飞hah',
+        user_score: 900900,
+        created_time: 'yesterday',
+    },
+    {
+        id: 7,
+        user_name: '张飞haaahahhahah',
+        user_score: 1234890900900900,
+        created_time: '25 hours before',
+    },
+    {
+        id: 8,
+        user_name: '张飞hah',
+        user_score: 900900,
+        created_time: '56 min before',
+    },
+    // {
+    //     id: 9,
+    //     user_name: '张飞hah',
+    //     user_score: 900900,
+    //     created_time: '2022-12-30',
+    // },
+    // {
+    //     id: 10,
+    //     user_name: '张飞hah',
+    //     user_score: 900900,
+    //     created_time: 'yesterday',
+    // },
+    // {
+    //     id: 11,
+    //     user_name: '张飞hah111111',
+    //     user_score: 900900,
+    //     created_time: 'yesterday',
+    // },
+])
+
 
 interface IPropsResultModal {
     isShow: boolean // 是否展示
@@ -24,6 +104,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
     let navigate = useNavigate()
     const [modalClass, setModalClass] = useState<string>('modal')
     const [scorer, setScorer] = useState<string>('')
+    const [pageNum, setPageNum] = useState<number>(1) // 第几页
     const [isSubmit, setIsSubmit] = useState<boolean>(false) // 是否提交过
 
     useEffect (() => {
@@ -49,54 +130,53 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
             }
         }
     }
-    const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e) => {
-        console.log(e.target.value)
-        setScorer(e.target.value)
-    }
+    const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e) => setScorer(e.target.value)
 
     const onSubmit: () => void = () => {
-        alert(scorer)
         setIsSubmit(true)
+        setPageNum(2)
     }
 
-    // 是否现得分数超越过去最高分
-    const isExceeded: boolean = props.score > props.bestScore
-    
-    const NormalElem: JSX.Element = (
+
+    const FirstPage: JSX.Element = (
         <>
-            <h1 className="title">Game Over</h1>
-            <div className="p-score">Current Score：<span className="num cur">{props.score || 0}</span></div>
-            <div className="p-score best">Best Score：<span className="num">{ props.bestScore || 0}</span></div>
-        </>
-    )
-    const BestElem: JSX.Element = (
-        <>
-            <h1 className="title exceed">Congratulations</h1>
-            <div className="p-score">You Has Got A Best Score: <span className="num cur best">{props.score || 0}</span></div>
-            
+            <ResultLayout score={props.score} bestScore={props.bestScore} />
+            <div className="input-wrap">
+                <input 
+                    className="scorer" 
+                    type="text" 
+                    placeholder="Save your score ?" 
+                    maxLength={10} 
+                    onChange={onChange} 
+                />    
+            </div>
+            <button className="btn btn-submit" onClick={() => onSubmit()}>Submit Ur Name</button>
+            <button className="btn btn-no-submit" onClick={() => setPageNum(2)}>No, thanks</button>
         </>
     )
 
-    const SubmitElem: JSX.Element = isSubmit 
-        ? <p className="submit-tip">Submit Successfully!</p>
-        : (
-            <>
-                <div className="input-wrap">
-                    <input className="scorer" type="text" maxLength={10} placeholder="Save your score ?" onChange={onChange} />    
-                </div>
-                <button className="btn btn-submit" onClick={() => onSubmit()}>Submit Ur Name</button>
-            </>
-        )
+    const myInfo: IRankItem = {
+        id: -1, // id
+        user_name: scorer, // 用户名
+        user_score: props.score, // 得分
+        created_time:  '' // 创建时间- TODO
+    }
+    const SecondPage: JSX.Element = (
+        <>
+            {
+                isSubmit
+                    ? <RankList list={list} myInfo={myInfo} />
+                    : <ResultLayout score={props.score} bestScore={props.bestScore} />
+            }
+            <button className="btn btn-restart" onClick={() => closeModal('restart')}>Restart</button>
+            <button className="btn btn-home" onClick={() => closeModal('home')}>Home</button>
+        </>   
+    )
 
     return (
         <div className={modalClass}>
             <div className="modal-main">
-                { isExceeded ? BestElem : NormalElem }
-
-                {SubmitElem}
-
-                <button className="btn btn-restart" onClick={() => closeModal('restart')}>Restart</button>
-                <button className="btn btn-home" onClick={() => closeModal('home')}>Home</button>
+                { pageNum === 1 ? FirstPage : SecondPage }   
             </div>
         </div>
     )

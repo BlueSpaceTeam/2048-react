@@ -12,6 +12,7 @@
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.0",
     "async": "^3.2.3",
+    "axios": "^0.27.2",
     "portfinder": "^1.0.28",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
