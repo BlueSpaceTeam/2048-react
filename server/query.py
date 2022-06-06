@@ -1,7 +1,7 @@
 '''
 Author: fantiga
 Date: 2022-06-02 18:05:59
-LastEditTime: 2022-06-06 19:13:35
+LastEditTime: 2022-06-06 20:30:12
 LastEditors: fantiga
 Description: 
 FilePath: /2048-react/server/query.py
@@ -106,7 +106,7 @@ def query():
 def getAll():
     db = Db()
     # 拼接sql语句
-    sql = "SELECT id, user_name, user_score, created_time FROM (SELECT * FROM \"main\".\"bs_2048_server_rankdata\" ORDER BY id DESC) GROUP BY user_score ORDER BY user_score DESC LIMIT 10"
+    sql = "SELECT a.id, a.user_name, a.user_score, a.created_time FROM \"main\".\"bs_2048_server_rankdata\" a JOIN (SELECT * FROM \"main\".\"bs_2048_server_rankdata\" ORDER BY created_time DESC LIMIT 9999) b ON a.id=b.id GROUP BY a.user_score ORDER BY a.user_score DESC LIMIT 10"
     fields, fetch_data = db.selectTableData(sql)
 
     # 定义表结构的列表
