@@ -1,3 +1,5 @@
+$form-width: 4rem;
+
 .modal {
     // display: none;
     position: fixed;
@@ -42,7 +44,7 @@
         }
 
         & + .p-score {
-            margin-top: 0.6rem;
+            margin-top: 0.4rem;
         }
     }
 
@@ -76,10 +78,30 @@
         }
     }
 
+    .submit-tip {
+        margin-top: 0.6rem;
+        color: #f71d04;
+        font-size: 0.32rem;
+    }
+
+    .input-wrap {
+        width: $form-width;
+        margin-top: 0.6rem;
+        padding: 0.06rem;
+        border: 0.01rem solid #f89e62;
+        border-radius: 0.08rem;
+
+        .scorer {
+            height: 0.88rem;
+            color: #52483c;
+            line-height: 0.88rem;
+            text-align: center;
+        }
+    }
+
     .btn {
         margin-top: 0.6rem;
-        // padding: 0 0.6rem;
-        width: 3.1rem;
+        width: $form-width;
         height: 1rem;
         line-height: 1rem;
         color: #fff;
@@ -88,8 +110,13 @@
         border-radius: 0.08rem;
     }
 
+    .btn-submit,
     .btn-restart {
         background-color: #f89e62;
+    }
+
+    .btn-submit {
+        margin-top: 0.3rem;
     }
 
     .btn-home {

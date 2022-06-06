@@ -18,9 +18,26 @@ interface IPropRankItem {
 * 排名项
 */
 const RankItem: React.FC<IPropRankItem> = (props) => {
+    const positionClass: string[] = ['position']
+
+    switch (props.position) {
+        case 1: {
+            positionClass.push('first')
+            break
+        }
+        case 2: {
+            positionClass.push('second')
+            break
+        }
+        case 3: {
+            positionClass.push('third')
+            break
+        }
+    }
+
     return (
         <li className="rank-item">
-            <span className="position">{props.position || 0}</span>
+            <span className={positionClass.join(' ')}>{props.position || 0}</span>
             <span className="name">{props.name || '-'}</span>
             <span className="score">{props.score || 0}</span>
         </li>

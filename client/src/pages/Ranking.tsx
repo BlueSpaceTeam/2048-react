@@ -10,6 +10,7 @@ import React from 'react'
 
 import RankItem from '../components/RankItem'
 
+import '../scss/ranking.scss'
 
 interface IRankItem {
     id: string // id
@@ -52,7 +53,7 @@ const Ranking: React.FC<{}> = ({}) => {
     return (
         <div className="ranking">
             <h1 className="title">RANKING</h1>
-            <ol>
+            <ol className="container">
                 {
                     list.map((obj: IRankItem, idx: number) => {
                         return (

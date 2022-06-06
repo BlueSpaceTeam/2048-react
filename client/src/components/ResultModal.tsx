@@ -23,6 +23,8 @@ interface IPropsResultModal {
 const ResultModal: React.FC<IPropsResultModal> = (props) => {
     let navigate = useNavigate()
     const [modalClass, setModalClass] = useState<string>('modal')
+    const [scorer, setScorer] = useState<string>('')
+    const [isSubmit, setIsSubmit] = useState<boolean>(false) // 是否提交过
 
     useEffect (() => {
         console.log('ResultModal, isShow', props.isShow)
@@ -47,6 +49,16 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
             }
         }
     }
+    const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e) => {
+        console.log(e.target.value)
+        setScorer(e.target.value)
+    }
+
+    const onSubmit: () => void = () => {
+        alert(scorer)
+        setIsSubmit(true)
+    }
+
     // 是否现得分数超越过去最高分
     const isExceeded: boolean = props.score > props.bestScore
     
@@ -61,13 +73,28 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
         <>
             <h1 className="title exceed">Congratulations</h1>
             <div className="p-score">You Has Got A Best Score: <span className="num cur best">{props.score || 0}</span></div>
+            
         </>
     )
+
+    const SubmitElem: JSX.Element = isSubmit 
+        ? <p className="submit-tip">Submit Successfully!</p>
+        : (
+            <>
+                <div className="input-wrap">
+                    <input className="scorer" type="text" maxLength={10} placeholder="Save your score ?" onChange={onChange} />    
+                </div>
+                <button className="btn btn-submit" onClick={() => onSubmit()}>Submit Ur Name</button>
+            </>
+        )
 
     return (
         <div className={modalClass}>
             <div className="modal-main">
                 { isExceeded ? BestElem : NormalElem }
+
+                {SubmitElem}
+
                 <button className="btn btn-restart" onClick={() => closeModal('restart')}>Restart</button>
                 <button className="btn btn-home" onClick={() => closeModal('home')}>Home</button>
             </div>
