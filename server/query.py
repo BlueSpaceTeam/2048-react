@@ -1,7 +1,7 @@
 '''
 Author: fantiga
 Date: 2022-06-02 18:05:59
-LastEditTime: 2022-06-06 17:51:57
+LastEditTime: 2022-06-06 19:13:35
 LastEditors: fantiga
 Description: 
 FilePath: /2048-react/server/query.py
@@ -28,9 +28,7 @@ class Db():
 
     # 插入记录并返回新id
     def insertTableData(self, sql):
-        # print('sql', sql)
         self.cur.execute(sql)
-        # print('lastrowid', self.cur.lastrowid)
         lastrowid = self.cur.lastrowid
         self.conn.commit()
         return lastrowid
@@ -45,47 +43,25 @@ class Db():
         get_table_fields = self.cur.description
         return [get_table_fields, get_table_data]
 
+    # 查询并返回排名
+    def selectRankNum(self, sql):
+        self.cur.execute(sql)
+        self.conn.commit()
+        # 单条数据
+        return self.cur.fetchone()
+
     # 关闭数据库
     def closeDatabase(self):
         self.cur.close()
         self.conn.close()
 
 
-def getAll():
-    db = Db()
-    # 拼接sql语句
-    sql = "SELECT id, user_name, user_score, created_time from \"main\".\"bs_2048_server_rankdata\" ORDER BY \"user_score\" DESC LIMIT 10"
-    fields, fetch_data = db.selectTableData(sql)
-
-    # 定义表结构的列表
-    column_list = []
-
-    # 提取字段，追加到列表中
-    for i in fields:
-        column_list.append(i[0])
-
-    # 按行将数据存入数组中，并转换为json格式
-    #column_size = len(column_list)
-    # 定义存储sql数据的list
-    sql_list = []
-    # 按行对sql数据进行循环
-    for row in fetch_data:
-        # 表数据与表结构对应 存入字典中
-        result = {}
-        for i in range(len(row)):
-            result[column_list[i]] = row[i]
-        # 字典存入list中
-        sql_list.append(result)
-
-    db.closeDatabase()
-
-    return sql_list
-
 
 @app.route('/query', methods=['POST'])
 def query():
     # 接收到的数据
     action = request.form['action']
+    json = {}
 
     if action == 'add':
         user_name = request.form['user_name']
@@ -100,6 +76,11 @@ def query():
         # 最新的id
         lastrowid = db.insertTableData(sql)
 
+        # 获取排名值
+        sql = "SELECT COUNT(*) FROM (SELECT * FROM \"main\".\"bs_2048_server_rankdata\" WHERE \"user_score\" > '" + \
+            str(user_score) + "' GROUP BY user_score)"
+        rank_num = db.selectRankNum(sql)
+
         db.closeDatabase()
 
         # 保存当前的记录数据
@@ -107,21 +88,51 @@ def query():
             "id": lastrowid,
             "user_name": user_name,
             "user_score": user_score,
+            "rank_num": rank_num[0] + 1,
             "created_time": now
         }
 
-        json = {
-            "current_data": current_data,
-            "rank_data": getAll()
-        }
+        json.update({
+            "current_data": current_data
+        })
 
-    elif action == 'get':
-        json = {
-            "rank_data": getAll()
-        }
+    json.update({
+        "rank_data": getAll()
+    })
 
     return json
 
+
+def getAll():
+    db = Db()
+    # 拼接sql语句
+    sql = "SELECT id, user_name, user_score, created_time FROM (SELECT * FROM \"main\".\"bs_2048_server_rankdata\" ORDER BY id DESC) GROUP BY user_score ORDER BY user_score DESC LIMIT 10"
+    fields, fetch_data = db.selectTableData(sql)
+
+    # 定义表结构的列表
+    column_list = []
+
+    # 提取字段，追加到列表中
+    for i in fields:
+        column_list.append(i[0])
+
+    # 按行将数据存入数组中，并转换为json格式
+    #column_size = len(column_list)
+    # 定义存储sql数据的list
+    sql_list = []
+    # 按行对sql数据进行循环
+    for rank_num, row in enumerate(fetch_data):
+        # 表数据与表结构对应 存入字典中
+        result = {}
+        result['rank_num'] = rank_num + 1
+        for i in range(len(row)):
+            result[column_list[i]] = row[i]
+        # 字典存入list中
+        sql_list.append(result)
+
+    db.closeDatabase()
+
+    return sql_list
 
 if __name__ == '__main__':
     app.run(debug=True)
