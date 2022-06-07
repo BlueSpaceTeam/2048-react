@@ -44,7 +44,7 @@ const RankItem: React.FC<IPropRankItem> = (props) => {
 
     return (
         <li className={rankItemClass}>
-            <span className={positionClass.join(' ')}>{props.position === -1? 'Mine' : (props.position || 0)}</span>
+            <span className={positionClass.join(' ')}>{props.position === -1? 'Yours' : (props.position || 0)}</span>
             <span className="name">{props.name || '-'}</span>
             <span className="score">{props.score || 0}</span>
             <span className="time">{props.time ? props.time.slice(0, 16) : '-'}</span>
