@@ -8,7 +8,7 @@
  */
 import React from 'react'
 import RankItem from './RankItem'
-import './RankList.scss'
+import '../scss/RankList.scss'
 
 interface IRankItem {
     id: string | number // id

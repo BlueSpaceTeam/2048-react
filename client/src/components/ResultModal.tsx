@@ -8,9 +8,12 @@
  */
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
-import ResultLayout from './ResultLayout'
-import RankList from './RankList'
+// import ResultLayout from './ResultLayout'
+// import RankList from './RankList'
+import ResultModalFirstPage from './ResultModalFirstPage'
+import ResultModalSecondPage from './ResultModalSecondPage'
 
 // TODEL
 interface IRankItem {
@@ -133,27 +136,11 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
     const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e) => setScorer(e.target.value)
 
     const onSubmit: () => void = () => {
+        if (!scorer) return
+
         setIsSubmit(true)
         setPageNum(2)
     }
-
-
-    const FirstPage: JSX.Element = (
-        <>
-            <ResultLayout score={props.score} bestScore={props.bestScore} />
-            <div className="input-wrap">
-                <input 
-                    className="scorer" 
-                    type="text" 
-                    placeholder="Save your score ?" 
-                    maxLength={10} 
-                    onChange={onChange} 
-                />    
-            </div>
-            <button className="btn btn-submit" onClick={() => onSubmit()}>Submit Ur Name</button>
-            <button className="btn btn-no-submit" onClick={() => setPageNum(2)}>No, thanks</button>
-        </>
-    )
 
     const myInfo: IRankItem = {
         id: -1, // id
@@ -161,22 +148,29 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
         user_score: props.score, // 得分
         created_time:  '' // 创建时间- TODO
     }
-    const SecondPage: JSX.Element = (
-        <>
-            {
-                isSubmit
-                    ? <RankList list={list} myInfo={myInfo} />
-                    : <ResultLayout score={props.score} bestScore={props.bestScore} />
-            }
-            <button className="btn btn-restart" onClick={() => closeModal('restart')}>Restart</button>
-            <button className="btn btn-home" onClick={() => closeModal('home')}>Home</button>
-        </>   
-    )
 
     return (
         <div className={modalClass}>
             <div className="modal-main">
-                { pageNum === 1 ? FirstPage : SecondPage }   
+                { 
+                    pageNum === 1 
+                        ? <ResultModalFirstPage
+                                score={props.score}
+                                bestScore={props.bestScore}
+                                onChange={onChange}
+                                onSubmit={onSubmit}
+                                onPageChange={setPageNum.bind(this, 2)}
+                            />
+                        : <ResultModalSecondPage
+                                isSubmit={isSubmit}
+                                list={list}
+                                myInfo={myInfo}
+                                score={props.score}
+                                bestScore={props.bestScore}
+                                onRestart={closeModal.bind(this, 'restart')}
+                                onHome={closeModal.bind(this, 'home')}
+                            /> 
+                }   
             </div>
         </div>
     )

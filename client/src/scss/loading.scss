@@ -1,0 +1,103 @@
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .main {
+        position: relative;
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .particle {
+        position: absolute;
+        width: 0.52rem;
+        height: 0.52rem;
+        line-height: 0.52rem;
+        color: #fff;
+        font-size: 0.28rem;
+        font-weight: 500;
+        text-align: center;
+
+        &_1 {
+            background-color: #f4e4db;
+            animation: move1 0.8s ease-in-out infinite alternate;
+        }
+        &_2 {
+            background-color: #ca850e;
+            animation: move2 0.8s ease-in-out infinite alternate;
+        }
+        &_3 {
+            background-color: #deb628;
+            animation: move3 0.8s ease-in-out infinite alternate;
+        }
+        &_4 {
+            background-color: #d3a685;
+            animation: move4 0.8s ease-in-out infinite alternate;
+        }
+    }
+}
+
+@mixin breath-start {
+    border-radius: 50%;
+    transform: translate3d(-50%, -50%, 0) scale(0.5);
+    opacity: 0.2;
+    left: 50%;
+    top: 50%;
+}
+
+@mixin breath-end {
+    border-radius: 0.08rem;
+    transform: translate3d(-50%, -50%, 0) scale(1);
+    opacity: 1;
+}
+
+
+@keyframes move1 {
+    0% {
+        @include breath-start;
+    }
+    100% {
+        @include breath-end;
+        left: 0;
+        top: 0;
+    }
+}
+
+@keyframes move2 {
+    0% {
+        @include breath-start;
+    }
+    100% {
+        @include breath-end;
+        left: 100%;
+        top: 0;
+    }
+}
+
+@keyframes move3 {
+    0% {
+        @include breath-start;
+    }
+    100% {
+        @include breath-end;
+        left: 0;
+        top: 100%;
+    }
+}
+
+@keyframes move4 {
+    0% {
+        @include breath-start;
+    }
+    100% {
+        @include breath-end;
+        left: 100%;
+        top: 100%;
+    }
+}

@@ -4,10 +4,24 @@
     .title {
         color: #696662; // #d3a685
         background-image:-webkit-linear-gradient(bottom,#696662 50%,#d3a685 50%); 
-        -webkit-background-clip:text; 
-        -webkit-text-fill-color:transparent; 
+        -webkit-background-clip: text; 
+        -webkit-text-fill-color: transparent; 
         font-size: 0.7rem;
         text-align: center;
         margin-bottom: 0.3rem;
+    }
+
+    .error,
+    .no-data {
+        font-size: 0.4rem;
+        line-height: 0.56rem;
+        text-align: center;
+    }
+    .error {
+        color: red;
+    }
+
+    .no-data {
+        color: #938f89;
     }
 }

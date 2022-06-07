@@ -14,24 +14,21 @@ interface IResultLayout {
 }
 
 const ResultLayout: React.FC<IResultLayout> = (props) => {
-    // 是否现得分数超越过去最高分
-    const isExceeded: boolean = props.score > props.bestScore
-    
-    const NormalElem: JSX.Element = (
-        <>
-            <h1 className="title">Game Over</h1>
-            <div className="p-score">Current Score：<span className="num cur">{props.score || 0}</span></div>
-            <div className="p-score best">Best Score：<span className="num">{ props.bestScore || 0}</span></div>
-        </>
-    )
-    const BestElem: JSX.Element = (
-        <>
-            <h1 className="title exceed">Congratulations</h1>
-            <div className="p-score">You Has Got A Best Score: <span className="num cur best">{props.score || 0}</span></div>
-            
-        </>
-    )
-    return props.score > props.bestScore ? BestElem : NormalElem
+    // 是否现得分数超越过去最高分 展示不同的结果
+    return props.score > props.bestScore 
+        ? (
+            <>
+                <h1 className="title exceed">Congratulations</h1>
+                <div className="p-score">You Has Got A Best Score: <span className="num cur best">{props.score || 0}</span></div>
+            </>
+        ) 
+        : (
+            <>
+                <h1 className="title">Game Over</h1>
+                <div className="p-score">Current Score：<span className="num cur">{props.score || 0}</span></div>
+                <div className="p-score best">Best Score：<span className="num">{ props.bestScore || 0}</span></div>
+            </>
+        )
 }
 
 export default ResultLayout
