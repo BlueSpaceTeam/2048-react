@@ -8,10 +8,10 @@
  */
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../utils/axios'
 
-// import ResultLayout from './ResultLayout'
-// import RankList from './RankList'
+import Modal from '../components/Modal'
+import Loading from '../components/Loading'
 import ResultModalFirstPage from './ResultModalFirstPage'
 import ResultModalSecondPage from './ResultModalSecondPage'
 
@@ -91,7 +91,6 @@ const list: IRankItem[] = ([
     // },
 ])
 
-
 interface IPropsResultModal {
     isShow: boolean // 是否展示
     bestScore: number // 最高分
@@ -109,6 +108,8 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
     const [scorer, setScorer] = useState<string>('')
     const [pageNum, setPageNum] = useState<number>(1) // 第几页
     const [isSubmit, setIsSubmit] = useState<boolean>(false) // 是否提交过
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [error, setError] = useState<any>(null)
 
     useEffect (() => {
         console.log('ResultModal, isShow', props.isShow)
@@ -136,10 +137,28 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
     const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e) => setScorer(e.target.value)
 
     const onSubmit: () => void = () => {
-        if (!scorer) return
+        console.log('scorer=', scorer)
+        if (!scorer || isLoading) return
 
-        setIsSubmit(true)
-        setPageNum(2)
+        setIsLoading(true)
+        axios.post('/query', {
+            data: {
+                action: 'add',
+                user_name: scorer,
+                user_score: props.score
+            }
+          })
+            .then(e => {
+                console.log('e=', e)
+                setIsLoading(false)
+                setIsSubmit(true)
+                setPageNum(2)
+            })
+            .catch(err => {
+                console.error('err=', err)
+                setIsLoading(false)
+                setError(err)
+            })
     }
 
     const myInfo: IRankItem = {
@@ -152,11 +171,21 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
     return (
         <div className={modalClass}>
             <div className="modal-main">
+                {
+                    isLoading 
+                        ? (
+                            <Modal>
+                                <Loading />
+                            </Modal>
+                        ) 
+                        : null
+                }
                 { 
                     pageNum === 1 
                         ? <ResultModalFirstPage
                                 score={props.score}
                                 bestScore={props.bestScore}
+                                isError={Boolean(error)}
                                 onChange={onChange}
                                 onSubmit={onSubmit}
                                 onPageChange={setPageNum.bind(this, 2)}

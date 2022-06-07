@@ -119,11 +119,11 @@ const Ranking: React.FC<{}> = ({}) => {
     console.log(error)
 
     const ResUI: JSX.Element = error
-        ? <p className="error">获取失败请稍后重试</p>
+        ? <p className="error">Opps! Something wrong. Please try again later.</p>
         : (
             true 
             ? <RankList list={list} />
-            : <p className="no-data">暂无数据</p>
+            : <p className="no-data">Empty Data</p>
         )
 
     return (

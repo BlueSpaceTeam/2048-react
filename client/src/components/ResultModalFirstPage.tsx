@@ -13,6 +13,7 @@ import ResultLayout from './ResultLayout'
 interface IPropsResultModal {
     bestScore: number // 最高分
     score: number // 当前分数
+    isError: boolean // 是否提交异常
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void // 名字改变
     onSubmit: () => void // 提交名字
     onPageChange: (e: number) => void // 更改页码
@@ -29,12 +30,19 @@ const ResultModalFirstPage: React.FC<IPropsResultModal> = (props) => {
                 <input 
                     className="scorer" 
                     type="text" 
-                    placeholder="Input your name to save this record" 
+                    placeholder="Input name to save record" 
                     maxLength={30} 
+                    autoFocus
                     onChange={props.onChange} 
                 />    
             </div>
-            <button className="btn btn-submit" onClick={() => props.onSubmit}>Save Ur Name</button>
+            <button className="btn btn-submit" onClick={() => props.onSubmit()}>Save Ur Name</button>
+            {
+                props.isError 
+                    ? <p className="error">Opps! Something wrong. Please try again later.</p>
+                    : null
+            }
+            
             <button className="btn btn-no-submit" onClick={() => props.onPageChange}>No, thanks</button>
         </>
     )

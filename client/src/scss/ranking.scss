@@ -13,8 +13,10 @@
 
     .error,
     .no-data {
+        margin-top: 0.6rem;
+        padding: 0.6rem;
         font-size: 0.4rem;
-        line-height: 0.56rem;
+        line-height: 0.8rem;
         text-align: center;
     }
     .error {
