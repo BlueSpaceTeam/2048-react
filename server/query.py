@@ -1,24 +1,36 @@
 '''
 Author: fantiga
 Date: 2022-06-02 18:05:59
-LastEditTime: 2022-06-07 15:22:34
+LastEditTime: 2022-06-08 18:09:08
 LastEditors: fantiga
-Description: 
+Description:
 FilePath: /2048-react/server/query.py
 '''
 
 from flask import Flask, request
+import flask
 import os
 import sqlite3
 import time
+import json
 from flask_cors import CORS
 
 app = Flask(__name__)
 
-""" 
+"""
     跨域支持
  """
-CORS(app, supports_credentials=True, origins='*', methods='*', allow_headers='*')
+CORS(app, resources=r'/*')
+
+
+headers = {
+    'Cache-Control': 'no-cache, no-store, must-revalidate',
+    'Pragma': 'no-cache',
+    'Expires': '0',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+}
 
 # app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -31,7 +43,7 @@ CORS(app, supports_credentials=True, origins='*', methods='*', allow_headers='*'
 # app.after_request(after_request)
 
 class Db():
-    """ 
+    """
         用于操作数据库的封装
     """
 
@@ -46,7 +58,7 @@ class Db():
         self.cur = self.conn.cursor()
 
     def insertTableData(self, sql):
-        """ 
+        """
             插入记录并返回新id
         """
         self.cur.execute(sql)
@@ -55,7 +67,7 @@ class Db():
         return lastrowid
 
     def selectTableData(self, sql):
-        """ 
+        """
             查询并返回记录
         """
         self.cur.execute(sql)
@@ -67,7 +79,7 @@ class Db():
         return [get_table_fields, get_table_data]
 
     def selectRankNum(self, sql):
-        """ 
+        """
             查询并返回排名
         """
         self.cur.execute(sql)
@@ -76,7 +88,7 @@ class Db():
         return self.cur.fetchone()
 
     def closeDatabase(self):
-        """ 
+        """
             关闭数据库
         """
         self.cur.close()
@@ -84,7 +96,7 @@ class Db():
 
 
 def getAll():
-    """ 
+    """
         获取前10名
     """
     db = Db()
@@ -100,7 +112,7 @@ def getAll():
         column_list.append(i[0])
 
     # 按行将数据存入数组中，并转换为json格式
-    #column_size = len(column_list)
+    # column_size = len(column_list)
     # 定义存储sql数据的list
     sql_list = []
     # 按行对sql数据进行循环
@@ -122,7 +134,7 @@ def getAll():
 def query():
     # 接收到的数据
     action = request.form['action']
-    json = {}
+    json_data = {}
 
     if action == 'add':
         user_name = request.form['user_name']
@@ -153,15 +165,18 @@ def query():
             "created_time": now
         }
 
-        json.update({
+        json_data.update({
             "current_data": current_data
         })
 
-    json.update({
+    json_data.update({
         "rank_data": getAll()
     })
 
-    return json
+    rsp = flask.Response(json.dumps(json_data))
+    rsp.headers = headers
+    rsp.headers['Cache-Control'] = 'no-cache'
+    return rsp
 
 
 if __name__ == '__main__':
