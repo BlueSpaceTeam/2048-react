@@ -11,12 +11,8 @@ import React, { useState, useEffect } from 'react'
 import RankList from './RankList'
 import ResultLayout from './ResultLayout'
 
-interface IRankItem {
-    id: string | number // id
-    user_name: string  // 用户名
-    user_score: number // 得分
-    created_time: string // 创建时间
-}
+import { IRankItem } from '../utils/constants'
+
 interface IPropsResultModal {
     isSubmit: boolean // 是否提交记录者名称
     list: IRankItem[] // 历史记录

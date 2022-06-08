@@ -39,6 +39,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
     const [myInfo, setMyInfo] = useState<IRankItem>(
         {
             id: -1, // id
+            rank_num: 0, // 名词
             user_name: scorer, // 用户名
             user_score: props.score, // 得分
             created_time:  '' // 创建时间- TODO
@@ -46,7 +47,6 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
     )
 
     useEffect (() => {
-        console.log('ResultModal, isShow', props.isShow)
         setModalClass(props.isShow ? 'modal show' : 'modal')
     }, [props.isShow])
 
@@ -71,7 +71,6 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
     const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e) => setScorer(e.target.value)
 
     const onSubmit: () => void = () => {
-        console.log('scorer=', scorer)
         if (!scorer || isLoading) return
 
         setIsLoading(true)
@@ -84,7 +83,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
 			}),
 		)
             .then(e => {
-                console.log('e=', e)
+                // console.log('e=', e)
                 if (e.data && e.data.current_data) {
 					setMyInfo(e.data.current_data)
 					setList(e.data.rank_data)

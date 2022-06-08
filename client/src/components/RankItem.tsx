@@ -25,12 +25,6 @@ const RankItem: React.FC<IPropRankItem> = (props) => {
     let timeClass: string[] = ['time']
 
     switch (props.position) {
-        case -1: {
-            rankItemClass += ' mine'
-            positionClass.push('txt')
-            timeClass.push('txt')
-            break
-        }
         case 1: {
             positionClass.push('first')
             break
@@ -48,6 +42,9 @@ const RankItem: React.FC<IPropRankItem> = (props) => {
     let timePlaceStr: string = props.time ? props.time.slice(0, 16) : '-'
     if (props.isYours) {
         timePlaceStr = 'Yours'
+        rankItemClass += ' mine'
+        positionClass.push('txt')
+        timeClass.push('txt')
     }
     return (
         <li className={rankItemClass}>
