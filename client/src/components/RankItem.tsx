@@ -9,7 +9,8 @@
 import React from 'react'
 
 interface IPropRankItem {
-    position: number // 名次， 当名次值为-1，认为是特殊展示：展示自己的排名
+    isYours?: boolean // 是否展示自己的排名
+    position: number // 名次
     name: string  // 用户名
     score: number // 得分
     time: string // 时间
@@ -21,11 +22,13 @@ interface IPropRankItem {
 const RankItem: React.FC<IPropRankItem> = (props) => {
     const positionClass: string[] = ['position']
     let rankItemClass: string = 'rank-item'
+    let timeClass: string[] = ['time']
 
     switch (props.position) {
         case -1: {
             rankItemClass += ' mine'
             positionClass.push('txt')
+            timeClass.push('txt')
             break
         }
         case 1: {
@@ -42,12 +45,16 @@ const RankItem: React.FC<IPropRankItem> = (props) => {
         }
     }
 
+    let timePlaceStr: string = props.time ? props.time.slice(0, 16) : '-'
+    if (props.isYours) {
+        timePlaceStr = 'Yours'
+    }
     return (
         <li className={rankItemClass}>
-            <span className={positionClass.join(' ')}>{props.position === -1? 'Yours' : (props.position || 0)}</span>
+            <span className={positionClass.join(' ')}>{props.position || 0}</span>
             <span className="name">{props.name || '-'}</span>
             <span className="score">{props.score || 0}</span>
-            <span className="time">{props.time ? props.time.slice(0, 16) : '-'}</span>
+            <span className={timeClass.join(' ')}>{timePlaceStr}</span>
         </li>
     )
 }

@@ -23,8 +23,9 @@ interface IPropsResultModal {
     myInfo: IRankItem // 本次游戏记录
     bestScore: number // 最高分
     score: number // 当前分数
-    onRestart: () => void // 提交名字
-    onHome: (e: number) => void // 更改页码
+    onClose: (type: string) => void // 关闭弹窗
+    // onRestart: (type: string) => void // 提交名字
+    // onHome: (type: string) => void // 更改页码
 }
 
 /**
@@ -38,8 +39,8 @@ const ResultModalSecondPage: React.FC<IPropsResultModal> = (props) => {
                     ? <RankList list={props.list} myInfo={props.myInfo} />
                     : <ResultLayout score={props.score} bestScore={props.bestScore} />
             }
-            <button className="btn btn-restart" onClick={() => props.onRestart}>Restart</button>
-            <button className="btn btn-home" onClick={() => props.onHome}>Home</button>
+            <button className="btn btn-restart" onClick={() => props.onClose('restart')}>Restart</button>
+            <button className="btn btn-home" onClick={() => props.onClose('home')}>Home</button>
         </>   
     )
 }

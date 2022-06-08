@@ -43,7 +43,7 @@ const ResultModalFirstPage: React.FC<IPropsResultModal> = (props) => {
                     : null
             }
             
-            <button className="btn btn-no-submit" onClick={() => props.onPageChange}>No, thanks</button>
+            <button className="btn btn-no-submit" onClick={() => props.onPageChange(2)}>No, thanks</button>
         </>
     )
 }

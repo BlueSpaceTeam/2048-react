@@ -21,3 +21,12 @@ export const RIGHT: Direction = 'ArrowRight'
 export const LEFT: Direction = 'ArrowLeft'
 export const DOWN: Direction = 'ArrowDown'
 export const UP: Direction = 'ArrowUp'
+
+// 接口返回的rankItem结构
+export interface IRankItem {
+    id: string | number // id
+    rank_num: number // 排名
+    user_name: string  // 用户名
+    user_score: number // 得分
+    created_time: string // 创建时间
+}

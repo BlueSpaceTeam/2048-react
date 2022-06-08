@@ -135,7 +135,22 @@ const config = {
                 removeComments: true, // 打包后移除html文件中的注释
             }
         }),
-    ]
+    ],
+    devServer: {
+        // static: {
+        //     directory: path.join(__dirname, 'public'),
+        // },
+        compress: true,
+        port: 8080,
+        hot: true,
+        proxy: {
+            '/query': {
+                target: 'http://dev.ued.team/',
+                changeOrigin: true,
+                // pathRewrite: { '/query': '' },
+            },
+        },
+    },
 };
 
 module.exports = config;
