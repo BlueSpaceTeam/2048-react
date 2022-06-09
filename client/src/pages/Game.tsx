@@ -32,10 +32,12 @@ interface IAHistoryOfSquares {
 	squares: number[]
 }
 
+interface IGame {}
+
 /**
  * 游戏
  */
-const Game: React.FC<{}> = ({ }) => {
+const Game: React.FC<IGame> = (props) => {
 	// 只记录最近操作的2步，故包括初始数组最多长度为3
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{ squares: new Array(16).fill(0) }])
 	const [scores, setScores] = useState<number[]>([0])

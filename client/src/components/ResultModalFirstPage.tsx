@@ -6,7 +6,7 @@
  * @Description: 
  * @FilePath: /2048-react/src/components/ResultModalFirstPage.tsx
  */
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import ResultLayout from './ResultLayout'
 
@@ -31,7 +31,7 @@ const ResultModalFirstPage: React.FC<IPropsResultModal> = (props) => {
                     className="scorer" 
                     type="text" 
                     placeholder="Input name to save record" 
-                    maxLength={30} 
+                    maxLength={20} 
                     autoFocus
                     onChange={props.onChange} 
                 />    

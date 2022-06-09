@@ -10,10 +10,13 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import '../scss/home.scss'
+
+interface IHome {}
+
 /* *
  * 首页
  * */
-const Home: React.FC<{}> = ({}) => {
+const Home: React.FC<IHome> = (props) => {
     let navigate = useNavigate()
     return (
         <div className="home">
