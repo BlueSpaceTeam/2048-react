@@ -92,6 +92,31 @@ const config = {
                 ],
                 include: /\.module\.css$/
             },
+            // 设置less文件的处理
+            {
+                test: /\.less$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    // 引入postcss
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        'postcss-preset-env',
+                                        {
+                                            browsers: 'last 2 versions'
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    },
+                    'less-loader',
+                ]
+            },
             // 设置sass文件处理
             {
                 test: /\.s[ac]ss$/i,
@@ -118,6 +143,19 @@ const config = {
                     'sass-loader',
                 ]
             },
+            // 设置svg文件处理
+            {
+                test: /\.svg$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'svg-url-loader',
+                        options: {
+                            limit: 10000,
+                        },
+                    },
+                ],
+            }
         ]
     },
     // 设置哪些文件可以用于引用模块
@@ -130,12 +168,25 @@ const config = {
         new HTMLWebpackPlugin({
             title: '2048 - React',
             // filename: './dist/index.html', // 配置生成的HTML文件名称
-            template: './public/index.html', // 生成HTML文件所需要的模板文件
+            template: path.resolve(__dirname, 'public', 'index.html'), // 生成HTML文件所需要的模板文件
             minify: {
                 removeComments: true, // 打包后移除html文件中的注释
-            }
+            },
+            // 导入ico文件
+            // favicon: path.resolve(__dirname, 'public', 'favicon.ico'),
+            // 导入manifest文件
+            manifest: path.resolve(__dirname, 'public', 'manifest.json'),
         }),
     ],
+    // 性能提示
+    performance: {
+        // 打开/关闭提示
+        hints: false,
+        // 何时根据最大入口点大小（以字节为单位）发出性能提示
+        maxEntrypointSize: 512000,
+        // 何时根据单个资产大小（以字节为单位）发出性能提示
+        maxAssetSize: 512000,
+    },
     devServer: {
         // static: {
         //     directory: path.join(__dirname, 'public'),
