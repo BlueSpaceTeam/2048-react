@@ -4,10 +4,14 @@
 
 ## Table of Contents
 
+- [Intro](#Intro)
 - [Usage](#usage)
 - [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Intro
+Welcome to 2048-react. An online digital game using React and Typescript to deepen our undertanding and master these techiques.
 
 ## Usage
 
