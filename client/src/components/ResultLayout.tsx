@@ -19,7 +19,7 @@ const ResultLayout: React.FC<IResultLayout> = (props) => {
         ? (
             <>
                 <h1 className="title exceed">Congratulations</h1>
-                <div className="p-score">You Has Got A Best Score: <span className="num cur best">{props.score || 0}</span></div>
+                <div className="p-score">You has got a best score: <span className="num cur best">{props.score || 0}</span></div>
             </>
         ) 
         : (

@@ -30,13 +30,13 @@ const ResultModalFirstPage: React.FC<IPropsResultModal> = (props) => {
                 <input 
                     className="scorer" 
                     type="text" 
-                    placeholder="Input name to save record" 
+                    placeholder="Input your name" 
                     maxLength={20} 
                     autoFocus
                     onChange={props.onChange} 
                 />    
             </div>
-            <button className="btn btn-submit" onClick={() => props.onSubmit()}>Save Ur Name</button>
+            <button className="btn btn-submit" onClick={() => props.onSubmit()}>Save Record</button>
             {
                 props.isError 
                     ? <p className="error">Opps! Something wrong. Please try again later.</p>

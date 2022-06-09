@@ -21,7 +21,7 @@ const Home: React.FC<IHome> = (props) => {
     return (
         <div className="home">
             <header>
-                <h1 className="hd-l">Welcome to</h1>
+                <h1 className="hd-l">Blue Space</h1>
                 <div className="hd-r">
                     <span className="square square_1">2</span>
                     <span className="square square_2">0</span>
@@ -40,7 +40,8 @@ const Home: React.FC<IHome> = (props) => {
             </ul>
 
             <footer>
-                Written in React and Typescript by Swan Cai and FantiGa on May 4th, 2022.
+                <p>Blue Space Team, on June 9th, 2022.</p>
+                <p>Written in React18 / Typescript / Python3 / SQLite3.</p>
             </footer>
         </div>
     )
