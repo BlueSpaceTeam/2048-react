@@ -426,7 +426,7 @@ const Game: React.FC<{}> = ({ }) => {
 			</main>
 			<footer>
 				<span>Written in React and Typescript</span>
-				<span>by Swan Cai</span>
+				<span>by Swan Cai and FantiGa</span>
 				<span>on May 4th, 2022.</span>
 			</footer>
 

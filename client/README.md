@@ -14,23 +14,13 @@
 ```
 ```
 
-## TodoList
-1. - [x] #feat: 撤销功能(也需要记录上一次分数)
-2. - [x] #feat: 重新开局功能
-3. - [x] #feat: 确定计分方法
-4. - [x] #feat: 嵌入路由
-5. - [ ] #feat: 排行榜
-6. - [x] #bugs: Game over 界面 无法出现Congratulation
-7. - [ ] #bug: 游戏 要限制多于2个手指不做反应
-
-
 
 ## Maintainers
 
 [@swancai](https://github.com/swancai) [@FantiGA](https://github.com/FantiGA)
 
 ## Contributing
-[@FantiGA](https://github.com/FantiGA)
+
 
 ## License
 

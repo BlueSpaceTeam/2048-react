@@ -37,7 +37,7 @@ const Home: React.FC<{}> = ({}) => {
             </ul>
 
             <footer>
-                Written in React and Typescript by Swan Cai on May 4th, 2022.
+                Written in React and Typescript by Swan Cai and FantiGa on May 4th, 2022.
             </footer>
         </div>
     )
