@@ -201,7 +201,11 @@ const config = {
                 // pathRewrite: { '/query': '' },
             },
         },
-        historyApiFallback: true, // Allows to proxy requests through a specified index page (by default 'index.html'), useful for Single Page Applications that utilise the HTML5 History API.
+        /**
+         * Allows to proxy requests through a specified index page (by default 'index.html'), 
+         * useful for Single Page Applications that utilise the HTML5 History API.
+         */
+        historyApiFallback: true,
     },
 };
 

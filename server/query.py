@@ -1,7 +1,7 @@
 '''
 Author: fantiga
 Date: 2022-06-02 18:05:59
-LastEditTime: 2022-06-08 18:09:08
+LastEditTime: 2022-06-09 14:59:25
 LastEditors: fantiga
 Description:
 FilePath: /2048-react/server/query.py
@@ -31,16 +31,6 @@ headers = {
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
 }
-
-# app.config['CORS_HEADERS'] = 'Content-Type'
-
-
-# def after_request(resp):
-#     resp.headers['Access-Control-Allow-Origin'] = '*'
-#     return resp
-
-
-# app.after_request(after_request)
 
 class Db():
     """
