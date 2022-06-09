@@ -8,7 +8,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const config = {
     // 指定打包模式：'none' | 'development' | 'production'
-    mode: 'development',
+    mode: 'production',
     // 指定入口文件
     entry: './src/index.tsx',
     // 指定打包文件所在目录
