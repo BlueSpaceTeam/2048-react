@@ -24,13 +24,18 @@ const Ranking: React.FC<{}> = ({}) => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [error, setError] = useState<any>(null)
     const [list, setList] = useState<IRankItem[]>([])
+    // const controller = new AbortController()
 
     useEffect(() => {
+
 		axios.post(
 			'', 
 			formatFormUrlencoded({
 				action: 'get'
 			}),
+            // {
+            //     signal: controller.signal
+            // }
 		)
 			.then(e => {
 				if (e.data && Array.isArray(e.data.rank_data)) {
@@ -44,7 +49,9 @@ const Ranking: React.FC<{}> = ({}) => {
 				console.error('err=', err)
 				setIsLoading(false)
 				setError(err)
-			})  
+			}) 
+        
+        // return () => controller.abort()
     }, [])
 
     const ResUI: JSX.Element = error

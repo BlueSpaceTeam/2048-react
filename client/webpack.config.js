@@ -150,6 +150,7 @@ const config = {
                 // pathRewrite: { '/query': '' },
             },
         },
+        historyApiFallback: true,
     },
 };
 
