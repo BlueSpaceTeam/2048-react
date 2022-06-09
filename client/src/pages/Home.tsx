@@ -32,10 +32,10 @@ const Home: React.FC<IHome> = (props) => {
 
             <ul>
                 <li>
-                    <button className="btn" onClick={() => navigate('/game')}>Start Game</button>
+                    <button className="btn" onClick={() => navigate('/game')}>Play</button>
                 </li>
                 <li>
-                    <button className="btn" onClick={() => navigate('/ranking')}>Check Ranking</button>
+                    <button className="btn" onClick={() => navigate('/ranking')}>Ranking</button>
                 </li>
             </ul>
 

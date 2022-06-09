@@ -42,7 +42,6 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
             rank_num: 0, // 名词
             user_name: scorer, // 用户名
             user_score: props.score, // 得分
-            created_time:  '' // 创建时间- TODO
         }
     )
 
@@ -71,7 +70,14 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
     const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e) => setScorer(e.target.value)
 
     const onSubmit: () => void = () => {
-        if (!scorer || isLoading) return
+        if (isLoading) return
+        if (!scorer) {
+            setError('Please enter your name')
+            return
+        }
+        if (error) {
+            setError('')
+        }
 
         setIsLoading(true)
 		axios.post(

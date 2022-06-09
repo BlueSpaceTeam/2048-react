@@ -1,10 +1,10 @@
-.rank-list {
-    padding: 0.2rem 0;
+%ranking {
     background-color: rgba($color: #696662, $alpha: 0.2);
     border-radius: 0.08rem;
 }
 
-.rank-wrap {
+.rank-list {
+    @extend %ranking;
     max-height: calc(100vh - 3rem);
     max-height: calc(100vh - 3rem - env(safe-area-inset-bottom));
     max-height: calc(100vh - 3rem - constant(safe-area-inset-bottom));
@@ -15,11 +15,22 @@
         display:none;
     }
 
-    &.mine {
+    &.short {
         max-height: calc(100vh - 7rem);
         max-height: calc(100vh - 7rem - env(safe-area-inset-bottom));
         max-height: calc(100vh - 7rem - constant(safe-area-inset-bottom));
     }
+}
+
+.no-data {
+    @extend %ranking;
+    padding: 0.3rem 0;
+    font-size: 0.28rem;
+    text-align: center;
+    padding: 0.3rem 0;
+    font-size: 0.28rem;
+    line-height: 0.36rem;
+    text-align: center;
 }
 
 .rank-item {
@@ -28,12 +39,11 @@
     padding: 0.3rem 0;
     font-size: 0.28rem;
     text-align: center;
-    word-break: break-all;
+    word-wrap: break-word;
 
     .position,
     .name,
-    .score,
-    .time {
+    .score {
         box-sizing: border-box;
         padding: 0 0.1rem;
     }
@@ -56,18 +66,10 @@
 
     .name,
     .score {
-        width: 1.8rem;
-    }
-    .time {
-        width: 1.9rem;
+        width: 2.95rem;
     }
 
-    &.mine {
-        border-bottom: 0.01rem solid #d4cfc7;
-        font-weight: 600;
-    }
-    
-    .txt {
-        color: #366dd8 !important;
+    .score {
+        text-align: left;
     }
 }

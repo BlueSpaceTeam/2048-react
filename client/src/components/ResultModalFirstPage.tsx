@@ -30,7 +30,7 @@ const ResultModalFirstPage: React.FC<IPropsResultModal> = (props) => {
                 <input 
                     className="scorer" 
                     type="text" 
-                    placeholder="Input your name" 
+                    placeholder="Enter your name" 
                     maxLength={20} 
                     autoFocus
                     onChange={props.onChange} 

@@ -81,7 +81,7 @@ $form-width: 5rem;
         width: $form-width;
         margin-top: 0.6rem;
         padding: 0.06rem;
-        border: 0.01rem solid #f89e62;
+        border: 0.03rem solid #f89e62;
         border-radius: 0.08rem;
 
         .scorer {
@@ -110,10 +110,6 @@ $form-width: 5rem;
         background-color: #f89e62;
     }
 
-    .btn-submit {
-        margin-top: 0.3rem;
-    }
-
     .btn-no-submit,
     .btn-home {
         background-color: #c4ae9a;
@@ -125,6 +121,51 @@ $form-width: 5rem;
         font-size: 0.2rem;
         line-height: 0.44rem;
         text-align: center;
+    }
+
+    .my-rank {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 0.25rem;
+        padding: 0.3rem 0;
+        font-size: 0.28rem;
+        font-weight: 600;
+        text-align: center;
+        word-wrap: break-word;
+        background-color: rgba($color: #696662, $alpha: 0.2);
+        border-radius: 0.08rem;
+        
+        .position,
+        .name,
+        .score {
+            box-sizing: border-box;
+            padding: 0 0.1rem;
+        }
+
+        .position {
+            width: 1rem;
+            font-size: 0.3rem;
+            font-style: italic;
+        }
+
+        .name,
+        .score {
+            width: 2.35rem;
+        }
+
+        .score {
+            text-align: left;
+        }
+
+        .flag {
+            width: 1.8rem;
+        }
+    
+        .blue {
+            color: #366dd8;
+        }
+
     }
 }
 

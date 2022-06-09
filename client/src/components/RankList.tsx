@@ -14,8 +14,8 @@ import { IRankItem } from '../utils/constants'
 import '../scss/RankList.scss'
 
 interface IRankList {
+    isShort?: boolean // 展示短样式
     list: IRankItem[]
-    myInfo?: IRankItem
 }
 
 /*
@@ -23,40 +23,28 @@ interface IRankList {
 */
 const RankList: React.FC<IRankList> = (props) => {
     const list: IRankItem[] = props.list
-    const rankWrapClass = `rank-wrap ${ props.myInfo ? 'mine' : '' }`
-    return (
-        <div className="rank-list">
-            {
-                props.myInfo 
-                    ? (
-                        <RankItem 
-                            key={'mine'}
-                            isYours
-                            position={props.myInfo.rank_num} 
-                            name={props.myInfo.user_name}
-                            score={props.myInfo.user_score}
-                            time={props.myInfo.created_time}
-                        />
-                    ) : null
-            }
-            <ol className={rankWrapClass}>
+    const olClass: string[] = ['rank-list']
+    if (props.isShort) {
+        olClass.push('short')
+    }
+    return list.length 
+        ? (
+            <ol className={olClass.join(' ')}>
                 {
-                    list.length 
-                        ? list.map((obj: IRankItem) => {
-                            return (
-                                <RankItem 
-                                    key={obj.id}
-                                    position={obj.rank_num} 
-                                    name={obj.user_name}
-                                    score={obj.user_score}
-                                    time={obj.created_time}
-                                />
-                            )
-                        })
-                        : '暂无数据'
+                    list.map((obj: IRankItem) => {
+                        return (
+                            <RankItem 
+                                key={obj.id}
+                                position={obj.rank_num} 
+                                name={obj.user_name}
+                                score={obj.user_score}
+                            />
+                        )
+                    })
                 }
             </ol>
-        </div>
-    )
+        ) 
+        : <p className="no-data">暂无数据</p>
+
 }
 export default RankList

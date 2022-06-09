@@ -28,5 +28,4 @@ export interface IRankItem {
     rank_num: number // 排名
     user_name: string  // 用户名
     user_score: number // 得分
-    created_time: string // 创建时间
 }

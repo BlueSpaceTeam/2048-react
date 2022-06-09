@@ -254,7 +254,7 @@ const Game: React.FC<IGame> = (props) => {
 							// 每列开始值对应一元数组的下标
 							const curColIdx: number = getSquareIdx(row, col)
 							if (arr[curColIdx]) { // 当前列有值的情况
-								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squareIdx=${curColIdx}`)
+								// console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squareIdx=${curColIdx}`)
 								// preColIdx ：移动方向的前一列Idx
 								for (let preColIdx: number = getSquareIdx(row, col - 1); preColIdx >= preEndIdx; preColIdx -= colIdxDelta) {
 									if (arr[preColIdx]) {
@@ -415,7 +415,7 @@ const Game: React.FC<IGame> = (props) => {
 			<header>
 				<div className="logo">2048</div>
 				<Score name="SCORE" num={scores[scores.length - 1]} />
-				<Score name="BEST" num={bestScore} />
+				<Score name="YOUR BEST" num={bestScore} />
 				<GameButton name="NEW" onClick={() => startGame()} />
 				<GameButton name="UNDO" btnDisabled={disabledUndo} onClick={() => undoGame()} />
 			</header>
@@ -426,11 +426,6 @@ const Game: React.FC<IGame> = (props) => {
 					onMove={(dir: Direction) => handleMove(dir)}
 				/>
 			</main>
-			<footer>
-				<span>Written in React and Typescript</span>
-				<span>by Swan Cai and FantiGa</span>
-				<span>on May 4th, 2022.</span>
-			</footer>
 
 			{ModalUI}
 		</div>

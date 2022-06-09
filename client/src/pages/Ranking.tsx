@@ -23,13 +23,14 @@ interface IRanking {}
  * 排行榜
  * */ 
 const Ranking: React.FC<IRanking> = (props) => {
+    console.log('Ranking')
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [error, setError] = useState<any>(null)
     const [list, setList] = useState<IRankItem[]>([])
     // const controller = new AbortController()
-
+    
     useEffect(() => {
-
+        console.log('useEffect...')
 		axios.post(
 			'', 
 			formatFormUrlencoded({
@@ -59,9 +60,7 @@ const Ranking: React.FC<IRanking> = (props) => {
     const ResUI: JSX.Element = error
         ? <p className="error">Opps! Something wrong. Please try again later.</p>
         : (
-            true 
-            ? <RankList list={list} />
-            : <p className="no-data">Empty Data</p>
+            <RankList list={list} />
         )
 
     return (

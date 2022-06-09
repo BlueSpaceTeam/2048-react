@@ -6,7 +6,7 @@
  * @Description: 
  * @FilePath: /2048-react/src/components/ResultModalSecondPage.tsx
  */
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import RankList from './RankList'
 import ResultLayout from './ResultLayout'
@@ -26,11 +26,22 @@ interface IPropsResultModal {
  * modal第一页内容
  **/ 
 const ResultModalSecondPage: React.FC<IPropsResultModal> = (props) => {
+    const RankUI: JSX.Element = (
+        <>
+            <div className="my-rank">
+                <span className="position blue">{props.myInfo.rank_num || 0}</span>
+                <span className="name">{props.myInfo.user_name || '-'}</span>
+                <span className="score">{props.myInfo.user_score || 0}</span>
+                <span className="flag blue">Yours</span>
+            </div>
+            <RankList list={props.list} isShort />
+        </>
+    )
     return (
         <>
             {
                 props.isSubmit
-                    ? <RankList list={props.list} myInfo={props.myInfo} />
+                    ? RankUI
                     : <ResultLayout score={props.score} bestScore={props.bestScore} />
             }
             <button className="btn btn-restart" onClick={() => props.onClose('restart')}>Play Again</button>
