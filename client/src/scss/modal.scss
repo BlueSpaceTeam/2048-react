@@ -131,7 +131,6 @@ $form-width: 5rem;
         padding: 0.3rem 0;
         font-size: 0.28rem;
         font-weight: 600;
-        text-align: center;
         word-wrap: break-word;
         background-color: rgba($color: #696662, $alpha: 0.2);
         border-radius: 0.08rem;
@@ -145,6 +144,7 @@ $form-width: 5rem;
 
         .position {
             width: 1rem;
+            padding-left: 0.2rem;
             font-size: 0.3rem;
             font-style: italic;
         }
@@ -152,10 +152,6 @@ $form-width: 5rem;
         .name,
         .score {
             width: 2.35rem;
-        }
-
-        .score {
-            text-align: left;
         }
 
         .flag {

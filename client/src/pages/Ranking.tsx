@@ -27,18 +27,17 @@ const Ranking: React.FC<IRanking> = (props) => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [error, setError] = useState<any>(null)
     const [list, setList] = useState<IRankItem[]>([])
-    // const controller = new AbortController()
+    const controller = new AbortController()
     
     useEffect(() => {
-        console.log('useEffect...')
 		axios.post(
 			'', 
 			formatFormUrlencoded({
 				action: 'get'
 			}),
-            // {
-            //     signal: controller.signal
-            // }
+            {
+                signal: controller.signal
+            }
 		)
 			.then(e => {
 				if (e.data && Array.isArray(e.data.rank_data)) {
@@ -54,14 +53,12 @@ const Ranking: React.FC<IRanking> = (props) => {
 				setError(err)
 			}) 
         
-        // return () => controller.abort()
+        return () => controller.abort()
     }, [])
 
     const ResUI: JSX.Element = error
         ? <p className="error">Opps! Something wrong. Please try again later.</p>
-        : (
-            <RankList list={list} />
-        )
+        : <RankList list={list} />
 
     return (
         <div className="ranking">
