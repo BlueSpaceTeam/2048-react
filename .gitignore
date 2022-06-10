@@ -1,13 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/client/node_modules
+node_modules
 
 # testing
-/client/coverage
+coverage
 
 # production
-/client/build
+build
 
 # misc
 .DS_Store
@@ -25,7 +25,6 @@ yarn-error.log*
 
 # Database files
 *.db
-db.sqlite*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
