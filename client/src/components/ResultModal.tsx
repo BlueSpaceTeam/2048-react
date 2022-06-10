@@ -89,7 +89,6 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
 			}),
 		)
             .then(e => {
-                // console.log('e=', e)
                 if (e.data && e.data.current_data) {
 					setMyInfo(e.data.current_data)
 					setList(e.data.rank_data)

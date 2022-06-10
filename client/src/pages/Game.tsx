@@ -71,7 +71,7 @@ const Game: React.FC<IGame> = (props) => {
 		const idx = emptyIdxs[Math.round(Math.random() * (emptyIdxs.length - 1))]
 		// 随机设置2或4
 		arr[idx] = Math.round(Math.random()) ? 2 : 4
-		console.log('Sequares=', arr)
+		// console.log('Sequares=', arr)
 		return arr
 	}
 	// 检查垂直于用户移动方向的方向上是否存在合并或者移动的可能性
@@ -164,7 +164,7 @@ const Game: React.FC<IGame> = (props) => {
 							// 每行开始值对应一元数组的下标
 							const curRowIdx: number = getSquareIdx(row, col)
 							if (arr[curRowIdx]) { // 当前行有值的情况
-								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squareIdx=${curRowIdx}`)
+								// console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squareIdx=${curRowIdx}`)
 								// preRowIdx ：移动方向的前一行Idx
 								for (let preRowIdx: number = getSquareIdx(row - 1, col); preRowIdx >= preEndIdx; preRowIdx -= rowIdxDelta) {
 									if (arr[preRowIdx]) {
@@ -209,7 +209,7 @@ const Game: React.FC<IGame> = (props) => {
 							// 每行开始值对应一元数组的下标
 							const curRowIdx: number = getSquareIdx(row, col)
 							if (arr[curRowIdx]) { // 当前行有值的情况
-								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squareIdx=${curRowIdx}`)
+								// console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squareIdx=${curRowIdx}`)
 								// preRowIdx ：移动方向的前一行Idx
 								for (let preRowIdx: number = getSquareIdx(row + 1, col); preRowIdx <= preEndIdx; preRowIdx += rowIdxDelta) {
 									if (arr[preRowIdx]) {
@@ -299,7 +299,7 @@ const Game: React.FC<IGame> = (props) => {
 							// 每列开始值对应一元数组的下标
 							const curColIdx: number = getSquareIdx(row, col)
 							if (arr[curColIdx]) { // 当前列有值的情况
-								console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squareIdx=${curColIdx}`)
+								// console.log(`startPointer=${startPointer}, preEndIdx=${preEndIdx}, col=${col}, row=${row}, squareIdx=${curColIdx}`)
 								// preColIdx ：移动方向的前一列Idx
 								for (let preColIdx: number = getSquareIdx(row, col + 1); preColIdx <= preEndIdx; preColIdx += colIdxDelta) {
 									if (arr[preColIdx]) {
@@ -328,7 +328,7 @@ const Game: React.FC<IGame> = (props) => {
 				break
 			}
 		}
-		console.log(currentHistory.squares, arr)
+		// console.log(currentHistory.squares, arr)
 
 		// 如果完全相同，则不发生变化
 		if (JSON.stringify(currentHistory.squares) === JSON.stringify(arr)) {
@@ -339,7 +339,7 @@ const Game: React.FC<IGame> = (props) => {
 					localStorage.setItem('bestScore', curScore + '')
 				}
 				setIsOver(true)
-				console.log('================ Game Over')
+				// console.log('================ Game Over')
 			}
 			return
 		}
@@ -367,7 +367,7 @@ const Game: React.FC<IGame> = (props) => {
 			if (newHistory.length > 3) {
 				newHistory.splice(1, 1)
 			}
-			console.log(`History`, newHistory)
+			// console.log(`History`, newHistory)
 			return newHistory
 		}), 90)
 	}

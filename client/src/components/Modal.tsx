@@ -33,11 +33,9 @@ const Modal: React.FC<IPropsModal> = (props) => {
 		// 则需添加 state 到 Modal 中，
 		// 仅当 Modal 被插入 DOM 树中才能渲染子元素。
 		modalRoot.appendChild(wrapperEle)
-		// console.log('MODAL BE MOUNTED')
 
 		return () => {
 			modalRoot.removeChild(wrapperEle)
-			// console.log('MODAL BE UNMOUNTED')
 		}
    }, [])
 

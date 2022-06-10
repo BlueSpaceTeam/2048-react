@@ -68,7 +68,7 @@ const Board: React.FC<IPropBoard> = (props) => {
 	function handleTouchStart(e: React.TouchEvent) {
 		e.preventDefault()
 		e.stopPropagation()
-		console.log('handleTouchStart', e)
+		// console.log('handleTouchStart', e)
 		// // TODO: 多于一个手指不做反映
 		// if (e.touches.length > 1) return
 
@@ -78,7 +78,7 @@ const Board: React.FC<IPropBoard> = (props) => {
 	function handleTouchEnd(e: React.TouchEvent) {
 		e.preventDefault()
 		e.stopPropagation()
-		console.log('handleTouchEnd', e)
+		// console.log('handleTouchEnd', e)
 		// TODO: 多于一个手指不做反映
 		// if (e.changedTouches.length > 1) return
 		// 不在区域内，不执行后续代码
@@ -99,7 +99,7 @@ const Board: React.FC<IPropBoard> = (props) => {
 	function handleMouseDown(e: React.MouseEvent) {
 		e.preventDefault()
 		e.stopPropagation()
-		console.log('handleMouseDown', e, e.clientX, e.clientY)
+		// console.log('handleMouseDown', e, e.clientX, e.clientY)
 
 		coordinate.X = e.clientX
 		coordinate.Y = e.clientY
@@ -116,7 +116,7 @@ const Board: React.FC<IPropBoard> = (props) => {
 		}
 
 		const direction: Direction | null = getDirection(e.clientX, e.clientY, MIN_DISTANCE_PC)
-		console.log('handleMouseUp', e, e.clientX, e.clientY, direction)
+		// console.log('handleMouseUp', e, e.clientX, e.clientY, direction)
 		if (direction) {
 			onMove(direction)
 		}
@@ -125,7 +125,7 @@ const Board: React.FC<IPropBoard> = (props) => {
 	// 键盘事件
 	function handleKeyUp(e: KeyboardEvent) {
 		e.stopPropagation()
-		console.log('handleKeyUp', e)
+		// console.log('handleKeyUp', e)
 		switch (e.code) {
 			case UP:
 			case RIGHT:

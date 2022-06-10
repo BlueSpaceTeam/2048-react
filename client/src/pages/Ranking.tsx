@@ -23,7 +23,6 @@ interface IRanking {}
  * 排行榜
  * */ 
 const Ranking: React.FC<IRanking> = (props) => {
-    console.log('Ranking')
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [error, setError] = useState<any>(null)
     const [list, setList] = useState<IRankItem[]>([])
