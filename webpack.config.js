@@ -6,6 +6,8 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 // 引入clean插件
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
+const { SourceMapDevToolPlugin } = require("webpack")
+
 const config = {
     // 指定打包模式：'none' | 'development' | 'production'
     mode: 'production',
@@ -32,7 +34,7 @@ const config = {
                 // test指定的是规则生效的文件  
                 test: /\.js$/,
                 // 要使用的loader
-                use: 'babel-loader',
+                use: ['babel-loader', 'source-map-loader'],
                 // 要排除的文件
                 exclude: /node_modules/
             },
@@ -176,6 +178,9 @@ const config = {
             // favicon: path.resolve(__dirname, 'public', 'favicon.ico'),
             // 导入manifest文件
             manifest: path.resolve(__dirname, 'public', 'manifest.json'),
+        }),
+        new SourceMapDevToolPlugin({
+            filename: '[file].map'
         }),
     ],
     // 性能提示
