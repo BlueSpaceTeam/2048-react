@@ -32,13 +32,12 @@ root.render(
                     <Route index element={<Home />} />
                     <Route path="game" element={<Game />} />
                     <Route path="ranking" element={<Ranking />} />
-                    {/* 只能针对使用了Link标签的，不针对手动输入链接那种 */}
-                    <Route path="*" element={
+                    {/* <Route path="*" element={
                             <main style={{ padding: "1rem" }}>
                                 <p>There's nothing here!</p>
                             </main>
                         }
-                    />
+                    /> */}
                 </Route>
             </Routes>
         </BrowserRouter>
