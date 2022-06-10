@@ -118,6 +118,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+2048_env/
 
 # Spyder project settings
 .spyderproject
