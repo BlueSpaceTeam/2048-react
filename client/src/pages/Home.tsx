@@ -18,6 +18,12 @@ interface IHome {}
  * */
 const Home: React.FC<IHome> = (props) => {
     let navigate = useNavigate()
+
+    const goToGithub: () => void = () => {
+
+        window.location.href = 'https://github.com/BlueSpaceTeam'
+    }
+
     return (
         <div className="home">
             <header>
@@ -40,7 +46,7 @@ const Home: React.FC<IHome> = (props) => {
             </ul>
 
             <footer>
-                <p>Blue Space Team, on June 9th, 2022.</p>
+                <p><a className="link" href="javascript:;" onClick={goToGithub}>Blue Space Team</a>, on June 9th, 2022.</p>
                 <p>Written in React18 / Typescript / Python3 / SQLite3.</p>
             </footer>
         </div>
