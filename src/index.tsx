@@ -10,7 +10,7 @@ import './scss/modal.scss'
 import './utils/fontSize'
 
 import React from 'react'
-import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom'
+import { Routes, Route, HashRouter } from 'react-router-dom'
 import { createRoot } from 'react-dom/client'
 import App from './App'
 import Home from './pages/Home'
@@ -29,17 +29,15 @@ root.render(
     <React.StrictMode>
         <HashRouter>
             <Routes>
-                <Route path="/" element={<App />} >
-                    <Route index element={<Home />} />
-                    <Route path="game" element={<Game />} />
-                    <Route path="ranking" element={<Ranking />} />
-                    <Route path="*" element={
-                            <main style={{ padding: "1rem" }}>
-                                <p>There's nothing here!</p>
-                            </main>
-                        }
-                    />
-                </Route>
+                <Route path="/" element={<Home />} />
+                <Route path="/game" element={<Game />} />
+                <Route path="/ranking" element={<Ranking />} />
+                <Route path="*" element={
+                        <main style={{ padding: "1rem" }}>
+                            <p>There's nothing here!</p>
+                        </main>
+                    }
+                />
             </Routes>
         </HashRouter>
     </React.StrictMode>
