@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = '/query'
+axios.defaults.baseURL = 'http://dev.ued.team'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 

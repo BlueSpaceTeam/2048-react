@@ -6,7 +6,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 // 引入clean插件
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-const { SourceMapDevToolPlugin } = require("webpack")
+// const { SourceMapDevToolPlugin } = require("webpack")
 
 const config = {
     // 指定打包模式：'none' | 'development' | 'production'
@@ -154,9 +154,9 @@ const config = {
             // 导入manifest文件
             // manifest: path.resolve(__dirname, 'public', 'manifest.json'),
         }),
-        new SourceMapDevToolPlugin({
-            filename: '[file].map',
-        }),
+        // new SourceMapDevToolPlugin({
+        //     filename: '[file].map',
+        // }),
     ],
     // 性能提示
     performance: {
@@ -167,22 +167,17 @@ const config = {
         // 何时根据单个资产大小（以字节为单位）发出性能提示
         maxAssetSize: 512000,
     },
-    devServer: {
-        compress: true,
-        port: 8080,
-        hot: true,
-        proxy: {
-            '/query': {
-                target: 'http://dev.ued.team/',
-                changeOrigin: true,
-            },
-        },
-        /**
-         * Allows to proxy requests through a specified index page (by default 'index.html'), 
-         * useful for Single Page Applications that utilise the HTML5 History API.
-         */
-        // historyApiFallback: true,
-    },
+    // devServer: {
+    //     compress: true,
+    //     port: 8080,
+    //     hot: true,
+    //     proxy: {
+    //         '/query': {
+    //             target: 'http://dev.ued.team/',
+    //             changeOrigin: true,
+    //         },
+    //     },
+    // },
 };
 
 module.exports = config;

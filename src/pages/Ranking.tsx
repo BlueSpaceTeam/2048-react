@@ -30,7 +30,7 @@ const Ranking: React.FC<IRanking> = (props) => {
     
     useEffect(() => {
 		axios.post(
-			'', 
+			'/query', 
 			formatFormUrlencoded({
 				action: 'get'
 			}),
