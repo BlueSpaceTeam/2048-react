@@ -10,12 +10,13 @@ import './scss/modal.scss'
 import './utils/fontSize'
 
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom'
 import { createRoot } from 'react-dom/client'
 import App from './App'
 import Home from './pages/Home'
 import Game from './pages/Game'
 import Ranking from './pages/Ranking'
+
 
 /**
  * React 18 新写法
@@ -26,7 +27,7 @@ const root = createRoot(container)
 // 初始渲染：将一个元素渲染到root。
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
                 <Route path="/" element={<App />} >
                     <Route index element={<Home />} />
@@ -40,6 +41,6 @@ root.render(
                     />
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     </React.StrictMode>
 )

@@ -92,31 +92,6 @@ const config = {
                 ],
                 include: /\.module\.css$/
             },
-            // 设置less文件的处理
-            {
-                test: /\.less$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    // 引入postcss
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                plugins: [
-                                    [
-                                        'postcss-preset-env',
-                                        {
-                                            browsers: 'last 2 versions'
-                                        }
-                                    ]
-                                ]
-                            }
-                        }
-                    },
-                    'less-loader',
-                ]
-            },
             // 设置sass文件处理
             {
                 test: /\.s[ac]ss$/i,
@@ -175,7 +150,7 @@ const config = {
             // 导入ico文件
             // favicon: path.resolve(__dirname, 'public', 'favicon.ico'),
             // 导入manifest文件
-            manifest: path.resolve(__dirname, 'public', 'manifest.json'),
+            // manifest: path.resolve(__dirname, 'public', 'manifest.json'),
         }),
     ],
     // 性能提示
@@ -188,9 +163,6 @@ const config = {
         maxAssetSize: 512000,
     },
     devServer: {
-        // static: {
-        //     directory: path.join(__dirname, 'public'),
-        // },
         compress: true,
         port: 8080,
         hot: true,
@@ -198,14 +170,13 @@ const config = {
             '/query': {
                 target: 'http://dev.ued.team/',
                 changeOrigin: true,
-                // pathRewrite: { '/query': '' },
             },
         },
         /**
          * Allows to proxy requests through a specified index page (by default 'index.html'), 
          * useful for Single Page Applications that utilise the HTML5 History API.
          */
-        historyApiFallback: true,
+        // historyApiFallback: true,
     },
 };
 
