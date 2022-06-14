@@ -1,12 +1,12 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-27 18:03:31
+ * @LastEditTime: 2022-06-14 18:30:15
  * @LastEditors: fantiga
  * @Description: 
- * @FilePath: /2048-react/src/pages/Game.tsx
+ * @FilePath: /2048-react/client/src/pages/Game.tsx
  */
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Score from '../components/Score'
 import Board from '../components/Board'

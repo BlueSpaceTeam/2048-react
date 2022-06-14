@@ -1,18 +1,17 @@
 /*
  * @Author: fantiga
  * @Date: 2022-04-28 15:18:31
- * @LastEditTime: 2022-05-27 17:54:51
+ * @LastEditTime: 2022-06-14 18:29:55
  * @LastEditors: fantiga
  * @Description: 
- * @FilePath: /2048-react/src/index.tsx
+ * @FilePath: /2048-react/client/src/index.tsx
  */
 import './scss/modal.scss'
 import './utils/fontSize'
 
 import React from 'react'
-import { Routes, Route, HashRouter } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import { createRoot } from 'react-dom/client'
-import App from './App'
 import Home from './pages/Home'
 import Game from './pages/Game'
 import Ranking from './pages/Ranking'
@@ -27,7 +26,7 @@ const root = createRoot(container)
 // 初始渲染：将一个元素渲染到root。
 root.render(
     <React.StrictMode>
-        <HashRouter>
+        <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/game" element={<Game />} />
@@ -39,6 +38,6 @@ root.render(
                     }
                 />
             </Routes>
-        </HashRouter>
+        </BrowserRouter>
     </React.StrictMode>
 )
