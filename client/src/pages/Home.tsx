@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-14 13:16:50
+ * @LastEditTime: 2022-06-14 14:01:42
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/client/src/pages/Home.tsx
@@ -41,7 +41,8 @@ const Home: React.FC<IHome> = (props) => {
             </ul>
 
             <footer>
-                <p><a className="link" href="https://github.com/BlueSpaceTeam">@BlueSpaceTeam</a> on <a className="link" href="https://github.com/BlueSpaceTeam/2048-react">GitHub</a>, June 14th, 2022.</p>
+                <p><a className="link" href="https://github.com/BlueSpaceTeam/2048-react">README</a></p>
+                <p><a className="link" href="https://github.com/BlueSpaceTeam">@BlueSpaceTeam</a>, June 14th, 2022.</p>
                 <p>Written in React18 / Typescript / Python3 / SQLite3.</p>
             </footer>
         </div>
