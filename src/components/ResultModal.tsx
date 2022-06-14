@@ -81,7 +81,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
 
         setIsLoading(true)
 		axios.post(
-			'/query', 
+			'/server', 
 			formatFormUrlencoded({
 				action: 'add',
                 user_name: scorer,
