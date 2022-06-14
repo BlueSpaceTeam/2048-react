@@ -167,17 +167,17 @@ const config = {
         // 何时根据单个资产大小（以字节为单位）发出性能提示
         maxAssetSize: 512000,
     },
-    // devServer: {
-    //     compress: true,
-    //     port: 8080,
-    //     hot: true,
-    //     proxy: {
-    //         '/query': {
-    //             target: 'http://dev.ued.team/',
-    //             changeOrigin: true,
-    //         },
-    //     },
-    // },
+    devServer: {
+        compress: true,
+        port: 8080,
+        hot: true,
+        proxy: {
+            '/query': {
+                target: 'http://dev.ued.team/',
+                changeOrigin: true,
+            },
+        },
+    },
 };
 
 module.exports = config;
