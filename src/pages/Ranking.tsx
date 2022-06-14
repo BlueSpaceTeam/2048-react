@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-14 11:41:16
+ * @LastEditTime: 2022-06-14 11:47:12
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/src/pages/Ranking.tsx
@@ -30,7 +30,7 @@ const Ranking: React.FC<IRanking> = (props) => {
     
     useEffect(() => {
 		axios.post(
-			'/server', 
+			'/query', 
 			formatFormUrlencoded({
 				action: 'get'
 			}),

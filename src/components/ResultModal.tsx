@@ -1,8 +1,8 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime:2022-06-08 22:17:00
- * @LastEditors: Swan Cai
+ * @LastEditTime: 2022-06-14 11:47:16
+ * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/src/components/ResultModal.tsx
  */
@@ -81,7 +81,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
 
         setIsLoading(true)
 		axios.post(
-			'/server', 
+			'/query', 
 			formatFormUrlencoded({
 				action: 'add',
                 user_name: scorer,

@@ -172,8 +172,8 @@ const config = {
         port: 8080,
         hot: true,
         proxy: {
-            '/server': {
-                target: 'http://2048.ued.team',
+            '/query': {
+                target: 'http://2048.ued.team/server',
                 changeOrigin: true,
             },
         },
