@@ -14,16 +14,20 @@ Welcome to 2048-react. An online digital game written in React18 , Typescript , 
 ## Usage
 
 ```
+1. Open [http://2048.ued.team/dist/](http://2048.ued.team/dist/).
+2. Touch `Play` Start the game, touch `Ranking` to view the global rankings.
+3. Use the `arrow keys` or swipe the screen to move the tiles. Tiles with the same number merge into one when they touch. Add them up to reach 2048!
 ```
-
 
 ## Maintainers
 
-[@swancai](https://github.com/swancai) [@FantiGA](https://github.com/FantiGA)
+[@swancai](https://github.com/swancai)
+[@FantiGA](https://github.com/FantiGA)
 
 ## Contributing
 
+[@FantiGA](https://github.com/FantiGA)
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE)  © 2022 [@BlueSpaceTeam](https://github.com/BlueSpaceTeam)
