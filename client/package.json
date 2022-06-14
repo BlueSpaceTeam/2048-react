@@ -7,14 +7,13 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "homepage": "https://bluespaceteam.github.io/2048-react/dist/",
+  "homepage": "https://github.com/BlueSpaceTeam/2048-react",
   "dependencies": {
     "@babel/preset-typescript": "^7.16.7",
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.0",
     "async": "^3.2.3",
     "axios": "^0.27.2",
-    "gh-pages": "^4.0.0",
     "portfinder": "^1.0.28",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -26,9 +25,7 @@
   },
   "scripts": {
     "start": "webpack serve",
-    "build": "webpack",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "build": "webpack"
   },
   "browserslist": {
     "production": [
