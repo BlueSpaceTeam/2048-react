@@ -150,7 +150,7 @@ const config = {
                 removeComments: true, // 打包后移除html文件中的注释
             },
             // 导入ico文件
-            // favicon: path.resolve(__dirname, 'public', 'favicon.ico'),
+            favicon: path.resolve(__dirname, 'public', 'favicon.ico'),
             // 导入manifest文件
             // manifest: path.resolve(__dirname, 'public', 'manifest.json'),
         }),
