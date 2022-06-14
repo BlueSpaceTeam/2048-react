@@ -1,6 +1,14 @@
+/*
+ * @Author: fantiga
+ * @Date: 2022-06-14 09:49:54
+ * @LastEditTime: 2022-06-14 10:06:11
+ * @LastEditors: fantiga
+ * @Description: 
+ * @FilePath: /2048-react/src/utils/axios.ts
+ */
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://dev.ued.team'
+axios.defaults.baseURL = 'http://2048.ued.team'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 

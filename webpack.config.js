@@ -173,7 +173,7 @@ const config = {
         hot: true,
         proxy: {
             '/query': {
-                target: 'http://dev.ued.team/',
+                target: 'http://2048.ued.team/',
                 changeOrigin: true,
             },
         },
