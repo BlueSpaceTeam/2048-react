@@ -7,7 +7,7 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-欢迎来到 2048-react。一个用 React 18 、 Typescript 、 Python 和 SQLite3 编写的在线数字游戏，可以加深您的理解并掌握这些技术。
+欢迎来到 2048-react。一个用 React 18 、 Typescript 、 Python 和 SQLite3 编写的在线数字游戏，可以加深我们的理解并掌握这些技术。
 
 ## 目录
 
@@ -42,4 +42,4 @@
 
 ## 执照
 
-[MIT](LICENSE)© 2022[@BlueSpaceTeam](https://github.com/BlueSpaceTeam)
+[MIT](LICENSE)  © 2022 [@BlueSpaceTeam](https://github.com/BlueSpaceTeam)

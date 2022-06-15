@@ -42,4 +42,4 @@
 
 ## ライセンス
 
-[MIT](LICENSE)© 2022[@BlueSpaceTeam](https://github.com/BlueSpaceTeam)
+[MIT](LICENSE)  © 2022 [@BlueSpaceTeam](https://github.com/BlueSpaceTeam)
