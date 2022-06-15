@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,15 +22,7 @@ jobs:
         uses: dephraiim/translate-readme@main
         with:
           LANG: zh-TW
-      - name: Adding README - Hindi
+      - name: Adding README - Japanese
         uses: dephraiim/translate-readme@main
         with:
-          LANG: hi
-      - name: Adding README - Arabic
-        uses: dephraiim/translate-readme@main
-        with:
-          LANG: ar
-      - name: Adding README - French
-        uses: dephraiim/translate-readme@main
-        with:
-          LANG: fr
+          LANG: ja
