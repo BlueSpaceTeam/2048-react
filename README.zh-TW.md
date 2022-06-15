@@ -1,4 +1,9 @@
-# 2048-反應
+# 2048-react
+
+- [English](README.md)
+- [简体中文](README.zh-CN.md)
+- [繁体中文](README.zh-TW.md)
+- [日本語](README.ja.md)
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
@@ -6,20 +11,21 @@
 
 ## 目錄
 
--   [用法](#usage)
--   [維護者](#maintainers)
--   [貢獻](#contributing)
--   [執照](#license)
+-   [用法](#用法)
+-   [待辦事項](#待辦事項)
+-   [維護者](#維護者)
+-   [貢獻](#貢獻)
+-   [執照](#執照)
 
 ## 用法
 
-1.  打開<http://2048.ued.team/>.
-2.  觸碰`Play`開始遊戲，點擊`Ranking`查看全球排名。
-3.  使用`arrow keys`或滑動屏幕移動瓷磚。
+1.  打開 [http://2048.ued.team/](http://2048.ued.team/).
+2.  觸碰 `Play` 開始遊戲，點擊 `Ranking` 查看全球排名。
+3.  使用 `arrow keys` 或滑動屏幕移動瓷磚。
 4.  相同編號的瓷磚在接觸時會合二為一。
 5.  將它們加起來達到 2048！
 
-## 全部
+## 待辦事項
 
 -   [ ] 桌面計算機上的頁面未完全顯示。
 -   [ ] 添加一些音效。
@@ -27,7 +33,8 @@
 
 ## 維護者
 
-[@斯旺斯](https://github.com/swancai)[@FantiGA](https://github.com/FantiGA)
+[@swancai](https://github.com/swancai)
+[@FantiGA](https://github.com/FantiGA)
 
 ## 貢獻
 
@@ -35,4 +42,4 @@
 
 ## 執照
 
-[和](LICENSE)© 2022[@BlueSpaceTeam](https://github.com/BlueSpaceTeam)
+[MIT](LICENSE)© 2022[@BlueSpaceTeam](https://github.com/BlueSpaceTeam)

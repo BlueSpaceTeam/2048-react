@@ -1,5 +1,10 @@
 # 2048-react
 
+- [English](README.md)
+- [简体中文](README.zh-CN.md)
+- [繁体中文](README.zh-TW.md)
+- [日本語](README.ja.md)
+
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 Welcome to 2048-react. An online digital game written in React18 , Typescript , Python3 , and SQLite3 to deepen our undertanding and master these techiques.
@@ -7,6 +12,7 @@ Welcome to 2048-react. An online digital game written in React18 , Typescript , 
 ## Table of Contents
 
 - [Usage](#usage)
+- [Todo](#todo)
 - [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
