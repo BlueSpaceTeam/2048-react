@@ -177,6 +177,8 @@ const config = {
                 changeOrigin: true,
             },
         },
+        // 解决react-router-dom中使用BrowserRouter刷新后404的问题
+        historyApiFallback: true,
     },
 };
 
