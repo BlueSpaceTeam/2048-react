@@ -25,6 +25,7 @@ const config = {
             // 不使用const（为了兼容IE10）
             // const: false,
         },
+        publicPath: '/',
     },
     // 指定webpack打包时要用的模块
     module: {
