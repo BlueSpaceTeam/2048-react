@@ -1,10 +1,10 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-14 11:47:16
+ * @LastEditTime: 2022-06-15 13:34:38
  * @LastEditors: fantiga
  * @Description: 
- * @FilePath: /2048-react/src/components/ResultModal.tsx
+ * @FilePath: /2048-react/client/src/components/ResultModal.tsx
  */
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -26,7 +26,7 @@ interface IPropsResultModal {
 
 /**
  * modal结果内容
- **/ 
+ **/
 const ResultModal: React.FC<IPropsResultModal> = (props) => {
     let navigate = useNavigate()
     const [modalClass, setModalClass] = useState<string>('modal')
@@ -45,7 +45,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
         }
     )
 
-    useEffect (() => {
+    useEffect(() => {
         setModalClass(props.isShow ? 'modal show' : 'modal')
     }, [props.isShow])
 
@@ -62,7 +62,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
                 break
             }
             case 'home': {
-                navigate(-1)
+                navigate('/')
                 break
             }
         }
@@ -80,24 +80,24 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
         }
 
         setIsLoading(true)
-		axios.post(
-			'/query', 
-			formatFormUrlencoded({
-				action: 'add',
+        axios.post(
+            '/query',
+            formatFormUrlencoded({
+                action: 'add',
                 user_name: scorer,
                 user_score: props.score
-			}),
-		)
+            }),
+        )
             .then(e => {
                 if (e.data && e.data.current_data) {
-					setMyInfo(e.data.current_data)
-					setList(e.data.rank_data)
+                    setMyInfo(e.data.current_data)
+                    setList(e.data.rank_data)
                     setIsLoading(false)
                     setIsSubmit(true)
                     setPageNum(2)
-				} else {
-					throw new Error('response is error')
-				}
+                } else {
+                    throw new Error('response is error')
+                }
             })
             .catch(err => {
                 console.error('err=', err)
@@ -110,33 +110,33 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
         <div className={modalClass}>
             <div className="modal-main">
                 {
-                    isLoading 
+                    isLoading
                         ? (
                             <Modal>
                                 <Loading />
                             </Modal>
-                        ) 
+                        )
                         : null
                 }
-                { 
-                    pageNum === 1 
+                {
+                    pageNum === 1
                         ? <ResultModalFirstPage
-                                score={props.score}
-                                bestScore={props.bestScore}
-                                isError={Boolean(error)}
-                                onChange={onChange}
-                                onSubmit={onSubmit}
-                                onPageChange={(e) => setPageNum(e)}
-                            />
+                            score={props.score}
+                            bestScore={props.bestScore}
+                            isError={Boolean(error)}
+                            onChange={onChange}
+                            onSubmit={onSubmit}
+                            onPageChange={(e) => setPageNum(e)}
+                        />
                         : <ResultModalSecondPage
-                                isSubmit={isSubmit}
-                                list={list}
-                                myInfo={myInfo}
-                                score={props.score}
-                                bestScore={props.bestScore}
-                                onClose={(e) => closeModal(e)}
-                            /> 
-                }   
+                            isSubmit={isSubmit}
+                            list={list}
+                            myInfo={myInfo}
+                            score={props.score}
+                            bestScore={props.bestScore}
+                            onClose={(e) => closeModal(e)}
+                        />
+                }
             </div>
         </div>
     )
