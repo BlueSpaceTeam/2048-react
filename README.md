@@ -19,6 +19,12 @@ Welcome to 2048-react. An online digital game written in React18 , Typescript , 
 4. Tiles with the same number merge into one when they touch.
 5. Add them up to reach 2048!
 
+## Todo
+
+- [ ] The page on the desktop computer is not displayed completely.
+- [ ] Add some sound effects.
+- [ ] Save progress in real time.
+
 ## Maintainers
 
 [@swancai](https://github.com/swancai)
