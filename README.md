@@ -38,7 +38,7 @@ Welcome to 2048-react. An online digital game written in React18 , Typescript , 
 
 ## Contributing
 
-[@FantiGA](https://github.com/FantiGA)
+[@someoneHere](https://github.com/someoneHere)
 
 ## License
 
