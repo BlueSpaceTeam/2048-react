@@ -7,7 +7,7 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-2048-reactへようこそ。 React 18、Typescript、Python、SQLite3で書かれたオンラインデジタルゲームで、理解を深め、これらのテクニックを習得します。
+2048-reactへようこそ。React18、Typescript、Python3、SQLite3で書かれたオンラインデジタルゲームで、理解を深め、これらのテクニックを習得します。
 
 ## 目次
 

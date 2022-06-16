@@ -7,7 +7,7 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-Welcome to 2048-react. An online digital game written in React18 , Typescript , Python3 , and SQLite3 to deepen our undertanding and master these techiques.
+Welcome to 2048-react. An online digital game written in React18, Typescript, Python3 and SQLite3, to deepen our understanding and mastery of these techniques.
 
 ## Table of Contents
 
