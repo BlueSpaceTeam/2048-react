@@ -38,7 +38,7 @@
 
 ## 貢献
 
-[@FantiGA](https://github.com/FantiGA)
+[@someoneHere](https://github.com/someoneHere)
 
 ## ライセンス
 
