@@ -28,10 +28,10 @@ Welcome to 2048-react. An online digital game written in React18, Typescript, Py
 ## Todo
 
 - [x] The page on the desktop computer is not displayed completely.
-- [ ] Add some sound effects.
 - [x] Save progress in real time.
 - [x] Add version for 6-time click on logo in page Game.
-- [ ] After refreshing the game page, it wouldn't back to page Home by pressing the btn home(code: "navigate(-1)"). Because it lost the brower history. If used code: "navigate('/')", history will push two same pages which provides a bad experience while pressing browser Btn Back. 
+- [ ] Add some sound effects.
+- [ ] After refreshing the game page, it wouldn't back to page Home by pressing the btn home(code: `"navigate(-1)"`). Because it lost the brower history. If used code: `"navigate('/')"`, history will push two same pages which provides a bad experience while pressing browser Btn `Back`. 
 
 ## Maintainers
 
