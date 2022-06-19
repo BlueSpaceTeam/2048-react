@@ -6,8 +6,14 @@
  * @Description: 
  * @FilePath: /2048-react/client/src/pages/Home.tsx
  */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+
+import { 
+    STORAGE_GAME_HISTORY, 
+    IAHistoryOfSquares
+} from '../utils/constants'
 
 import '../scss/home.scss'
 
@@ -18,6 +24,17 @@ interface IHome { }
  * */
 const Home: React.FC<IHome> = (props) => {
     let navigate = useNavigate()
+
+
+    useEffect (() => {
+        const StorageStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || ''
+		if (StorageStr) {
+			const SHistory: IAHistoryOfSquares[]= JSON.parse(StorageStr) 
+			if (Array.isArray(SHistory) && SHistory.length > 1) {
+                navigate('/game')
+            }
+        }
+    }, [])
 
     return (
         <div className="home">

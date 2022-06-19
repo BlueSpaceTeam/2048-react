@@ -60,6 +60,11 @@ body {
     overflow: hidden;
 }
 
+#root {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
 #modal {
     position: relative;
     z-index: 999;

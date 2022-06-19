@@ -8,6 +8,7 @@
  */
 import React, { useState, useEffect } from 'react'
 
+import Logo from '../components/Logo'
 import Score from '../components/Score'
 import Board from '../components/Board'
 import GameButton from '../components/GameButton'
@@ -23,14 +24,13 @@ import {
 	LEFT,
 	DOWN,
 	UP,
-	Direction
+	Direction,
+	IAHistoryOfSquares,
+	STORAGE_GAME_HISTORY
 } from '../utils/constants'
 
 import '../scss/game.scss'
 
-interface IAHistoryOfSquares {
-	squares: number[]
-}
 
 interface IGame {}
 
@@ -339,6 +339,7 @@ const Game: React.FC<IGame> = (props) => {
 					localStorage.setItem('bestScore', curScore + '')
 				}
 				setIsOver(true)
+				localStorage.removeItem(STORAGE_GAME_HISTORY)
 				// console.log('================ Game Over')
 			}
 			return
@@ -391,10 +392,25 @@ const Game: React.FC<IGame> = (props) => {
 
 	// 初始化游戏界面
 	useEffect(() => {
-		setHistory((oldHistory: IAHistoryOfSquares[]) => {
+		const setNewHistory: () => void = () => setHistory((oldHistory: IAHistoryOfSquares[]) => {
 			return oldHistory.concat([{ squares: genNewNum(history[0].squares!) }])
 		})
+
+		const StorageStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || ''
+		if (StorageStr) {
+			const SHistory: IAHistoryOfSquares[]= JSON.parse(StorageStr) 
+			if (Array.isArray(SHistory) && SHistory.length > 1) {
+				setHistory(SHistory)
+			} else {
+				setNewHistory()
+			}
+        } else {
+			setNewHistory()
+		}
 	}, []);
+
+	// 记录操作至缓存
+	useEffect(() => localStorage.setItem(STORAGE_GAME_HISTORY, JSON.stringify(history)) , [history]) 
 
 	// 控制Modal
 	const ModalUI: JSX.Element | null = isOver ? (
@@ -413,7 +429,7 @@ const Game: React.FC<IGame> = (props) => {
 	return (
 		<div className="game">
 			<header>
-				<div className="logo">2048</div>
+				<Logo />
 				<Score name="SCORE" num={scores[scores.length - 1]} />
 				<Score name="YOUR BEST" num={bestScore} />
 				<GameButton name="NEW" onClick={() => startGame()} />

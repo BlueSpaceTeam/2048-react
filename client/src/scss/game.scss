@@ -37,6 +37,11 @@
         background-color: #f4c949;
         font-size: 0.48rem;
         font-weight: 600;
+
+        &.version {
+            font-size: 0.4rem;
+            line-height: 0.8rem;
+        }
     }
 
     .score {

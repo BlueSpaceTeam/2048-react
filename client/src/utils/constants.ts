@@ -29,3 +29,9 @@ export interface IRankItem {
     user_name: string  // 用户名
     user_score: number // 得分
 }
+
+export interface IAHistoryOfSquares {
+	squares: number[]
+}
+
+export const STORAGE_GAME_HISTORY = 'game_history'
