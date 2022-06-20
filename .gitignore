@@ -17,6 +17,14 @@ build
 .env.production.local
 
 npm-debug.log*
+
+# yarn
+.pnp
+.pnp.js
+.pnp.cjs
+client/.yarn/cache
+client/.yarn/unplugged
+client/.yarn/install-state.gz
 yarn-debug.log*
 yarn-error.log*
 
