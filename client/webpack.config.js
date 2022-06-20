@@ -10,7 +10,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const config = {
     // 指定打包模式：'none' | 'development' | 'production'
-    mode: 'production',
+    mode: 'development',
     // 指定入口文件
     entry: './src/index.tsx',
     // 指定打包文件所在目录
@@ -131,6 +131,15 @@ const config = {
                         options: {
                             limit: 10000,
                         },
+                    },
+                ],
+            },
+            // 设置mp3文件处理
+            {
+                test: /\.mp3$/,
+                use: [
+                    {
+                        loader: 'file-loader'
                     },
                 ],
             }

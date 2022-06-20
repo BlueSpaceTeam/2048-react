@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-14 18:30:15
+ * @LastEditTime: 2022-06-20 17:13:59
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/client/src/pages/Game.tsx
@@ -16,6 +16,9 @@ import Modal from '../components/Modal'
 import ResultModal from '../components/ResultModal'
 
 import { usePrevious } from '../utils/hooks'
+
+import useSound from 'use-sound'
+import beepSfx from '../sfx/s3.mp3'
 
 import {
 	MATRIX_ROW,
@@ -32,7 +35,7 @@ import {
 import '../scss/game.scss'
 
 
-interface IGame {}
+interface IGame { }
 
 /**
  * 游戏
@@ -45,6 +48,9 @@ const Game: React.FC<IGame> = (props) => {
 	const [bestScore, setBestScore] = useState<number>(Number(localStorage.getItem('bestScore') || 0))
 	// 最高分原始值
 	const preBestScore: number = usePrevious(bestScore) || 0
+	// 音效播放
+	const [isMute, setMute] = useState<boolean>(false)
+	const [play] = useSound(beepSfx, { soundEnabled: isMute })
 
 	// btn-undo是否可点击
 	const disabledUndo: boolean = isOver || history.length < 3
@@ -175,6 +181,8 @@ const Game: React.FC<IGame> = (props) => {
 											startPointer = getRow(col, preRowIdx) + 1
 											// 计算分数
 											scoreDelta += arr[preRowIdx]
+											// 播放音效
+											play()
 										} else if ((curRowIdx - preRowIdx) / rowIdxDelta > 1) { // curRowIdx - preRowIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preRowIdx + rowIdxDelta] = arr[curRowIdx]
 											arr[curRowIdx] = 0
@@ -220,6 +228,8 @@ const Game: React.FC<IGame> = (props) => {
 											startPointer = getRow(col, preRowIdx) - 1
 											// 计算分数
 											scoreDelta += arr[preRowIdx]
+											// 播放音效
+											play()
 										} else if ((preRowIdx - curRowIdx) / rowIdxDelta > 1) { // curRowIdx - preRowIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preRowIdx - rowIdxDelta] = arr[curRowIdx]
 											arr[curRowIdx] = 0
@@ -265,6 +275,8 @@ const Game: React.FC<IGame> = (props) => {
 											startPointer = getCol(row, preColIdx) + 1
 											// 计算分数
 											scoreDelta += arr[preColIdx]
+											// 播放音效
+											play()
 										} else if ((curColIdx - preColIdx) / colIdxDelta > 1) { // curColIdx - preColIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preColIdx + colIdxDelta] = arr[curColIdx]
 											arr[curColIdx] = 0
@@ -310,6 +322,8 @@ const Game: React.FC<IGame> = (props) => {
 											startPointer = getCol(row, preColIdx) - 1
 											// 计算分数
 											scoreDelta += arr[preColIdx]
+											// 播放音效
+											play()
 										} else if ((preColIdx - curColIdx) / colIdxDelta > 1) { // curColIdx - preColIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preColIdx - colIdxDelta] = arr[curColIdx]
 											arr[curColIdx] = 0
@@ -328,6 +342,7 @@ const Game: React.FC<IGame> = (props) => {
 				break
 			}
 		}
+
 		// console.log(currentHistory.squares, arr)
 
 		// 如果完全相同，则不发生变化
@@ -344,6 +359,7 @@ const Game: React.FC<IGame> = (props) => {
 			}
 			return
 		}
+
 		setHistory(history.concat([{ squares: arr }]))
 		// 计算分数
 		if (scoreDelta) {
@@ -398,19 +414,19 @@ const Game: React.FC<IGame> = (props) => {
 
 		const StorageStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || ''
 		if (StorageStr) {
-			const SHistory: IAHistoryOfSquares[]= JSON.parse(StorageStr) 
+			const SHistory: IAHistoryOfSquares[] = JSON.parse(StorageStr)
 			if (Array.isArray(SHistory) && SHistory.length > 1) {
 				setHistory(SHistory)
 			} else {
 				setNewHistory()
 			}
-        } else {
+		} else {
 			setNewHistory()
 		}
 	}, []);
 
 	// 记录操作至缓存
-	useEffect(() => localStorage.setItem(STORAGE_GAME_HISTORY, JSON.stringify(history)) , [history]) 
+	useEffect(() => localStorage.setItem(STORAGE_GAME_HISTORY, JSON.stringify(history)), [history])
 
 	// 控制Modal
 	const ModalUI: JSX.Element | null = isOver ? (
@@ -441,6 +457,13 @@ const Game: React.FC<IGame> = (props) => {
 					squares={history[history.length - 1].squares}
 					onMove={(dir: Direction) => handleMove(dir)}
 				/>
+				<figure>
+					<figcaption>
+						<button onChange={() => setMute(!isMute)}>{
+							isMute ? '🔊' : '🔇'
+						}</button>
+					</figcaption>
+				</figure>
 			</main>
 
 			{ModalUI}
