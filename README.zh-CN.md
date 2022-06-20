@@ -1,3 +1,11 @@
+<!--
+ * @Author: fantiga
+ * @Date: 2022-06-16 12:51:39
+ * @LastEditTime: 2022-06-20 17:47:24
+ * @LastEditors: fantiga
+ * @Description: 
+ * @FilePath: /2048-react/README.zh-CN.md
+-->
 # 2048-react
 
 - [English](README.md)
@@ -30,7 +38,7 @@
 - [x] 桌面计算机上的页面未完全显示。
 - [x] 实时保存进度。
 - [x] 增加在游戏中点击6次Logo以进行版本显示。
-- [ ] 添加一些音效。
+- [x] 添加一些音效。
 - [ ] 刷新游戏页面后，按下 `Home`（代码：`"navigate(-1)"`）无法回到主页。 因为它失去了浏览历史。 如果使用代码： `"navigate('/')"`，历史记录将推出两个相同的页面，这些页面在按下浏览器 `Back` 按钮的同时提供了不良体验。
 
 ## 维护者
