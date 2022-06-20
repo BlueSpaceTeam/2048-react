@@ -1,28 +1,28 @@
 @import './base.scss';
 
 %text {
-    color: #756f68;
-    font-size: 0.3rem;
+    color      : #756f68;
+    font-size  : 0.3rem;
     line-height: 0.44rem;
-    text-align: center;
+    text-align : center;
 }
 
 .game {
     box-sizing: border-box;
-    margin: 0 auto;
-    padding: 0.3rem;
-    max-width: 750px;
-    min-width: 320px;
-    
+    margin    : 0 auto;
+    padding   : 0.3rem;
+    max-width : 750px;
+    min-width : 320px;
+
     header {
-        display: grid;
+        display            : grid;
         grid-template-areas: "logo score bestScore"
-                            "logo btnNew btnUndo";
+            "logo btnNew btnUndo";
         grid-template-columns: repeat(3, 2.18rem);
-        grid-gap: 0.18rem;
-        height: 2.18rem;
-        color: #fff;
-        text-align: center;
+        grid-gap             : 0.18rem;
+        height               : 2.18rem;
+        color                : #fff;
+        text-align           : center;
     }
 
     .logo,
@@ -32,24 +32,24 @@
     }
 
     .logo {
-        grid-row-start: span 2;
-        line-height: 2.18rem;
+        grid-row-start  : span 2;
+        line-height     : 2.18rem;
         background-color: #f4c949;
-        font-size: 0.48rem;
-        font-weight: 600;
+        font-size       : 0.48rem;
+        font-weight     : 600;
 
         &.version {
-            font-size: 0.4rem;
+            font-size  : 0.4rem;
             line-height: 0.8rem;
         }
     }
 
     .score {
-        display: inline-grid;
-        place-content: center;
+        display         : inline-grid;
+        place-content   : center;
         background-color: #3f3932;
-        font-size: 0.34rem;
-        font-weight: 500;
+        font-size       : 0.34rem;
+        font-weight     : 500;
 
         .key {
             font-size: 0.24rem;
@@ -57,14 +57,14 @@
     }
 
     .btn {
-        border: none;
+        border          : none;
         background-color: #ff4e2c;
-        color: inherit;
-        font-size: 0.34rem;
-        font-weight: 600;
+        color           : inherit;
+        font-size       : 0.34rem;
+        font-weight     : 600;
 
         &.disabled {
-            opacity: 0.5;
+            opacity       : 0.5;
             pointer-events: none;
         }
     }
@@ -75,32 +75,32 @@
     }
 
     .board {
-        display: grid;
+        display              : grid;
         grid-template-columns: repeat(4, 1.5rem);
-        place-content: space-evenly space-evenly;
-        width: 6.9rem;
-        height: 6.9rem;
-        background-color: #a8927e;
-        border-radius: 0.08rem;
+        place-content        : space-evenly space-evenly;
+        width                : 6.9rem;
+        height               : 6.9rem;
+        background-color     : #a8927e;
+        border-radius        : 0.08rem;
     }
 
     .square {
-        height: 1.5rem;
-        line-height: 1.5rem;
+        height          : 1.5rem;
+        line-height     : 1.5rem;
         background-color: #c4ae9a;
-        border-radius: inherit;
-        overflow: hidden;
-        pointer-events: none;
+        border-radius   : inherit;
+        overflow        : hidden;
+        pointer-events  : none;
     }
 
     .number {
-        width: 100%;
-        height: 100%;
-        color: #fff;
-        font-weight: 600;
-        text-align: center;
-        transform: scale(0);
-        transition: all .1s;
+        width        : 100%;
+        height       : 100%;
+        color        : #fff;
+        font-weight  : 600;
+        text-align   : center;
+        transform    : scale(0);
+        transition   : all .1s;
         border-radius: inherit;
 
         &.show {
@@ -109,48 +109,70 @@
 
         &.color-1 {
             background-color: #f4e4db;
-            color: #786e61;
+            color           : #786e61;
         }
+
         &.color-2 {
             background-color: #f1e2c9;
-            color: #786e61;
+            color           : #786e61;
         }
+
         &.color-3 {
             background-color: #ffad77;
         }
+
         &.color-4 {
             background-color: #ff9262;
         }
+
         &.color-5 {
             background-color: #ff7461;
         }
+
         &.color-6 {
             background-color: #ff4e3b;
         }
+
         &.color-7 {
             background-color: #edcf72;
         }
+
         &.color-8 {
             background-color: #e7d150;
         }
+
         &.color-9 {
             background-color: #cea20a;
         }
+
         &.color-10 {
             background-color: #e6b400;
         }
+
         &.color-0 {
             background-color: #a08674;
         }
 
-        &.fs-3 { 
+        &.fs-3 {
             font-size: 0.56rem;
         }
+
         &.fs-4 {
             font-size: 0.5rem;
         }
+
         &.fs-5 {
             font-size: 0.4rem;
+        }
+    }
+
+    figure {
+        figcaption {
+            text-align: center;
+
+            button {
+                font-size: 0.4rem;
+            }
         }
     }
 }

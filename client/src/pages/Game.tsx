@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-20 17:13:59
+ * @LastEditTime: 2022-06-20 17:39:06
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/client/src/pages/Game.tsx
@@ -17,8 +17,9 @@ import ResultModal from '../components/ResultModal'
 
 import { usePrevious } from '../utils/hooks'
 
+// 引入声音模块
 import useSound from 'use-sound'
-import beepSfx from '../sfx/s3.mp3'
+import beepSfx from '../sfx/s1.mp3'
 
 import {
 	MATRIX_ROW,
@@ -467,7 +468,7 @@ const Game: React.FC<IGame> = (props) => {
 				/>
 				<figure>
 					<figcaption>
-						<button onChange={() => setMute(!isMute)}>{
+						<button onTouchEnd={() => setMute(!isMute)}>{
 							isMute ? '🔊' : '🔇'
 						}</button>
 					</figcaption>
