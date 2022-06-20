@@ -15,7 +15,10 @@ import Loading from '../components/Loading'
 import ResultModalFirstPage from './ResultModalFirstPage'
 import ResultModalSecondPage from './ResultModalSecondPage'
 
-import { IRankItem } from '../utils/constants'
+import { 
+	IRankItem,
+  STORAGE_GAME_PLAYER
+} from '../utils/constants'
 interface IPropsResultModal {
     isShow: boolean // 是否展示
     bestScore: number // 最高分
@@ -47,6 +50,10 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
 
     useEffect(() => {
         setModalClass(props.isShow ? 'modal show' : 'modal')
+				const SScorer: string = localStorage.getItem(STORAGE_GAME_PLAYER) || ''
+				if (props.isShow && SScorer) {
+					setScorer(SScorer)
+				}
     }, [props.isShow])
 
     // 关闭弹窗
@@ -95,6 +102,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
                     setIsLoading(false)
                     setIsSubmit(true)
                     setPageNum(2)
+										localStorage.setItem(STORAGE_GAME_PLAYER, scorer)
                 } else {
                     throw new Error('response is error')
                 }
@@ -121,6 +129,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
                 {
                     pageNum === 1
                         ? <ResultModalFirstPage
+														inputVal={scorer}
                             score={props.score}
                             bestScore={props.bestScore}
                             isError={Boolean(error)}

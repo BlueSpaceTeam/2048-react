@@ -34,4 +34,9 @@ export interface IAHistoryOfSquares {
 	squares: number[]
 }
 
+// 游戏历史记录
 export const STORAGE_GAME_HISTORY = 'game_history'
+// 游戏分数记录
+export const STORAGE_GAME_SCORES = 'game_scores'
+// 记录曾提交过的名字
+export const STORAGE_GAME_PLAYER = 'game_player'

@@ -29,7 +29,8 @@ import {
 	UP,
 	Direction,
 	IAHistoryOfSquares,
-	STORAGE_GAME_HISTORY
+	STORAGE_GAME_HISTORY,
+	STORAGE_GAME_SCORES,
 } from '../utils/constants'
 
 import '../scss/game.scss'
@@ -355,6 +356,7 @@ const Game: React.FC<IGame> = (props) => {
 				}
 				setIsOver(true)
 				localStorage.removeItem(STORAGE_GAME_HISTORY)
+				localStorage.removeItem(STORAGE_GAME_SCORES)
 				// console.log('================ Game Over')
 			}
 			return
@@ -412,11 +414,14 @@ const Game: React.FC<IGame> = (props) => {
 			return oldHistory.concat([{ squares: genNewNum(history[0].squares!) }])
 		})
 
-		const StorageStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || ''
-		if (StorageStr) {
-			const SHistory: IAHistoryOfSquares[] = JSON.parse(StorageStr)
-			if (Array.isArray(SHistory) && SHistory.length > 1) {
+		const StorageHistoryStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || ''
+		const StorageScoresStr: string = localStorage.getItem(STORAGE_GAME_SCORES) || ''
+		if (StorageHistoryStr && StorageScoresStr) {
+			const SHistory: IAHistoryOfSquares[] = JSON.parse(StorageHistoryStr)
+			const SScores: number[] = JSON.parse(StorageScoresStr)
+			if (Array.isArray(SHistory) && SHistory.length > 1 && Array.isArray(SScores)) {
 				setHistory(SHistory)
+				setScores(SScores)
 			} else {
 				setNewHistory()
 			}
@@ -426,7 +431,10 @@ const Game: React.FC<IGame> = (props) => {
 	}, []);
 
 	// 记录操作至缓存
-	useEffect(() => localStorage.setItem(STORAGE_GAME_HISTORY, JSON.stringify(history)), [history])
+	useEffect(() => {
+		localStorage.setItem(STORAGE_GAME_HISTORY, JSON.stringify(history))
+		localStorage.setItem(STORAGE_GAME_SCORES, JSON.stringify(scores))
+	}, [history])
 
 	// 控制Modal
 	const ModalUI: JSX.Element | null = isOver ? (

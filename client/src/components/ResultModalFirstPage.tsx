@@ -11,6 +11,7 @@ import React from 'react'
 import ResultLayout from './ResultLayout'
 
 interface IPropsResultModal {
+    inputVal: string // 名字字符串
     bestScore: number // 最高分
     score: number // 当前分数
     isError: boolean // 是否提交异常
@@ -33,6 +34,7 @@ const ResultModalFirstPage: React.FC<IPropsResultModal> = (props) => {
                     placeholder="Enter your name" 
                     maxLength={20} 
                     autoFocus
+                    value={props.inputVal}
                     onChange={props.onChange} 
                 />    
             </div>
