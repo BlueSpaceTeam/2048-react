@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-21 17:08:59
+ * @LastEditTime: 2022-06-21 17:54:32
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/client/src/pages/Game.tsx
@@ -86,7 +86,6 @@ const Game: React.FC<IGame> = (props) => {
 	}
 	// 检查垂直于用户移动方向的方向上是否存在合并或者移动的可能性
 	function checkPerpendicularDirPossibility(direction: Direction, squares: number[]): boolean {
-		console.log(direction, JSON.stringify(squares))
 		let possibility = false
 		switch (direction) {
 			case UP:
