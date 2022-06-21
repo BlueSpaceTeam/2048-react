@@ -30,15 +30,14 @@ $form-width: 5rem;
     }
 
     .title {
-        color: #c4ae9a;
-        font-size: 0.8rem;
-        font-style:oblique;
-        -webkit-text-stroke: 0.06rem #3f3932;
-        animation: showBigger 1s 0.1s;
-
+        color: #757575;
+        font-size: 0.7rem;
+        font-weight: 500;
         &.exceed {
-            color: #f71d04;
-            -webkit-text-stroke: 0.05rem #786e61;
+            color: #ffc0cb;
+            background-image:-webkit-linear-gradient(bottom,#fa617a 40%,#f90404 60%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
         }
 
         & + .p-score {
@@ -59,6 +58,7 @@ $form-width: 5rem;
             font-weight: 600;
             &.cur {
                 margin-top: 0.2rem;
+                color: #3f3932;
                 font-size: 0.8rem;
                 line-height: 0.9rem;
             }

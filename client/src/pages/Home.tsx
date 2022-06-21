@@ -25,7 +25,6 @@ interface IHome { }
 const Home: React.FC<IHome> = (props) => {
     let navigate = useNavigate()
 
-
     useEffect (() => {
         const StorageStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || ''
 		if (StorageStr) {

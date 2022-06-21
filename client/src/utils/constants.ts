@@ -40,3 +40,5 @@ export const STORAGE_GAME_HISTORY = 'game_history'
 export const STORAGE_GAME_SCORES = 'game_scores'
 // 记录曾提交过的名字
 export const STORAGE_GAME_PLAYER = 'game_player'
+// 游戏最高分
+export const STORAGE_BEST_SCORE = 'bestScore'

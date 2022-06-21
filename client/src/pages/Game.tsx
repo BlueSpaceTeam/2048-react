@@ -7,8 +7,8 @@
  * @FilePath: /2048-react/client/src/pages/Game.tsx
  */
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import Logo from '../components/Logo'
 import Score from '../components/Score'
 import Board from '../components/Board'
 import GameButton from '../components/GameButton'
@@ -32,6 +32,7 @@ import {
 	IAHistoryOfSquares,
 	STORAGE_GAME_HISTORY,
 	STORAGE_GAME_SCORES,
+	STORAGE_BEST_SCORE,
 } from '../utils/constants'
 
 import '../scss/game.scss'
@@ -43,11 +44,12 @@ interface IGame { }
  * 游戏
  */
 const Game: React.FC<IGame> = (props) => {
+	let navigate = useNavigate()
 	// 只记录最近操作的2步，故包括初始数组最多长度为3
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{ squares: new Array(16).fill(0) }])
 	const [scores, setScores] = useState<number[]>([0])
 	const [isOver, setIsOver] = useState<boolean>(false)
-	const [bestScore, setBestScore] = useState<number>(Number(localStorage.getItem('bestScore') || 0))
+	const [bestScore, setBestScore] = useState<number>(Number(localStorage.getItem(STORAGE_BEST_SCORE) || 0))
 	// 最高分原始值
 	const preBestScore: number = usePrevious(bestScore) || 0
 	// 音效播放
@@ -147,6 +149,19 @@ const Game: React.FC<IGame> = (props) => {
 		return possibility
 	}
 
+	// 从垂直于当前操作方向的方向来检查没有机会合并，game over的回调处理
+	const gameOverCallback: () => void = () => {
+		const curScore: number = scores[scores.length - 1]
+		if (curScore > preBestScore) {
+			setBestScore(curScore)
+			localStorage.setItem(STORAGE_BEST_SCORE, curScore + '')
+		}
+		setIsOver(true)
+		localStorage.removeItem(STORAGE_GAME_HISTORY)
+		localStorage.removeItem(STORAGE_GAME_SCORES)
+		// console.log('================ Game Over')
+	}
+
 	/**
 	 * 移动处理
 	 * 
@@ -185,8 +200,6 @@ const Game: React.FC<IGame> = (props) => {
 											startPointer = getRow(col, preRowIdx) + 1
 											// 计算分数
 											scoreDelta += arr[preRowIdx]
-											// 播放音效
-											play()
 										} else if ((curRowIdx - preRowIdx) / rowIdxDelta > 1) { // curRowIdx - preRowIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preRowIdx + rowIdxDelta] = arr[curRowIdx]
 											arr[curRowIdx] = 0
@@ -232,8 +245,6 @@ const Game: React.FC<IGame> = (props) => {
 											startPointer = getRow(col, preRowIdx) - 1
 											// 计算分数
 											scoreDelta += arr[preRowIdx]
-											// 播放音效
-											play()
 										} else if ((preRowIdx - curRowIdx) / rowIdxDelta > 1) { // curRowIdx - preRowIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preRowIdx - rowIdxDelta] = arr[curRowIdx]
 											arr[curRowIdx] = 0
@@ -279,8 +290,6 @@ const Game: React.FC<IGame> = (props) => {
 											startPointer = getCol(row, preColIdx) + 1
 											// 计算分数
 											scoreDelta += arr[preColIdx]
-											// 播放音效
-											play()
 										} else if ((curColIdx - preColIdx) / colIdxDelta > 1) { // curColIdx - preColIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preColIdx + colIdxDelta] = arr[curColIdx]
 											arr[curColIdx] = 0
@@ -326,8 +335,6 @@ const Game: React.FC<IGame> = (props) => {
 											startPointer = getCol(row, preColIdx) - 1
 											// 计算分数
 											scoreDelta += arr[preColIdx]
-											// 播放音效
-											play()
 										} else if ((preColIdx - curColIdx) / colIdxDelta > 1) { // curColIdx - preColIdx 之间有空格，则放置离lastRowIdx最近一格
 											arr[preColIdx - colIdxDelta] = arr[curColIdx]
 											arr[curColIdx] = 0
@@ -346,24 +353,24 @@ const Game: React.FC<IGame> = (props) => {
 				break
 			}
 		}
-
 		// console.log(currentHistory.squares, arr)
-		console.log('possibly=', checkPerpendicularDirPossibility(direction, arr))
-
-		// 从垂直于当前操作方向的方向来检查是否仍然有机会合并，如果没有则认为游戏结束
-		if (!checkPerpendicularDirPossibility(direction, arr)) {
-			const curScore: number = scores[scores.length - 1]
-			if (curScore > preBestScore) {
-				setBestScore(curScore)
-				localStorage.setItem('bestScore', curScore + '')
+		// 如果完全相同，则不发生变化
+		if (JSON.stringify(currentHistory.squares) === JSON.stringify(arr)) {
+			// 从垂直于当前操作方向的方向来检查是否仍然有机会合并，如果没有则认为游戏结束
+			if (!checkPerpendicularDirPossibility(direction, arr)) {
+				gameOverCallback()
 			}
-			setIsOver(true)
-			localStorage.removeItem(STORAGE_GAME_HISTORY)
-			localStorage.removeItem(STORAGE_GAME_SCORES)
-			console.log('================ Game Over')
 			return
+		} else {
+			// 从垂直于当前操作方向的方向来检查是否仍然有机会合并，如果没有则认为游戏结束
+			if (!checkPerpendicularDirPossibility(direction, arr)) {
+				gameOverCallback()
+				return
+			}
 		}
 
+		// 播放音效
+		play()
 		setHistory(history.concat([{ squares: arr }]))
 		// 计算分数
 		if (scoreDelta) {
@@ -391,7 +398,12 @@ const Game: React.FC<IGame> = (props) => {
 			// console.log(`History`, newHistory)
 			return newHistory
 		}), 90)
-		// TODO: 此处有#bug，在新建后还要再判断一次 checkPerpendicularDirPossibility(direction, arr)
+	}
+
+	function backHome () {
+		localStorage.removeItem(STORAGE_GAME_HISTORY)
+		localStorage.removeItem(STORAGE_GAME_SCORES)
+		navigate(-1)
 	}
 
 	// 开始游戏
@@ -456,11 +468,12 @@ const Game: React.FC<IGame> = (props) => {
 	return (
 		<div className="game">
 			<header>
-				<Logo />
+				<button className="logo" onClick={() => backHome()}>2048</button>
 				<Score name="SCORE" num={scores[scores.length - 1]} />
 				<Score name="YOUR BEST" num={bestScore} />
 				<GameButton name="NEW" onClick={() => startGame()} />
 				<GameButton name="UNDO" btnDisabled={disabledUndo} onClick={() => undoGame()} />
+				<GameButton name={ isMute ? 'SOUND' : 'MUTE' } onClick={() => setMute(!isMute)} />
 			</header>
 			<main>
 				<p className="desc">Join the numbers and get to the 2048 tile!</p>
@@ -468,13 +481,6 @@ const Game: React.FC<IGame> = (props) => {
 					squares={history[history.length - 1].squares}
 					onMove={(dir: Direction) => handleMove(dir)}
 				/>
-				<figure>
-					<figcaption>
-						<button onTouchEnd={() => setMute(!isMute)}>{
-							isMute ? '🔊' : '🔇'
-						}</button>
-					</figcaption>
-				</figure>
 			</main>
 
 			{ModalUI}

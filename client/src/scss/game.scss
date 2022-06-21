@@ -32,16 +32,12 @@
     }
 
     .logo {
-        grid-row-start  : span 2;
-        line-height     : 2.18rem;
+        display         : inline-grid;
+        place-items     : center;
+        color           : #fff;
         background-color: #f4c949;
-        font-size       : 0.48rem;
+        font-size       : 0.5rem;
         font-weight     : 600;
-
-        &.version {
-            font-size  : 0.4rem;
-            line-height: 0.8rem;
-        }
     }
 
     .score {
@@ -66,6 +62,12 @@
         &.disabled {
             opacity       : 0.5;
             pointer-events: none;
+        }
+
+        &-mute,
+        &-sound {
+            // background-color: #127bd1;
+            background-color: #0b6bb9;
         }
     }
 
@@ -163,16 +165,6 @@
 
         &.fs-5 {
             font-size: 0.4rem;
-        }
-    }
-
-    figure {
-        figcaption {
-            text-align: center;
-
-            button {
-                font-size: 0.4rem;
-            }
         }
     }
 }
