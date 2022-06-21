@@ -64,9 +64,7 @@
             pointer-events: none;
         }
 
-        &-mute,
-        &-sound {
-            // background-color: #127bd1;
+        &-unmuted {
             background-color: #0b6bb9;
         }
     }

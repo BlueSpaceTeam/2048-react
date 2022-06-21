@@ -29,7 +29,7 @@ Welcome to 2048-react. An online digital game written in React18, Typescript, Py
 
 - [x] The page on the desktop computer is not displayed completely.
 - [x] Save progress in real time.
-- [x] Add some sound effects.
+- [x] Added sound effects. Also added a mute button.
 - [ ] After refreshing the game page, it wouldn't back to page Home by pressing the btn home(code: `"navigate(-1)"`). Because it lost the brower history. If used code: `"navigate('/')"`, history will push two same pages which provides a bad experience while pressing browser Btn `Back`. 
 
 ## Maintainers

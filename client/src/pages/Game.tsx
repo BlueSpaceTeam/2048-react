@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-20 17:39:06
+ * @LastEditTime: 2022-06-21 17:08:59
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/client/src/pages/Game.tsx
@@ -53,8 +53,8 @@ const Game: React.FC<IGame> = (props) => {
 	// 最高分原始值
 	const preBestScore: number = usePrevious(bestScore) || 0
 	// 音效播放
-	const [isMute, setMute] = useState<boolean>(false)
-	const [play] = useSound(beepSfx, { soundEnabled: isMute })
+	const [isMuted, setMuted] = useState<boolean>(false)
+	const [play] = useSound(beepSfx, { soundEnabled: !isMuted })
 
 	// btn-undo是否可点击
 	const disabledUndo: boolean = isOver || history.length < 3
@@ -400,7 +400,7 @@ const Game: React.FC<IGame> = (props) => {
 		}), 90)
 	}
 
-	function backHome () {
+	function backHome() {
 		localStorage.removeItem(STORAGE_GAME_HISTORY)
 		localStorage.removeItem(STORAGE_GAME_SCORES)
 		navigate(-1)
@@ -473,7 +473,7 @@ const Game: React.FC<IGame> = (props) => {
 				<Score name="YOUR BEST" num={bestScore} />
 				<GameButton name="NEW" onClick={() => startGame()} />
 				<GameButton name="UNDO" btnDisabled={disabledUndo} onClick={() => undoGame()} />
-				<GameButton name={ isMute ? 'SOUND' : 'MUTE' } onClick={() => setMute(!isMute)} />
+				<GameButton name={isMuted ? 'MUTED' : 'UNMUTED'} onClick={() => setMuted(!isMuted)} />
 			</header>
 			<main>
 				<p className="desc">Join the numbers and get to the 2048 tile!</p>
