@@ -153,7 +153,7 @@ const config = {
     plugins: [
         new CleanWebpackPlugin(),
         new HTMLWebpackPlugin({
-            title: '2048 - React',
+            // title: '2048 - React',
             // filename: './dist/index.html', // 配置生成的HTML文件名称
             template: path.resolve(__dirname, 'public', 'index.html'), // 生成HTML文件所需要的模板文件
             minify: {
