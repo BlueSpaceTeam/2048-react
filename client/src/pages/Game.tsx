@@ -84,6 +84,7 @@ const Game: React.FC<IGame> = (props) => {
 	}
 	// 检查垂直于用户移动方向的方向上是否存在合并或者移动的可能性
 	function checkPerpendicularDirPossibility(direction: Direction, squares: number[]): boolean {
+		console.log(direction, JSON.stringify(squares))
 		let possibility = false
 		switch (direction) {
 			case UP:
@@ -145,6 +146,7 @@ const Game: React.FC<IGame> = (props) => {
 		}
 		return possibility
 	}
+
 	/**
 	 * 移动处理
 	 * 
@@ -346,20 +348,19 @@ const Game: React.FC<IGame> = (props) => {
 		}
 
 		// console.log(currentHistory.squares, arr)
+		console.log('possibly=', checkPerpendicularDirPossibility(direction, arr))
 
-		// 如果完全相同，则不发生变化
-		if (JSON.stringify(currentHistory.squares) === JSON.stringify(arr)) {
-			if (!checkPerpendicularDirPossibility(direction, arr)) {
-				const curScore: number = scores[scores.length - 1]
-				if (curScore > preBestScore) {
-					setBestScore(curScore)
-					localStorage.setItem('bestScore', curScore + '')
-				}
-				setIsOver(true)
-				localStorage.removeItem(STORAGE_GAME_HISTORY)
-				localStorage.removeItem(STORAGE_GAME_SCORES)
-				// console.log('================ Game Over')
+		// 从垂直于当前操作方向的方向来检查是否仍然有机会合并，如果没有则认为游戏结束
+		if (!checkPerpendicularDirPossibility(direction, arr)) {
+			const curScore: number = scores[scores.length - 1]
+			if (curScore > preBestScore) {
+				setBestScore(curScore)
+				localStorage.setItem('bestScore', curScore + '')
 			}
+			setIsOver(true)
+			localStorage.removeItem(STORAGE_GAME_HISTORY)
+			localStorage.removeItem(STORAGE_GAME_SCORES)
+			console.log('================ Game Over')
 			return
 		}
 
@@ -374,7 +375,7 @@ const Game: React.FC<IGame> = (props) => {
 		}
 		/**
 		 * 逻辑：为避免捕获过时的属性，setSquares需要异步函数获取
-		 * 优化：为体现先合并后随机顺序的逻辑，避免混淆，使用setTimeout。经人工调试不生硬，90ms比较符合视觉的展示
+		 * 优化：为体现先合并后随机顺序的逻辑及动画，避免视觉混淆，使用setTimeout。经人工调试不生硬，90ms比较符合视觉的展示
 		 **/
 		setTimeout(() => setHistory((oldHistory: IAHistoryOfSquares[]) => {
 			// 当前历史的索引
@@ -390,6 +391,7 @@ const Game: React.FC<IGame> = (props) => {
 			// console.log(`History`, newHistory)
 			return newHistory
 		}), 90)
+		// TODO: 此处有#bug，在新建后还要再判断一次 checkPerpendicularDirPossibility(direction, arr)
 	}
 
 	// 开始游戏
