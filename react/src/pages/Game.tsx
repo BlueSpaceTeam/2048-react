@@ -1,10 +1,10 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-21 18:46:06
+ * @LastEditTime: 2022-06-22 22:29:43
  * @LastEditors: fantiga
  * @Description: 
- * @FilePath: /2048-react/client/src/pages/Game.tsx
+ * @FilePath: /2048-react/react/src/pages/Game.tsx
  */
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -151,6 +151,7 @@ const Game: React.FC<IGame> = (props) => {
 
 	// 从垂直于当前操作方向的方向来检查没有机会合并，game over的回调处理
 	const gameOverCallback: () => void = () => {
+		// console.log('游戏结束')
 		const curScore: number = scores[scores.length - 1]
 		if (curScore > preBestScore) {
 			setBestScore(curScore)
@@ -412,6 +413,7 @@ const Game: React.FC<IGame> = (props) => {
 	}
 	// 开始游戏
 	function startGame(): void {
+		// console.log('游戏开始')
 		setHistory((oldHistory: IAHistoryOfSquares[]) => {
 			// 新历史集合
 			let newHistory: IAHistoryOfSquares[] = oldHistory.slice(0, 1)
@@ -429,6 +431,7 @@ const Game: React.FC<IGame> = (props) => {
 
 	// 初始化游戏界面
 	useEffect(() => {
+		// console.log('游戏开始2')
 		const setNewHistory: () => void = () => setHistory((oldHistory: IAHistoryOfSquares[]) => {
 			return oldHistory.concat([{ squares: genNewNum(history[0].squares!) }])
 		})
@@ -470,7 +473,7 @@ const Game: React.FC<IGame> = (props) => {
 			/>
 		</Modal>
 	)
-	: null
+		: null
 
 	return (
 		<div className="game">

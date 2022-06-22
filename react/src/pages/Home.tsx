@@ -1,17 +1,17 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-14 14:01:42
+ * @LastEditTime: 2022-06-22 22:14:52
  * @LastEditors: fantiga
  * @Description: 
- * @FilePath: /2048-react/client/src/pages/Home.tsx
+ * @FilePath: /2048-react/react/src/pages/Home.tsx
  */
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
-import { 
-    STORAGE_GAME_HISTORY, 
+import {
+    STORAGE_GAME_HISTORY,
     IAHistoryOfSquares
 } from '../utils/constants'
 
@@ -25,11 +25,11 @@ interface IHome { }
 const Home: React.FC<IHome> = (props) => {
     let navigate = useNavigate()
 
-    useEffect (() => {
+    useEffect(() => {
         const StorageStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || ''
-		if (StorageStr) {
-			const SHistory: IAHistoryOfSquares[]= JSON.parse(StorageStr) 
-			if (SHistory.length > 1) {
+        if (StorageStr) {
+            const SHistory: IAHistoryOfSquares[] = JSON.parse(StorageStr)
+            if (SHistory.length > 1) {
                 navigate('/game')
             }
         }
@@ -49,16 +49,16 @@ const Home: React.FC<IHome> = (props) => {
 
             <ul>
                 <li>
-                    <button className="btn" onClick={() => navigate('/game')}>Play</button>
+                    <button className="btn" onClick={() => navigate('/game')}>PLAY</button>
                 </li>
                 <li>
-                    <button className="btn" onClick={() => navigate('/ranking')}>Ranking</button>
+                    <button className="btn" onClick={() => navigate('/ranking')}>RANKING</button>
                 </li>
             </ul>
 
             <footer>
                 <p><a className="link" href="https://github.com/BlueSpaceTeam/2048-react">README</a></p>
-                <p><a className="link" href="https://github.com/BlueSpaceTeam">@BlueSpaceTeam</a>, June 14th, 2022.</p>
+                <p><a className="link" href="https://github.com/BlueSpaceTeam">@BlueSpaceTeam</a>, since Apr 28, 2022.</p>
                 <p>Written in React18 / Typescript / Python3 / SQLite3.</p>
             </footer>
         </div>
