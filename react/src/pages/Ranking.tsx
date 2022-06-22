@@ -17,12 +17,15 @@ import { IRankItem } from '../utils/constants'
 
 import '../scss/ranking.scss'
 
-interface IRanking {}
+interface IRanking {
+    // location: any
+}
 
 /* *
  * 排行榜
  * */ 
 const Ranking: React.FC<IRanking> = (props) => {
+
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [error, setError] = useState<any>(null)
     const [list, setList] = useState<IRankItem[]>([])

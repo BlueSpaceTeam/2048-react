@@ -31,6 +31,9 @@ root.render(
                 <Route path="/" element={<Home />} />
                 <Route path="/game" element={<Game />} />
                 <Route path="/ranking" element={<Ranking />} />
+                {/* <Route path="/" render={() => <Home />} />
+                <Route path="/game" render={() => <Game />} />
+                <Route path="/ranking" render={() => <Ranking />} /> */}
                 <Route path="*" element={
                     <main style={{ padding: "1rem" }}>
                         <p>There's nothing here!</p>

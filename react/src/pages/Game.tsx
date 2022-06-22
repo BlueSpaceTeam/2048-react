@@ -43,7 +43,7 @@ interface IGame { }
 /**
  * 游戏
  */
-const Game: React.FC<IGame> = (props) => {
+const Game: React.FC<IGame> = (props: any) => {
 	let navigate = useNavigate()
 	// 只记录最近操作的2步，故包括初始数组最多长度为3
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{ squares: new Array(16).fill(0) }])
@@ -373,7 +373,7 @@ const Game: React.FC<IGame> = (props) => {
 		setHistory(history.concat([{ squares: arr }]))
 		// 计算分数
 		if (scoreDelta) {
-			setScores(scores => {
+			setScores((scores: string | any[]) => {
 				const prevScore = scores[scores.length - 1]
 				const nowScore = prevScore + scoreDelta
 				return [prevScore, nowScore]
@@ -402,7 +402,11 @@ const Game: React.FC<IGame> = (props) => {
 	function backHome() {
 		localStorage.removeItem(STORAGE_GAME_HISTORY)
 		localStorage.removeItem(STORAGE_GAME_SCORES)
-		navigate(-1)
+		if (window.history && window.history.length > 1) {
+			navigate(-1)
+		} else {
+			navigate('/')
+		}
 	}
 
 	// 开始游戏
@@ -418,7 +422,7 @@ const Game: React.FC<IGame> = (props) => {
 	function undoGame(): void {
 		if (history.length > 2) { // 除了初始数组外，存在上一步方可撤销
 			setHistory((oldHistory: IAHistoryOfSquares[]) => oldHistory.slice(0, oldHistory.length - 1))
-			setScores(scores => scores.slice(0, 1))
+			setScores((scores: number[]) => scores.slice(0, 1))
 		}
 	}
 

@@ -69,7 +69,11 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
                 break
             }
             case 'home': {
-                navigate('/')
+                if (window.history && window.history.length > 1) {
+                    navigate(-1)
+                } else {
+                    navigate('/')
+                }
                 break
             }
         }
