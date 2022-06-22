@@ -1,7 +1,7 @@
 '''
 Author: fantiga
 Date: 2022-06-02 18:05:59
-LastEditTime: 2022-06-22 17:26:13
+LastEditTime: 2022-06-22 17:33:32
 LastEditors: fantiga
 Description:
 FilePath: /2048-react/server/query.py
@@ -127,14 +127,14 @@ def query():
     action = flask_request.form['action']
     json_data = {}
 
+    print('ip:', flask_request.remote_addr)
+    print('aaa')
+    print('user_agent:', flask_request.user_agent.string)
+
     if action == 'add':
         user_name = flask_request.form['user_name']
         user_score = int(flask_request.form['user_score'])
         now = time.strftime(r"%Y-%m-%d %H:%M:%S", time.localtime())
-
-        print('ip', flask_request.remote_addr)
-
-        print('user_agent', flask_request.user_agent.string)
 
         db = Db()
 
