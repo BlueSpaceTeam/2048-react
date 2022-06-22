@@ -1,7 +1,7 @@
 /*
  * @Author: fantiga
  * @Date: 2022-04-28 15:18:31
- * @LastEditTime: 2022-06-14 18:29:55
+ * @LastEditTime: 2022-06-21 18:48:24
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/client/src/index.tsx
@@ -32,11 +32,10 @@ root.render(
                 <Route path="/game" element={<Game />} />
                 <Route path="/ranking" element={<Ranking />} />
                 <Route path="*" element={
-                        <main style={{ padding: "1rem" }}>
-                            <p>There's nothing here!</p>
-                        </main>
-                    }
-                />
+                    <main style={{ padding: "1rem" }}>
+                        <p>There's nothing here!</p>
+                    </main>
+                } />
             </Routes>
         </BrowserRouter>
     </React.StrictMode>
