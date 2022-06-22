@@ -6,7 +6,7 @@ CREATE TABLE "main"."bs_2048_server_rankdata" (
     "created_time" datetime NOT NULL,
     "user_ip" varchar(100),
     "user_agent" varchar(255),
-    "time_cost" integer unsigned,
+    "time_spent" integer unsigned,
 );
 
 -- INSERT INTO "main"."sqlite_sequence" (name, seq) VALUES ('sqlite_sequence', '0');
