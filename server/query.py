@@ -1,13 +1,13 @@
 '''
 Author: fantiga
 Date: 2022-06-02 18:05:59
-LastEditTime: 2022-06-09 14:59:25
+LastEditTime: 2022-06-22 17:26:13
 LastEditors: fantiga
 Description:
 FilePath: /2048-react/server/query.py
 '''
 
-from flask import Flask, request
+from flask import Flask, request as flask_request
 import flask
 import os
 import sqlite3
@@ -31,6 +31,7 @@ headers = {
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
 }
+
 
 class Db():
     """
@@ -123,13 +124,18 @@ def getAll():
 @app.route(r'/query', methods=['POST'])
 def query():
     # 接收到的数据
-    action = request.form['action']
+    action = flask_request.form['action']
     json_data = {}
 
     if action == 'add':
-        user_name = request.form['user_name']
-        user_score = int(request.form['user_score'])
+        user_name = flask_request.form['user_name']
+        user_score = int(flask_request.form['user_score'])
         now = time.strftime(r"%Y-%m-%d %H:%M:%S", time.localtime())
+
+        print('ip', flask_request.remote_addr)
+
+        print('user_agent', flask_request.user_agent.string)
+
         db = Db()
 
         # 拼接sql语句
