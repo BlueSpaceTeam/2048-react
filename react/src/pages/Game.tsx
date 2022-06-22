@@ -37,18 +37,108 @@ import {
 
 import '../scss/game.scss'
 
+// 当前格对应一元数组的下标 —— 函数式编程
+const getSquareIdx: (row: number, col: number) => number = (row, col) => (row - 1) * MATRIX_COL + (col - 1)
+// 获取行号
+const getRow: (col: number, squareIdx: number) => number = (col, squareIdx) => (squareIdx - col + 1) / MATRIX_COL + 1
+// 获取列号
+const getCol: (row: number, squareIdx: number) => number = (row, squareIdx) => squareIdx + 1 - (row - 1) * MATRIX_COL
+// 随机选一为0的square随机设置2或4
+function genNewNum(squares: number[]): number[] {
+	const arr = squares.slice()
+	const emptyIdxs: number[] = []
+	for (let i: number = 0; i < arr.length; i++) {
+		if (!arr[i]) {
+			emptyIdxs.push(i)
+		}
+	}
+	if (!emptyIdxs.length) { // 返回自身，避免用空数组覆盖原来结果
+		return arr
+	}
+	// 从1到coutZero里随机生成一个位置
+	const idx = emptyIdxs[Math.round(Math.random() * (emptyIdxs.length - 1))]
+	// 随机设置2或4
+	arr[idx] = Math.round(Math.random()) ? 2 : 4
+	return arr
+}
+// 检查垂直于用户移动方向的方向上是否存在合并或者移动的可能性
+function checkPerpendicularDirPossibility(direction: Direction, squares: number[]): boolean {
+	let possibility = false
+	switch (direction) {
+		case UP:
+		case DOWN: {
+			// 垂直的方向为：LEFT
+			// 从第1行开始
+			for (let row: number = 1; row <= MATRIX_ROW; row++) {
+				if (possibility) break
+
+				// 从第2列开始往移动方向合并
+				for (let col: number = 2; col <= MATRIX_COL; col++) {
+					if (possibility) break
+					// 每列开始值对应一元数组的下标
+					const curColIdx: number = getSquareIdx(row, col)
+					if (squares[curColIdx]) { // 当前列有值的情况
+						// preColIdx ：移动方向的前一列Idx
+						const preColIdx: number = getSquareIdx(row, col - 1)
+						if (
+							!squares[preColIdx]
+							|| squares[preColIdx] && squares[curColIdx] === squares[preColIdx]
+						) {
+							possibility = true
+						}
+					} else {
+						possibility = true
+					}
+				}
+			}
+			break
+		}
+		case LEFT:
+		case RIGHT: {
+			// 垂直的方向为：UP
+			// 从第1列开始
+			for (let col: number = 1; col <= MATRIX_COL; col++) {
+				if (possibility) break
+
+				// 从第2行开始往移动方向合并
+				for (let row: number = 2; row <= MATRIX_ROW; row++) {
+					if (possibility) break
+					// 每行开始值对应一元数组的下标
+					const curRowIdx: number = getSquareIdx(row, col)
+					if (squares[curRowIdx]) { // 当前行有值的情况
+						// preRowIdx ：移动方向的前一行Idx
+						let preRowIdx: number = getSquareIdx(row - 1, col)
+						if (
+							!squares[preRowIdx]
+							|| squares[preRowIdx] && squares[curRowIdx] === squares[preRowIdx]
+						) {
+							possibility = true
+						}
+					} else {
+						possibility = true
+					}
+				}
+			}
+			break
+		}
+	}
+	return possibility
+}
 
 interface IGame { }
 
 /**
  * 游戏
  */
-const Game: React.FC<IGame> = (props: any) => {
+const Game: React.FC<IGame> = (props) => {
 	let navigate = useNavigate()
-	// 只记录最近操作的2步，故包括初始数组最多长度为3
+	// 游戏移动记录：[初始记录,(上一步记录,)当前记录]。只记录最近操作的2步，故包括初始数组最多长度为3
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{ squares: new Array(16).fill(0) }])
+	// 分数：[(上一步分数,)当前分数]
 	const [scores, setScores] = useState<number[]>([0])
+	// 游戏是否结束
 	const [isOver, setIsOver] = useState<boolean>(false)
+	// 最高分
 	const [bestScore, setBestScore] = useState<number>(Number(localStorage.getItem(STORAGE_BEST_SCORE) || 0))
 	// 最高分原始值
 	const preBestScore: number = usePrevious(bestScore) || 0
@@ -58,95 +148,6 @@ const Game: React.FC<IGame> = (props: any) => {
 
 	// btn-undo是否可点击
 	const disabledUndo: boolean = isOver || history.length < 3
-
-	// 当前格对应一元数组的下标 —— 函数式编程
-	const getSquareIdx: (row: number, col: number) => number = (row, col) => (row - 1) * MATRIX_COL + (col - 1)
-	// 获取行号
-	const getRow: (col: number, squareIdx: number) => number = (col, squareIdx) => (squareIdx - col + 1) / MATRIX_COL + 1
-	// 获取列号
-	const getCol: (row: number, squareIdx: number) => number = (row, squareIdx) => squareIdx + 1 - (row - 1) * MATRIX_COL
-	// 随机选一为0的square随机设置2或4
-	function genNewNum(squares: number[]): number[] {
-		const arr = squares.slice()
-		const emptyIdxs: number[] = []
-		for (let i: number = 0; i < arr.length; i++) {
-			if (!arr[i]) {
-				emptyIdxs.push(i)
-			}
-		}
-		if (!emptyIdxs.length) { // 返回自身，避免用空数组覆盖原来结果
-			return arr
-		}
-		// 从1到coutZero里随机生成一个位置
-		const idx = emptyIdxs[Math.round(Math.random() * (emptyIdxs.length - 1))]
-		// 随机设置2或4
-		arr[idx] = Math.round(Math.random()) ? 2 : 4
-		// console.log('Sequares=', arr)
-		return arr
-	}
-	// 检查垂直于用户移动方向的方向上是否存在合并或者移动的可能性
-	function checkPerpendicularDirPossibility(direction: Direction, squares: number[]): boolean {
-		let possibility = false
-		switch (direction) {
-			case UP:
-			case DOWN: {
-				// 垂直的方向为：LEFT
-				// 从第1行开始
-				for (let row: number = 1; row <= MATRIX_ROW; row++) {
-					if (possibility) break
-
-					// 从第2列开始往移动方向合并
-					for (let col: number = 2; col <= MATRIX_COL; col++) {
-						if (possibility) break
-						// 每列开始值对应一元数组的下标
-						const curColIdx: number = getSquareIdx(row, col)
-						if (squares[curColIdx]) { // 当前列有值的情况
-							// preColIdx ：移动方向的前一列Idx
-							const preColIdx: number = getSquareIdx(row, col - 1)
-							if (
-								!squares[preColIdx]
-								|| squares[preColIdx] && squares[curColIdx] === squares[preColIdx]
-							) {
-								possibility = true
-							}
-						} else {
-							possibility = true
-						}
-					}
-				}
-				break
-			}
-			case LEFT:
-			case RIGHT: {
-				// 垂直的方向为：UP
-				// 从第1列开始
-				for (let col: number = 1; col <= MATRIX_COL; col++) {
-					if (possibility) break
-
-					// 从第2行开始往移动方向合并
-					for (let row: number = 2; row <= MATRIX_ROW; row++) {
-						if (possibility) break
-						// 每行开始值对应一元数组的下标
-						const curRowIdx: number = getSquareIdx(row, col)
-						if (squares[curRowIdx]) { // 当前行有值的情况
-							// preRowIdx ：移动方向的前一行Idx
-							let preRowIdx: number = getSquareIdx(row - 1, col)
-							if (
-								!squares[preRowIdx]
-								|| squares[preRowIdx] && squares[curRowIdx] === squares[preRowIdx]
-							) {
-								possibility = true
-							}
-						} else {
-							possibility = true
-						}
-					}
-				}
-				break
-			}
-		}
-		return possibility
-	}
 
 	// 从垂直于当前操作方向的方向来检查没有机会合并，game over的回调处理
 	const gameOverCallback: () => void = () => {
@@ -399,6 +400,7 @@ const Game: React.FC<IGame> = (props: any) => {
 		}), 90)
 	}
 
+	// 返回首页
 	function backHome() {
 		localStorage.removeItem(STORAGE_GAME_HISTORY)
 		localStorage.removeItem(STORAGE_GAME_SCORES)
@@ -408,7 +410,6 @@ const Game: React.FC<IGame> = (props: any) => {
 			navigate('/', { replace: true })
 		}
 	}
-
 	// 开始游戏
 	function startGame(): void {
 		setHistory((oldHistory: IAHistoryOfSquares[]) => {
@@ -437,7 +438,7 @@ const Game: React.FC<IGame> = (props: any) => {
 		if (StorageHistoryStr && StorageScoresStr) {
 			const SHistory: IAHistoryOfSquares[] = JSON.parse(StorageHistoryStr)
 			const SScores: number[] = JSON.parse(StorageScoresStr)
-			if (Array.isArray(SHistory) && SHistory.length > 1 && Array.isArray(SScores)) {
+			if (SHistory.length > 1) {
 				setHistory(SHistory)
 				setScores(SScores)
 			} else {
@@ -446,13 +447,16 @@ const Game: React.FC<IGame> = (props: any) => {
 		} else {
 			setNewHistory()
 		}
-	}, []);
+	}, [])
 
 	// 记录操作至缓存
 	useEffect(() => {
 		localStorage.setItem(STORAGE_GAME_HISTORY, JSON.stringify(history))
-		localStorage.setItem(STORAGE_GAME_SCORES, JSON.stringify(scores))
 	}, [history])
+	// 记录操作至缓存
+	useEffect(() => {
+		localStorage.setItem(STORAGE_GAME_SCORES, JSON.stringify(scores))
+	}, [scores])
 
 	// 控制Modal
 	const ModalUI: JSX.Element | null = isOver ? (
@@ -466,7 +470,7 @@ const Game: React.FC<IGame> = (props: any) => {
 			/>
 		</Modal>
 	)
-		: null
+	: null
 
 	return (
 		<div className="game">

@@ -29,7 +29,7 @@ const Home: React.FC<IHome> = (props) => {
         const StorageStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || ''
 		if (StorageStr) {
 			const SHistory: IAHistoryOfSquares[]= JSON.parse(StorageStr) 
-			if (Array.isArray(SHistory) && SHistory.length > 1) {
+			if (SHistory.length > 1) {
                 navigate('/game')
             }
         }
