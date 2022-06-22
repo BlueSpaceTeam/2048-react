@@ -405,7 +405,7 @@ const Game: React.FC<IGame> = (props: any) => {
 		if (window.history && window.history.length > 1) {
 			navigate(-1)
 		} else {
-			navigate('/')
+			navigate('/', { replace: true })
 		}
 	}
 

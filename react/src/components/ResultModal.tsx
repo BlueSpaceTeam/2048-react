@@ -72,7 +72,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
                 if (window.history && window.history.length > 1) {
                     navigate(-1)
                 } else {
-                    navigate('/')
+                    navigate('/', { replace: true })
                 }
                 break
             }
