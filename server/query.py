@@ -1,7 +1,7 @@
 '''
 Author: fantiga
 Date: 2022-06-02 18:05:59
-LastEditTime: 2022-06-22 17:33:32
+LastEditTime: 2022-06-22 18:08:10
 LastEditors: fantiga
 Description:
 FilePath: /2048-react/server/query.py
@@ -92,7 +92,7 @@ def getAll():
     """
     db = Db()
     # 拼接sql语句
-    sql = "SELECT a.id, a.user_name, a.user_score, a.created_time FROM \"main\".\"bs_2048_server_rankdata\" a JOIN (SELECT * FROM \"main\".\"bs_2048_server_rankdata\" ORDER BY created_time DESC LIMIT 9999) b ON a.id=b.id GROUP BY a.user_score ORDER BY a.user_score DESC LIMIT 10"
+    sql = "SELECT a.* FROM \"main\".\"bs_2048_server_rankdata\" a JOIN (SELECT * FROM \"main\".\"bs_2048_server_rankdata\" ORDER BY created_time DESC LIMIT 9999) b ON a.id=b.id GROUP BY a.user_score ORDER BY a.user_score DESC LIMIT 10"
     fields, fetch_data = db.selectTableData(sql)
 
     # 定义表结构的列表
@@ -127,20 +127,20 @@ def query():
     action = flask_request.form['action']
     json_data = {}
 
-    print('ip:', flask_request.remote_addr)
-    print('aaa')
-    print('user_agent:', flask_request.user_agent.string)
-
     if action == 'add':
         user_name = flask_request.form['user_name']
         user_score = int(flask_request.form['user_score'])
         now = time.strftime(r"%Y-%m-%d %H:%M:%S", time.localtime())
+        user_ip = flask_request.remote_addr
+        user_agent = flask_request.user_agent.string
 
         db = Db()
 
         # 拼接sql语句
-        sql = "INSERT INTO \"main\".\"bs_2048_server_rankdata\" (\"user_name\", \"user_score\", \"created_time\") VALUES('" + \
-            user_name + "', '" + str(user_score) + "', '" + now + "')"
+        sql = "INSERT INTO \"main\".\"bs_2048_server_rankdata\" (\"user_name\", \"user_score\", \"created_time\", \"user_ip\", \"user_agent\") VALUES('" + \
+            user_name + "', '" + \
+            str(user_score) + "', '" + now + "', '" + \
+            user_ip + "', '" + user_agent + "')"
 
         # 最新的id
         lastrowid = db.insertTableData(sql)
@@ -158,7 +158,9 @@ def query():
             "user_name": user_name,
             "user_score": user_score,
             "rank_num": rank_num[0] + 1,
-            "created_time": now
+            "created_time": now,
+            "user_ip": user_ip,
+            "user_agent": user_agent
         }
 
         json_data.update({
