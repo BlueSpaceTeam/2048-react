@@ -25,8 +25,8 @@ const ResultLayout: React.FC<IResultLayout> = (props) => {
         : (
             <>
                 <h1 className="title">Game Over</h1>
-                <div className="p-score">Current Score：<span className="num cur">{props.score || 0}</span></div>
-                <div className="p-score best">Best Score：<span className="num">{ props.bestScore || 0}</span></div>
+                <div className="p-score">Current Score：<span className="num cur">{(props.score || 0).toLocaleString()}</span></div>
+                <div className="p-score best">Best Score：<span className="num">{(props.bestScore || 0).toLocaleString()}</span></div>
             </>
         )
 }
