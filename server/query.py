@@ -1,7 +1,7 @@
 '''
 Author: fantiga
 Date: 2022-06-02 18:05:59
-LastEditTime: 2022-06-22 17:26:13
+LastEditTime: 2022-06-22 23:10:04
 LastEditors: fantiga
 Description:
 FilePath: /2048-react/server/query.py
@@ -131,16 +131,16 @@ def query():
         user_name = flask_request.form['user_name']
         user_score = int(flask_request.form['user_score'])
         now = time.strftime(r"%Y-%m-%d %H:%M:%S", time.localtime())
-
-        print('ip', flask_request.remote_addr)
-
-        print('user_agent', flask_request.user_agent.string)
+        user_ip = flask_request.remote_addr
+        user_agent = flask_request.user_agent.string
 
         db = Db()
 
         # 拼接sql语句
-        sql = "INSERT INTO \"main\".\"bs_2048_server_rankdata\" (\"user_name\", \"user_score\", \"created_time\") VALUES('" + \
-            user_name + "', '" + str(user_score) + "', '" + now + "')"
+        sql = "INSERT INTO \"main\".\"bs_2048_server_rankdata\" (\"user_name\", \"user_score\", \"created_time\", \"user_ip\", \"user_agent\") VALUES('" + \
+            user_name + "', '" + \
+            str(user_score) + "', '" + now + "', '" + \
+            user_ip + "', '" + user_agent + "')"
 
         # 最新的id
         lastrowid = db.insertTableData(sql)
@@ -158,7 +158,9 @@ def query():
             "user_name": user_name,
             "user_score": user_score,
             "rank_num": rank_num[0] + 1,
-            "created_time": now
+            "created_time": now,
+            "user_ip": user_ip,
+            "user_agent": user_agent
         }
 
         json_data.update({
