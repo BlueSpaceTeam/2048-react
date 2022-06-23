@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-23 18:49:52
+ * @LastEditTime: 2022-06-23 19:11:22
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/pages/Game.tsx
@@ -154,7 +154,7 @@ const Game: React.FC<IGame> = (props) => {
 
 	// 从垂直于当前操作方向的方向来检查没有机会合并，game over的回调处理
 	const gameOverCallback: () => void = () => {
-		// console.log('游戏结束')
+		// 结束时间差计算
 		setTimeSpent(endTimeDiff())
 
 		const curScore: number = scores[scores.length - 1]
@@ -418,7 +418,7 @@ const Game: React.FC<IGame> = (props) => {
 	}
 	// 开始游戏
 	function startGame(): void {
-		// console.log('游戏开始')
+		// 开始时间差计算
 		startTimeDiff()
 		setHistory((oldHistory: IAHistoryOfSquares[]) => {
 			// 新历史集合
@@ -437,7 +437,7 @@ const Game: React.FC<IGame> = (props) => {
 
 	// 初始化游戏界面
 	useEffect(() => {
-		// console.log('游戏开始2')
+		// 开始时间差计算
 		startTimeDiff()
 		const setNewHistory: () => void = () => setHistory((oldHistory: IAHistoryOfSquares[]) => oldHistory.concat([{ squares: genNewNum(history[0].squares!) }]))
 
