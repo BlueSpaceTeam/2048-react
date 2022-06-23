@@ -1,10 +1,10 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-15 13:34:38
+ * @LastEditTime: 2022-06-23 18:47:49
  * @LastEditors: fantiga
  * @Description: 
- * @FilePath: /2048-react/client/src/components/ResultModal.tsx
+ * @FilePath: /2048-react/react/src/components/ResultModal.tsx
  */
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -23,6 +23,7 @@ interface IPropsResultModal {
     isShow: boolean // 是否展示
     bestScore: number // 最高分
     score: number // 当前分数
+    timeSpent: number  // 总耗时（毫秒）
     onRestart: () => void // 重新开始的方法
     onClose: () => void // 关闭弹窗
 }
@@ -96,7 +97,8 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
             formatFormUrlencoded({
                 action: 'add',
                 user_name: scorer,
-                user_score: props.score
+                user_score: props.score,
+                time_spent: props.timeSpent
             }),
         )
             .then(e => {

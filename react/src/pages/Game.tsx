@@ -1,7 +1,7 @@
 /*
  * @Author: Swan Cai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-22 22:29:43
+ * @LastEditTime: 2022-06-23 18:49:52
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/pages/Game.tsx
@@ -16,6 +16,7 @@ import Modal from '../components/Modal'
 import ResultModal from '../components/ResultModal'
 
 import { usePrevious } from '../utils/hooks'
+import { startTimeDiff, endTimeDiff } from '../utils/timer'
 
 // 引入声音模块
 import useSound from 'use-sound'
@@ -136,6 +137,8 @@ const Game: React.FC<IGame> = (props) => {
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{ squares: new Array(16).fill(0) }])
 	// 分数：[(上一步分数,)当前分数]
 	const [scores, setScores] = useState<number[]>([0])
+	// 总耗时（毫秒）
+	const [timeSpent, setTimeSpent] = useState<number>(0)
 	// 游戏是否结束
 	const [isOver, setIsOver] = useState<boolean>(false)
 	// 最高分
@@ -152,6 +155,8 @@ const Game: React.FC<IGame> = (props) => {
 	// 从垂直于当前操作方向的方向来检查没有机会合并，game over的回调处理
 	const gameOverCallback: () => void = () => {
 		// console.log('游戏结束')
+		setTimeSpent(endTimeDiff())
+
 		const curScore: number = scores[scores.length - 1]
 		if (curScore > preBestScore) {
 			setBestScore(curScore)
@@ -414,6 +419,7 @@ const Game: React.FC<IGame> = (props) => {
 	// 开始游戏
 	function startGame(): void {
 		// console.log('游戏开始')
+		startTimeDiff()
 		setHistory((oldHistory: IAHistoryOfSquares[]) => {
 			// 新历史集合
 			let newHistory: IAHistoryOfSquares[] = oldHistory.slice(0, 1)
@@ -432,9 +438,8 @@ const Game: React.FC<IGame> = (props) => {
 	// 初始化游戏界面
 	useEffect(() => {
 		// console.log('游戏开始2')
-		const setNewHistory: () => void = () => setHistory((oldHistory: IAHistoryOfSquares[]) => {
-			return oldHistory.concat([{ squares: genNewNum(history[0].squares!) }])
-		})
+		startTimeDiff()
+		const setNewHistory: () => void = () => setHistory((oldHistory: IAHistoryOfSquares[]) => oldHistory.concat([{ squares: genNewNum(history[0].squares!) }]))
 
 		const StorageHistoryStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || ''
 		const StorageScoresStr: string = localStorage.getItem(STORAGE_GAME_SCORES) || ''
@@ -467,6 +472,7 @@ const Game: React.FC<IGame> = (props) => {
 			<ResultModal
 				isShow={isOver}
 				score={scores[scores.length - 1]}
+				timeSpent={timeSpent}
 				bestScore={preBestScore}
 				onRestart={() => startGame()}
 				onClose={() => setIsOver(false)}

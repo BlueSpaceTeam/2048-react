@@ -6,7 +6,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 // 引入clean插件
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-// const { SourceMapDevToolPlugin } = require("webpack")
+// const { SourceMapDevToolPlugin } = require('webpack')
 
 const config = {
     // 指定打包模式：'none' | 'development' | 'production'
