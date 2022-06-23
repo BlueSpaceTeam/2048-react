@@ -38,7 +38,7 @@ const RankItem: React.FC<IPropRankItem> = (props) => {
         <li className="rank-item">
             <span className={positionClass.join(' ')}>{props.position || 0}</span>
             <span className="name">{props.name || '-'}</span>
-            <span className="score">{props.score || 0}</span>
+            <span className="score">{(props.score || 0).toLocaleString()}</span>
         </li>
     )
 }
