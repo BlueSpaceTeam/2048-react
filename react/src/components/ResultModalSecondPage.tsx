@@ -31,7 +31,7 @@ const ResultModalSecondPage: React.FC<IPropsResultModal> = (props) => {
             <div className="my-rank">
                 <span className="position blue">{props.myInfo.rank_num || 0}</span>
                 <span className="name">{props.myInfo.user_name || '-'}</span>
-                <span className="score">{props.myInfo.user_score || 0}</span>
+                <span className="score">{(props.myInfo.user_score || 0).toLocaleString()}</span>
                 <span className="flag blue">Yours</span>
             </div>
             <RankList list={props.list} isShort />
