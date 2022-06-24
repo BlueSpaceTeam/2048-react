@@ -4,7 +4,7 @@
 //  * @LastEditTime: 2022-06-24 15:01:21
 //  * @LastEditors: swancai
 //  * @Description: 
-//  * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\pages\Game.tsx
+//  * @FilePath: /2048-react/react/src/pages/Game.tsx
 //  */
 // import React, { useState, useEffect } from 'react'
 
