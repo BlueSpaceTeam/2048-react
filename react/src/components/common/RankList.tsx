@@ -1,17 +1,17 @@
 /*
  * @Author: swancai
  * @Date: 2022-06-06 14:48:00
- * @LastEditTime: 2022-06-24 11:20:00
+ * @LastEditTime: 2022-06-24 15:03:19
  * @LastEditors: swancai
  * @Description: 
- * @FilePath: /2048-react/src/components/RankList.tsx
+ * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\components\common\RankList.tsx
  */
 import React from 'react'
-import RankItem from './RankItem'
+import RankItem from '@components/common/RankItem'
 
-import { IRankItem } from '../../utils/constants'
+import { IRankItem } from '@utils/constants'
 
-import '../../scss/rankList.scss'
+import '@scss/rankList.scss'
 
 interface IRankList {
     isShort?: boolean // 展示短样式

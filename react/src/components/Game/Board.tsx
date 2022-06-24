@@ -1,13 +1,13 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-27 17:56:09
- * @LastEditors: fantiga
+ * @LastEditTime: 2022-06-24 15:04:34
+ * @LastEditors: swancai
  * @Description: 
- * @FilePath: /2048-react/src/components/Board.tsx
+ * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\components\Game\Board.tsx
  */
 import React from 'react'
-import Square from './Square'
+import Square from '@components/Game/Square'
 
 import {
 	MIN_DISTANCE_PC,
@@ -17,7 +17,7 @@ import {
 	DOWN,
 	UP,
 	Direction
-} from '../../utils/constants'
+} from '@utils/constants'
 interface IPropBoard {
 	squares: number[] // 方块集
 	onMove: (dir: Direction) => void // 处理移动结果

@@ -1,6 +1,16 @@
+/*
+ * @Author: swancai
+ * @Date: 2022-06-22 14:54:51
+ * @LastEditors: swancai
+ * @LastEditTime: 2022-06-24 15:02:16
+ * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\components\common\Loading.tsx
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by swancai 734665222@qq.com, All Rights Reserved. 
+ */
 import React from 'react'
 
-import '../../scss/loading.scss'
+import '@scss/loading.scss'
 
 interface ILoading {}
 

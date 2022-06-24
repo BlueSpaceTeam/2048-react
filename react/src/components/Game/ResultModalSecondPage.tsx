@@ -1,17 +1,17 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime:2022-06-06 15:49:00
+ * @LastEditTime: 2022-06-24 15:05:48
  * @LastEditors: swancai
  * @Description: 
- * @FilePath: /2048-react/src/components/ResultModalSecondPage.tsx
+ * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\components\Game\ResultModalSecondPage.tsx
  */
 import React from 'react'
 
-import RankList from '../common/RankList'
-import ResultLayout from './ResultLayout'
+import RankList from '@components/common/RankList'
+import ResultLayout from '@components/Game/ResultLayout'
 
-import { IRankItem } from '../../utils/constants'
+import { IRankItem } from '@utils/constants'
 
 interface IPropsResultModal {
     isSubmit: boolean // 是否提交记录者名称

@@ -1,33 +1,33 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-24 14:56:30
+ * @LastEditTime: 2022-06-24 15:01:21
  * @LastEditors: swancai
  * @Description: 
  * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\pages\Game.tsx
  */
 import React, { useState, useEffect } from 'react'
 
-import LogoButton from '../components/Game/LogoButton'
-import Score from '../components/Game/Score'
-import Board from '../components/Game/Board'
-import GameButton from '../components/Game/GameButton'
+import LogoButton from '@components/Game/LogoButton'
+import Score from '@components/Game/Score'
+import Board from '@components/Game/Board'
+import GameButton from '@components/Game/GameButton'
 
-import Portal from '../components/common/Portal'
-import ResultModal from '../components/Game/ResultModal'
+import Portal from '@components/common/Portal'
+import ResultModal from '@components/Game/ResultModal'
 
-import { usePrevious } from '../utils/hooks'
-import { startTimeDiff, endTimeDiff } from '../utils/timer'
+import { usePrevious } from '@utils/hooks'
+import { startTimeDiff, endTimeDiff } from '@utils/timer'
 
 import {
 	genNewNum,
 	checkPerpendicularDirPossibility,
 	getMoveResult
-} from '../utils/movingLogic'
+} from '@utils/movingLogic'
 
 // 引入声音模块
 import useSound from 'use-sound'
-import beepSfx from '../sfx/s1.mp3'
+import beepSfx from '@/sfx/s1.mp3'
 
 import {
 	Direction,
@@ -35,9 +35,9 @@ import {
 	STORAGE_GAME_HISTORY,
 	STORAGE_GAME_SCORES,
 	STORAGE_BEST_SCORE,
-} from '../utils/constants'
+} from '@utils/constants'
 
-import '../scss/game.scss'
+import '@scss/game.scss'
 
 
 interface IGame { }

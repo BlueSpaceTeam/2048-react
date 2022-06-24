@@ -1,24 +1,24 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-23 18:47:49
- * @LastEditors: fantiga
+ * @LastEditTime: 2022-06-24 15:05:26
+ * @LastEditors: swancai
  * @Description: 
- * @FilePath: /2048-react/react/src/components/ResultModal.tsx
+ * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\components\Game\ResultModal.tsx
  */
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios, { formatFormUrlencoded } from '../../utils/axios'
+import axios, { formatFormUrlencoded } from '@utils/axios'
 
-import Portal from '../common/Portal'
-import Loading from '../common/Loading'
-import ResultModalFirstPage from './ResultModalFirstPage'
-import ResultModalSecondPage from './ResultModalSecondPage'
+import Portal from '@components/common/Portal'
+import Loading from '@components/common/Loading'
+import ResultModalFirstPage from '@components/Game/ResultModalFirstPage'
+import ResultModalSecondPage from '@components/Game/ResultModalSecondPage'
 
 import { 
 	IRankItem,
   STORAGE_GAME_PLAYER
-} from '../../utils/constants'
+} from '@utils/constants'
 interface IPropsResultModal {
     isShow: boolean // 是否展示
     bestScore: number // 最高分

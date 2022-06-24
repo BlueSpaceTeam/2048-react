@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import {
 	STORAGE_GAME_HISTORY,
 	STORAGE_GAME_SCORES,
-} from '../../utils/constants'
+} from '@utils/constants'
 
 interface ILogoButton {}
 

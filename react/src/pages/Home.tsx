@@ -13,9 +13,9 @@ import { useNavigate } from 'react-router-dom'
 import {
     STORAGE_GAME_HISTORY,
     IAHistoryOfSquares
-} from '../utils/constants'
+} from '@utils/constants'
 
-import '../scss/home.scss'
+import '@scss/home.scss'
 
 interface IHome { }
 

@@ -8,7 +8,7 @@
  */
 import React from 'react'
 
-import ResultLayout from './ResultLayout'
+import ResultLayout from '@components/Game/ResultLayout'
 
 interface IPropsResultModal {
     inputVal: string // 名字字符串

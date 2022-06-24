@@ -7,15 +7,15 @@
  * @FilePath: /2048-react/src/pages/Ranking.tsx
  */
 import React, { useEffect, useState } from 'react'
-import axios, { formatFormUrlencoded } from '../utils/axios'
+import axios, { formatFormUrlencoded } from '@utils/axios'
 
-import RankList from '../components/common/RankList'
-import Portal from '../components/common/Portal'
-import Loading from '../components/common/Loading'
+import RankList from '@components/common/RankList'
+import Portal from '@components/common/Portal'
+import Loading from '@components/common/Loading'
 
-import { IRankItem } from '../utils/constants'
+import { IRankItem } from '@utils/constants'
 
-import '../scss/ranking.scss'
+import '@scss/ranking.scss'
 
 interface IRanking {}
 
