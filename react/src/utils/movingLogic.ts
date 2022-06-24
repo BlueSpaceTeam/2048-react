@@ -10,7 +10,7 @@ import {
 	DOWN,
 	UP,
 	Direction,
-} from '../utils/constants'
+} from '@utils/constants'
 
 // 当前格对应一元数组的下标 —— 函数式编程
 const getSquareIdx: (row: number, col: number) => number = (row, col) => (row - 1) * MATRIX_COL + (col - 1)
@@ -18,8 +18,9 @@ const getSquareIdx: (row: number, col: number) => number = (row, col) => (row - 
 const getRow: (col: number, squareIdx: number) => number = (col, squareIdx) => (squareIdx - col + 1) / MATRIX_COL + 1
 // 获取列号
 const getCol: (row: number, squareIdx: number) => number = (row, squareIdx) => squareIdx + 1 - (row - 1) * MATRIX_COL
+
 // 随机选一为0的square随机设置2或4
-export function genNewNum(squares: number[]): number[] {
+export function genNewNum1(squares: number[]): number[] {
 	const arr = squares.slice()
 	const emptyIdxs: number[] = []
 	for (let i: number = 0; i < arr.length; i++) {
@@ -36,6 +37,30 @@ export function genNewNum(squares: number[]): number[] {
 	arr[idx] = Math.round(Math.random()) ? 2 : 4
 	return arr
 }
+
+// 随机生产的数字的值和位置
+interface IGenNewNumObj {
+	idx: number // 随机生产的块数组元素的下标
+	arr: number[] // 新的方块数组
+}
+export function genNewNum(squares: number[]): IGenNewNumObj {
+	const arr = squares.slice()
+	const emptyIdxs: number[] = []
+	for (let i: number = 0; i < arr.length; i++) {
+		if (!arr[i]) {
+			emptyIdxs.push(i)
+		}
+	}
+	if (!emptyIdxs.length) { // 返回自身，避免用空数组覆盖原来结果
+		return { idx: -1, arr }
+	}
+	// 从1到coutZero里随机生成一个位置
+	const idx = emptyIdxs[Math.round(Math.random() * (emptyIdxs.length - 1))]
+	// 随机设置2或4
+	arr[idx] = Math.round(Math.random()) ? 2 : 4
+	return { idx, arr }
+}
+
 // 检查垂直于用户移动方向的方向上是否存在合并或者移动的可能性
 export function checkPerpendicularDirPossibility(direction: Direction, squares: number[]): boolean {
 	let possibility = false
@@ -104,7 +129,7 @@ export function checkPerpendicularDirPossibility(direction: Direction, squares: 
  * @description: 处理移动事件的方块移动合并结果及得分
  * @param {Direction} direction 当前移动方向
  * @param {number} originArr 上一步移动结果
- * @return {*} 返回结果及本次得分
+ * @return {arr, scoreDelta} 返回结果及本次得分
  */
 export function getMoveResult (direction: Direction, originArr: number[]) {
 	let arr: number[] = originArr.slice()
@@ -291,7 +316,7 @@ export function getMoveResult (direction: Direction, originArr: number[]) {
 		}
 	}
 	return {
+		arr,
 		scoreDelta,
-		arr
 	}
 }

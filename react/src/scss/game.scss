@@ -103,6 +103,10 @@
         transition   : all .1s;
         border-radius: inherit;
 
+        &.delay {
+            transition   : all .1s .1s;
+        }
+
         &.show {
             transform: scale(1);
         }

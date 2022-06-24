@@ -1,7 +1,7 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-24 15:01:21
+ * @LastEditTime: 2022-06-24 16:38:11
  * @LastEditors: swancai
  * @Description: 
  * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\pages\Game.tsx
@@ -51,6 +51,8 @@ const initialHistory = { squares: new Array(16).fill(0) }
 const Game: React.FC<IGame> = (props) => {
 	// 游戏移动记录：[初始记录,(上一步记录,)当前记录]。只记录最近操作的2步，故包括初始数组最多长度为3
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([initialHistory])
+	// 随机生产的数字所处数组的下标
+	const [randomNumIdx, setRandomNumIdx] = useState<number>(-1)
 	// 分数：[(上一步分数,)当前分数]
 	const [scores, setScores] = useState<number[]>([0])
 	// 总耗时（毫秒）
@@ -81,7 +83,6 @@ const Game: React.FC<IGame> = (props) => {
 		setIsOver(true)
 		localStorage.removeItem(STORAGE_GAME_HISTORY)
 		localStorage.removeItem(STORAGE_GAME_SCORES)
-		// console.log('================ Game Over')
 	}
 
 	/**
@@ -92,8 +93,8 @@ const Game: React.FC<IGame> = (props) => {
 		if (isOver) return
 
 		const currentHistory: IAHistoryOfSquares = history[history.length - 1]
+		// 生成移动结果及得分
 		const { arr = [], scoreDelta = 0 } = getMoveResult(direction, currentHistory.squares!.slice())
-		// console.log(currentHistory.squares, arr)
 		// 如果完全相同，则不发生变化
 		if (JSON.stringify(currentHistory.squares) === JSON.stringify(arr)) {
 			// 从垂直于当前操作方向的方向来检查是否仍然有机会合并，如果没有则认为游戏结束
@@ -111,7 +112,16 @@ const Game: React.FC<IGame> = (props) => {
 
 		// 播放音效
 		play()
-		setHistory(history.concat([{ squares: arr }]))
+		// 随机生成方块并替换当前历史
+		const { idx: idxNew, arr: squareNew } = genNewNum(arr)
+		const newHistory: IAHistoryOfSquares[] = history.slice()
+		// 只保留初始记录 和 最近2次的操作记录
+		if (newHistory.length > 3) {
+			newHistory.splice(1, 1)
+		} 
+		newHistory.splice(newHistory.length, 1, { squares: squareNew })
+		setHistory(newHistory)
+		setRandomNumIdx(idxNew)
 		// 计算分数
 		if (scoreDelta) {
 			setScores((scores: string | any[]) => {
@@ -120,28 +130,14 @@ const Game: React.FC<IGame> = (props) => {
 				return [prevScore, nowScore]
 			})
 		}
-		/**
-		 * 逻辑：为避免捕获过时的属性，setSquares需要异步函数获取
-		 * 优化：为体现先合并后随机顺序的逻辑及动画，避免视觉混淆，使用setTimeout。经人工调试不生硬，90ms比较符合视觉的展示
-		 **/
-		setTimeout(() => setHistory((oldHistory: IAHistoryOfSquares[]) => {
-			// 当前历史的索引
-			const curHistoryIdx: number = oldHistory.length - 1
-			// 新历史集合
-			let newHistory: IAHistoryOfSquares[] = oldHistory.slice()
-			// 随机生成方块并替换当前历史
-			newHistory.splice(curHistoryIdx, 1, { squares: genNewNum(newHistory[curHistoryIdx].squares!) })
-			// 只保留初始记录 和 最近2次的操作记录
-			if (newHistory.length > 3) {
-				newHistory.splice(1, 1)
-			}
-			// console.log(`History`, newHistory)
-			return newHistory
-		}), 90)
 	}
 
 	// 历史记录重新设置
-	const resetHistory: () => void = () => setHistory([initialHistory, { squares: genNewNum(initialHistory.squares) }])
+	const resetHistory: () => void = () => {
+		const { idx: idxNew, arr: squareNew } = genNewNum(initialHistory.squares)
+		setHistory([initialHistory, { squares: squareNew }])
+		setRandomNumIdx(idxNew)
+	}
 
 	// 开始游戏
 	const startGame: () => void = () => {
@@ -158,23 +154,30 @@ const Game: React.FC<IGame> = (props) => {
 		}
 	}
 
-	// 初始化游戏界面
+	// 初始化游戏界面-board及计时
 	useEffect(() => {
 		// 开始时间差计算
 		startTimeDiff()
 		const StorageHistoryStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || ''
-		const StorageScoresStr: string = localStorage.getItem(STORAGE_GAME_SCORES) || ''
-		if (StorageHistoryStr && StorageScoresStr) {
+		if (StorageHistoryStr) {
 			const SHistory: IAHistoryOfSquares[] = JSON.parse(StorageHistoryStr)
-			const SScores: number[] = JSON.parse(StorageScoresStr)
 			if (SHistory.length > 1) {
 				setHistory(SHistory)
-				setScores(SScores)
 			} else {
 				resetHistory()
 			}
 		} else {
 			resetHistory()
+		}
+	}, [])
+	// 初始化游戏界面-分数
+	useEffect(() => {
+		const StorageScoresStr: string = localStorage.getItem(STORAGE_GAME_SCORES) || ''
+		if (StorageScoresStr) {
+			const SScores: number[] = JSON.parse(StorageScoresStr)
+			if (SScores.length > 1) {
+				setScores(SScores)
+			}
 		}
 	}, [])
 
@@ -215,6 +218,7 @@ const Game: React.FC<IGame> = (props) => {
 			<main>
 				<p className="desc">Join the numbers and get to the 2048 tile!</p>
 				<Board
+					randomNumIdx={randomNumIdx}
 					squares={history[history.length - 1].squares}
 					onMove={(dir: Direction) => handleMove(dir)}
 				/>

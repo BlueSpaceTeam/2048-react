@@ -1,10 +1,10 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-24 15:55:29
+ * @LastEditTime: 2022-05-26 08:52:00
  * @LastEditors: swancai
  * @Description: 
- * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\components\Game\Square.tsx
+ * @FilePath: /2048-react/src/components/Square.tsx
  */
 import React from 'react'
 
@@ -12,7 +12,6 @@ import React from 'react'
 
 interface IPropSquare {
     num: number // 当前数值
-    isDelayShow: boolean // 是否延迟展示
 }
 
 /*
@@ -36,10 +35,8 @@ const Square: React.FC<IPropSquare> = (props) => {
         const colorClass:string = `color-${Math.log(props.num) / Math.log(2) % 11}`
 
         numClass.push('show', fsClass, colorClass)
-        if (props.isDelayShow) {
-            numClass.push('delay')
-        }
     }
+    
     return (
         <div className="square">
           <div className={numClass.join(' ')}>{props.num}</div>

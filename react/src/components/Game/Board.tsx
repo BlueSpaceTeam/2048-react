@@ -1,7 +1,7 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-24 15:04:34
+ * @LastEditTime: 2022-06-24 15:47:37
  * @LastEditors: swancai
  * @Description: 
  * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\components\Game\Board.tsx
@@ -19,18 +19,19 @@ import {
 	Direction
 } from '@utils/constants'
 interface IPropBoard {
+	randomNumIdx: number // 随机数字的下标
 	squares: number[] // 方块集
 	onMove: (dir: Direction) => void // 处理移动结果
 }
 const Board: React.FC<IPropBoard> = (props) => {
-	const { squares, onMove } = props
+	const { randomNumIdx, squares, onMove } = props
 	let coordinate = {
 		X: 0,
 		Y: 0
 	}
 
 	const SquaresUI: JSX.Element[] = squares.map((n: number, idx: React.Key | null | undefined) => {
-		return <Square num={n} key={idx} />
+		return <Square num={n} key={idx} isDelayShow={idx == randomNumIdx} />
 	})
 	// 获取方向
 	function getDirection(curX: number, curY: number, minDistance: number): Direction | null {
