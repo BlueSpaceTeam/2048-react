@@ -1,8 +1,8 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-14 11:47:12
- * @LastEditors: fantiga
+ * @LastEditTime: 2022-06-24 11:22:39
+ * @LastEditors: swancai
  * @Description: 
  * @FilePath: /2048-react/src/pages/Ranking.tsx
  */
@@ -17,9 +17,7 @@ import { IRankItem } from '../utils/constants'
 
 import '../scss/ranking.scss'
 
-interface IRanking {
-    // location: any
-}
+interface IRanking {}
 
 /* *
  * 排行榜
