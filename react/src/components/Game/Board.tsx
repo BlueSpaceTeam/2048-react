@@ -1,5 +1,5 @@
 /*
- * @Author: Swan Cai
+ * @Author: swancai
  * @Date: 2022-05-24 16:58:00
  * @LastEditTime: 2022-05-27 17:56:09
  * @LastEditors: fantiga
@@ -17,7 +17,7 @@ import {
 	DOWN,
 	UP,
 	Direction
-} from '../utils/constants'
+} from '../../utils/constants'
 interface IPropBoard {
 	squares: number[] // 方块集
 	onMove: (dir: Direction) => void // 处理移动结果

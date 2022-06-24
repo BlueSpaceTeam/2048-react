@@ -1,17 +1,17 @@
 /*
- * @Author: Swan Cai
+ * @Author: swancai
  * @Date: 2022-05-24 16:58:00
  * @LastEditTime:2022-06-06 15:49:00
- * @LastEditors: Swan Cai
+ * @LastEditors: swancai
  * @Description: 
  * @FilePath: /2048-react/src/components/ResultModalSecondPage.tsx
  */
 import React from 'react'
 
-import RankList from './RankList'
+import RankList from '../common/RankList'
 import ResultLayout from './ResultLayout'
 
-import { IRankItem } from '../utils/constants'
+import { IRankItem } from '../../utils/constants'
 
 interface IPropsResultModal {
     isSubmit: boolean // 是否提交记录者名称

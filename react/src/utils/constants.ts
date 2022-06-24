@@ -1,8 +1,8 @@
 /*
- * @Author: Swan Cai
+ * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-05-24 16:58:00
- * @LastEditors: Swan Cai
+ * @LastEditTime: 2022-06-24 10:01:05
+ * @LastEditors: swancai 734665222@qq.com
  * @Description: 
  * @FilePath: /2048-react/src/constants.ts
  */
@@ -30,6 +30,7 @@ export interface IRankItem {
     user_score: number // 得分
 }
 
+// 历史数据里方块的格式要求 
 export interface IAHistoryOfSquares {
 	squares: number[]
 }
@@ -40,5 +41,5 @@ export const STORAGE_GAME_HISTORY = 'game_history'
 export const STORAGE_GAME_SCORES = 'game_scores'
 // 记录曾提交过的名字
 export const STORAGE_GAME_PLAYER = 'game_player'
-// 游戏最高分
+// 游戏最高分- 因项目已上线。这个已产生历史数据，不再改为下划线方式命名
 export const STORAGE_BEST_SCORE = 'bestScore'

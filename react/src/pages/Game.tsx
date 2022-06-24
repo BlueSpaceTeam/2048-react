@@ -1,19 +1,20 @@
 /*
- * @Author: Swan Cai
+ * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-23 19:11:22
- * @LastEditors: fantiga
+ * @LastEditTime: 2022-06-24 10:55:04
+ * @LastEditors: swancai 734665222@qq.com
  * @Description: 
  * @FilePath: /2048-react/react/src/pages/Game.tsx
  */
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 
-import Score from '../components/Score'
-import Board from '../components/Board'
-import GameButton from '../components/GameButton'
-import Modal from '../components/Modal'
-import ResultModal from '../components/ResultModal'
+import LogoButton from '../components/Game/LogoButton'
+import Score from '../components/Game/Score'
+import Board from '../components/Game/Board'
+import GameButton from '../components/Game/GameButton'
+
+import Portal from '../components/common/Portal'
+import ResultModal from '../components/Game/ResultModal'
 
 import { usePrevious } from '../utils/hooks'
 import { startTimeDiff, endTimeDiff } from '../utils/timer'
@@ -128,13 +129,15 @@ function checkPerpendicularDirPossibility(direction: Direction, squares: number[
 
 interface IGame { }
 
+// 初始化的方块历史
+const initialHistory = { squares: new Array(16).fill(0) }
+
 /**
  * 游戏
  */
 const Game: React.FC<IGame> = (props) => {
-	let navigate = useNavigate()
 	// 游戏移动记录：[初始记录,(上一步记录,)当前记录]。只记录最近操作的2步，故包括初始数组最多长度为3
-	const [history, setHistory] = useState<IAHistoryOfSquares[]>([{ squares: new Array(16).fill(0) }])
+	const [history, setHistory] = useState<IAHistoryOfSquares[]>([initialHistory])
 	// 分数：[(上一步分数,)当前分数]
 	const [scores, setScores] = useState<number[]>([0])
 	// 总耗时（毫秒）
@@ -178,6 +181,7 @@ const Game: React.FC<IGame> = (props) => {
 		const currentHistory: IAHistoryOfSquares = history[history.length - 1]
 		const arr: number[] = currentHistory.squares!.slice()
 		let scoreDelta = 0 // 本轮新增的得分
+		// TODO: 抽成类似vue的mixins.js
 		switch (direction) {
 			case UP: {
 				if (MATRIX_ROW > 1) {
@@ -406,29 +410,18 @@ const Game: React.FC<IGame> = (props) => {
 		}), 90)
 	}
 
-	// 返回首页
-	function backHome() {
-		localStorage.removeItem(STORAGE_GAME_HISTORY)
-		localStorage.removeItem(STORAGE_GAME_SCORES)
-		if (window.history && window.history.length > 1) {
-			navigate(-1)
-		} else {
-			navigate('/', { replace: true })
-		}
-	}
+	// 历史记录重新设置
+	const resetHistory: () => void = () => setHistory([initialHistory, { squares: genNewNum(initialHistory.squares) }])
+
 	// 开始游戏
-	function startGame(): void {
+	const startGame: () => void = () => {
 		// 开始时间差计算
 		startTimeDiff()
-		setHistory((oldHistory: IAHistoryOfSquares[]) => {
-			// 新历史集合
-			let newHistory: IAHistoryOfSquares[] = oldHistory.slice(0, 1)
-			return newHistory.concat([{ squares: genNewNum(history[0].squares!) }])
-		})
+		resetHistory()
 		setScores([0])
 	}
 	// 撤销上一步
-	function undoGame(): void {
+	const undoGame: () => void = () => {
 		if (history.length > 2) { // 除了初始数组外，存在上一步方可撤销
 			setHistory((oldHistory: IAHistoryOfSquares[]) => oldHistory.slice(0, oldHistory.length - 1))
 			setScores((scores: number[]) => scores.slice(0, 1))
@@ -439,8 +432,6 @@ const Game: React.FC<IGame> = (props) => {
 	useEffect(() => {
 		// 开始时间差计算
 		startTimeDiff()
-		const setNewHistory: () => void = () => setHistory((oldHistory: IAHistoryOfSquares[]) => oldHistory.concat([{ squares: genNewNum(history[0].squares!) }]))
-
 		const StorageHistoryStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || ''
 		const StorageScoresStr: string = localStorage.getItem(STORAGE_GAME_SCORES) || ''
 		if (StorageHistoryStr && StorageScoresStr) {
@@ -450,10 +441,10 @@ const Game: React.FC<IGame> = (props) => {
 				setHistory(SHistory)
 				setScores(SScores)
 			} else {
-				setNewHistory()
+				resetHistory()
 			}
 		} else {
-			setNewHistory()
+			resetHistory()
 		}
 	}, [])
 
@@ -468,7 +459,7 @@ const Game: React.FC<IGame> = (props) => {
 
 	// 控制Modal
 	const ModalUI: JSX.Element | null = isOver ? (
-		<Modal>
+		<Portal>
 			<ResultModal
 				isShow={isOver}
 				score={scores[scores.length - 1]}
@@ -477,14 +468,14 @@ const Game: React.FC<IGame> = (props) => {
 				onRestart={() => startGame()}
 				onClose={() => setIsOver(false)}
 			/>
-		</Modal>
+		</Portal>
 	)
 		: null
 
 	return (
 		<div className="game">
 			<header>
-				<button className="logo" onClick={() => backHome()}>2048</button>
+				<LogoButton />
 				<Score name="SCORE" num={scores[scores.length - 1]} />
 				<Score name="YOUR BEST" num={bestScore} />
 				<GameButton name="NEW" onClick={() => startGame()} />

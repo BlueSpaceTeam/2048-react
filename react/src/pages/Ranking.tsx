@@ -1,5 +1,5 @@
 /*
- * @Author: Swan Cai
+ * @Author: swancai
  * @Date: 2022-05-24 16:58:00
  * @LastEditTime: 2022-06-14 11:47:12
  * @LastEditors: fantiga
@@ -9,9 +9,9 @@
 import React, { useEffect, useState } from 'react'
 import axios, { formatFormUrlencoded } from '../utils/axios'
 
-import RankList from '../components/RankList'
-import Modal from '../components/Modal'
-import Loading from '../components/Loading'
+import RankList from '../components/common/RankList'
+import Portal from '../components/common/Portal'
+import Loading from '../components/common/Loading'
 
 import { IRankItem } from '../utils/constants'
 
@@ -69,9 +69,9 @@ const Ranking: React.FC<IRanking> = (props) => {
             {
                 isLoading 
                 ? (
-                    <Modal>
+                    <Portal>
                         <Loading />
-                    </Modal>
+                    </Portal>
                 )
                 : ResUI
             }

@@ -1,5 +1,5 @@
 /*
- * @Author: Swan Cai
+ * @Author: swancai
  * @Date: 2022-05-24 16:58:00
  * @LastEditTime: 2022-06-23 18:47:49
  * @LastEditors: fantiga
@@ -8,17 +8,17 @@
  */
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios, { formatFormUrlencoded } from '../utils/axios'
+import axios, { formatFormUrlencoded } from '../../utils/axios'
 
-import Modal from '../components/Modal'
-import Loading from '../components/Loading'
+import Portal from '../common/Portal'
+import Loading from '../common/Loading'
 import ResultModalFirstPage from './ResultModalFirstPage'
 import ResultModalSecondPage from './ResultModalSecondPage'
 
 import { 
 	IRankItem,
   STORAGE_GAME_PLAYER
-} from '../utils/constants'
+} from '../../utils/constants'
 interface IPropsResultModal {
     isShow: boolean // 是否展示
     bestScore: number // 最高分
@@ -108,7 +108,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
                     setIsLoading(false)
                     setIsSubmit(true)
                     setPageNum(2)
-										localStorage.setItem(STORAGE_GAME_PLAYER, scorer)
+					localStorage.setItem(STORAGE_GAME_PLAYER, scorer)
                 } else {
                     throw new Error('response is error')
                 }
@@ -126,16 +126,16 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
                 {
                     isLoading
                         ? (
-                            <Modal>
+                            <Portal>
                                 <Loading />
-                            </Modal>
+                            </Portal>
                         )
                         : null
                 }
                 {
                     pageNum === 1
                         ? <ResultModalFirstPage
-														inputVal={scorer}
+							inputVal={scorer}
                             score={props.score}
                             bestScore={props.bestScore}
                             isError={Boolean(error)}

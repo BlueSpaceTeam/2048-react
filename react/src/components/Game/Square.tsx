@@ -1,8 +1,8 @@
 /*
- * @Author: Swan Cai
+ * @Author: swancai
  * @Date: 2022-05-24 16:58:00
  * @LastEditTime: 2022-05-26 08:52:00
- * @LastEditors: Swan Cai
+ * @LastEditors: swancai
  * @Description: 
  * @FilePath: /2048-react/src/components/Square.tsx
  */

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import '../scss/loading.scss'
+import '../../scss/loading.scss'
 
 interface ILoading {}
 
