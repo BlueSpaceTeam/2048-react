@@ -2,7 +2,7 @@
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
  * @LastEditTime: 2022-06-24 10:01:05
- * @LastEditors: swancai 734665222@qq.com
+ * @LastEditors: swancai
  * @Description: 
  * @FilePath: /2048-react/src/constants.ts
  */

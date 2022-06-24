@@ -1,10 +1,10 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-24 12:05:00
- * @LastEditors: swancai 734665222@qq.com
+ * @LastEditTime: 2022-06-24 14:56:30
+ * @LastEditors: swancai
  * @Description: 
- * @FilePath: /2048-react/react/src/pages/Game.tsx
+ * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\pages\Game.tsx
  */
 import React, { useState, useEffect } from 'react'
 

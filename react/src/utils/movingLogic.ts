@@ -1,6 +1,6 @@
 /*
  * @Author: swancai
- * @LastEditors: swancai 734665222@qq.com
+ * @LastEditors: swancai
  */
 import {
 	MATRIX_ROW,

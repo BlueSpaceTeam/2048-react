@@ -148,12 +148,6 @@ const config = {
     // 设置哪些文件可以用于引用模块
     resolve: {
         extensions: ['', '.js', '.jsx', '.ts', '.tsx', '.webpack.js', '.web.js'],
-        alias: {
-            '@':  path.resolve(__dirname, './src'),
-            '@components':  path.resolve(__dirname, './src/components'),
-            '@scss':  path.resolve(__dirname, './src/scss'),
-            '@utils':  path.resolve(__dirname, './src/utils'),
-        }
     },
     // 配置webpack插件
     plugins: [
