@@ -1,7 +1,7 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-24 17:06:56
+ * @LastEditTime: 2022-06-25 14:58:50
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/pages/Game.tsx
@@ -132,20 +132,33 @@ const Game: React.FC<IGame> = (props) => {
 		}
 	}
 
-	// 历史记录重新设置
+
 	const resetHistory: () => void = () => {
+		// 生成新数字
 		const { idx: idxNew, arr: squareNew } = genNewNum(initialHistory.squares);
+		// 设置历史记录
 		setHistory([initialHistory, { squares: squareNew }]);
 		setRandomNumIdx(idxNew);
 	};
 
-	// 开始游戏
-	const startGame: () => void = () => {
+	/**
+	 * @name: startGame
+	 * @description: 开始游戏的基础方法
+	 * @param {IAHistoryOfSquares} SHistory
+	 * @return {*}
+	 */
+	const startGame = (SHistory?: IAHistoryOfSquares[]): void => {
 		// 开始时间差计算
 		startTimeDiff();
-		resetHistory();
-		setScores([0]);
+
+		if (SHistory && SHistory.length > 1) {
+			setHistory(SHistory);
+		} else {
+			resetHistory();
+			setScores([0]);
+		}
 	};
+
 	// 撤销上一步
 	const undoGame: () => void = () => {
 		if (history.length > 2) { // 除了初始数组外，存在上一步方可撤销
@@ -156,20 +169,15 @@ const Game: React.FC<IGame> = (props) => {
 
 	// 初始化游戏界面-board及计时
 	useEffect(() => {
-		// 开始时间差计算
-		startTimeDiff();
 		const StorageHistoryStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || '';
 		if (StorageHistoryStr) {
 			const SHistory: IAHistoryOfSquares[] = JSON.parse(StorageHistoryStr);
-			if (SHistory.length > 1) {
-				setHistory(SHistory);
-			} else {
-				resetHistory();
-			}
+			startGame(SHistory);
 		} else {
 			resetHistory();
 		}
 	}, []);
+
 	// 初始化游戏界面-分数
 	useEffect(() => {
 		const StorageScoresStr: string = localStorage.getItem(STORAGE_GAME_SCORES) || '';
