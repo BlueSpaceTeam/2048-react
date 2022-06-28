@@ -1,12 +1,14 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-24 15:05:48
- * @LastEditors: swancai
+ * @LastEditTime: 2022-06-28 11:54:15
+ * @LastEditors: fantiga
  * @Description: 
- * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\components\Game\ResultModalSecondPage.tsx
+ * @FilePath: /2048-react/react/src/components/Game/ResultModalSecondPage.tsx
  */
 import React from 'react'
+
+import { useTranslation } from 'react-i18next';
 
 import RankList from '@components/common/RankList'
 import ResultLayout from '@components/Game/ResultLayout'
@@ -26,6 +28,7 @@ interface IPropsResultModal {
  * modal第一页内容
  **/ 
 const ResultModalSecondPage: React.FC<IPropsResultModal> = (props) => {
+    const { t, i18n } = useTranslation();
     const RankUI: JSX.Element = (
         <>
             <div className="my-rank">
@@ -44,8 +47,8 @@ const ResultModalSecondPage: React.FC<IPropsResultModal> = (props) => {
                     ? RankUI
                     : <ResultLayout score={props.score} bestScore={props.bestScore} />
             }
-            <button className="btn btn-restart" onClick={() => props.onClose('restart')}>Play Again</button>
-            <button className="btn btn-home" onClick={() => props.onClose('home')}>Home</button>
+            <button className="btn btn-restart" onClick={() => props.onClose('restart')}>{t('Play Again')}</button>
+            <button className="btn btn-home" onClick={() => props.onClose('home')}>{t('Home')}</button>
         </>   
     )
 }

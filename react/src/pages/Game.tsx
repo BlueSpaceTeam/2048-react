@@ -1,12 +1,14 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-25 14:58:50
+ * @LastEditTime: 2022-06-28 11:20:43
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/pages/Game.tsx
  */
 import React, { useState, useEffect } from 'react';
+
+import { useTranslation } from 'react-i18next';
 
 import LogoButton from '@components/Game/LogoButton';
 import Score from '@components/Game/Score';
@@ -42,16 +44,17 @@ import '@scss/game.scss';
 interface IGame { }
 
 // 初始化的方块历史
-const initialHistory = { 
+const initialHistory = {
 	squares: new Array(16).fill(0),
 	score: 0,
-	randomNumIdx: -1 
+	randomNumIdx: -1
 };
 
 /**
  * 游戏
  */
 const Game: React.FC<IGame> = (props) => {
+	const { t, i18n } = useTranslation();
 	// 游戏移动记录：[初始记录,(上一步记录,)当前记录]。只记录最近操作的2步，故包括初始数组最多长度为3
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([initialHistory]);
 	// 总耗时（毫秒）
@@ -117,10 +120,10 @@ const Game: React.FC<IGame> = (props) => {
 		if (newHistory.length > 3) {
 			newHistory.splice(1, 1);
 		}
-		newHistory.splice(newHistory.length, 1, { 
+		newHistory.splice(newHistory.length, 1, {
 			squares: squareNew,
 			score: newHistory[newHistory.length - 1].score + scoreDelta,
-			randomNumIdx: idxNew 
+			randomNumIdx: idxNew
 		});
 
 		setHistory(newHistory);
@@ -131,7 +134,7 @@ const Game: React.FC<IGame> = (props) => {
 		// 生成新数字
 		const { idx: idxNew, arr: squareNew } = genNewNum(initialHistory.squares);
 		// 设置历史记录
-		setHistory([initialHistory, { 
+		setHistory([initialHistory, {
 			squares: squareNew,
 			score: 0,
 			randomNumIdx: idxNew
@@ -204,7 +207,7 @@ const Game: React.FC<IGame> = (props) => {
 				<GameButton name={isMuted ? 'MUTED' : 'UNMUTED'} onClick={() => setMuted(!isMuted)} />
 			</header>
 			<main>
-				<p className="desc">Join the numbers and get to the 2048 tile!</p>
+				<p className="desc">{t('Join the numbers and get to the 2048 tile!')}</p>
 				<Board
 					randomNumIdx={history[history.length - 1].randomNumIdx}
 					squares={history[history.length - 1].squares}

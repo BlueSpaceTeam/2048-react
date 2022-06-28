@@ -1,21 +1,22 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-22 22:14:52
+ * @LastEditTime: 2022-06-28 11:32:13
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/pages/Home.tsx
  */
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
 
 import {
     STORAGE_GAME_HISTORY,
     IAHistoryOfSquares
-} from '@utils/constants'
+} from '@utils/constants';
 
-import '@scss/home.scss'
+import '@scss/home.scss';
 
 interface IHome { }
 
@@ -23,17 +24,18 @@ interface IHome { }
  * 首页
  * */
 const Home: React.FC<IHome> = (props) => {
-    let navigate = useNavigate()
+    const { t, i18n } = useTranslation();
+    let navigate = useNavigate();
 
     useEffect(() => {
-        const StorageStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || ''
+        const StorageStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || '';
         if (StorageStr) {
-            const SHistory: IAHistoryOfSquares[] = JSON.parse(StorageStr)
+            const SHistory: IAHistoryOfSquares[] = JSON.parse(StorageStr);
             if (SHistory.length > 1) {
-                navigate('/game')
+                navigate('/game');
             }
         }
-    }, [])
+    }, []);
 
     return (
         <div className="home">
@@ -49,10 +51,10 @@ const Home: React.FC<IHome> = (props) => {
 
             <ul>
                 <li>
-                    <button className="btn" onClick={() => navigate('/game')}>PLAY</button>
+                    <button className="btn" onClick={() => navigate('/game')}>{t('play').toUpperCase()}</button>
                 </li>
                 <li>
-                    <button className="btn" onClick={() => navigate('/ranking')}>RANKING</button>
+                    <button className="btn" onClick={() => navigate('/ranking')}>{t('ranking').toUpperCase()}</button>
                 </li>
             </ul>
 
@@ -62,7 +64,7 @@ const Home: React.FC<IHome> = (props) => {
                 <p>Written in React18 / Typescript / Python3 / SQLite3.</p>
             </footer>
         </div>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

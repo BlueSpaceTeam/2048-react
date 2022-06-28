@@ -1,7 +1,7 @@
 /*
  * @Author: fantiga
  * @Date: 2022-06-23 16:16:50
- * @LastEditTime: 2022-06-24 12:18:30
+ * @LastEditTime: 2022-06-28 10:39:47
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/utils/timer.tsx
@@ -31,10 +31,10 @@ export const startTimeDiff = (): void => sessionStorage.setItem('timer', String(
 /**
  * @name: endTimeDiff
  * @description: 结束时间差计算。生成一个当前时间的Unix时间戳，并与sessionStorage中已有的时间戳相减，得出总耗时。单位毫秒。
- * @return {*} number   总耗时
+ * @return {*} number 总耗时
  */
 export const endTimeDiff = (): number => {
-    let timer: number | null = Number(sessionStorage.getItem('timer'));
+    let timer: number = Number(sessionStorage.getItem('timer'));
     timer = getNow() - timer;
     sessionStorage.removeItem('timer');
     return timer;

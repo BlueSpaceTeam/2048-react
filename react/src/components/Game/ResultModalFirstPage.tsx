@@ -1,53 +1,56 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime:2022-06-06 15:49:00
- * @LastEditors: swancai
+ * @LastEditTime: 2022-06-28 11:48:00
+ * @LastEditors: fantiga
  * @Description: 
- * @FilePath: /2048-react/src/components/ResultModalFirstPage.tsx
+ * @FilePath: /2048-react/react/src/components/Game/ResultModalFirstPage.tsx
  */
-import React from 'react'
+import React from 'react';
 
-import ResultLayout from '@components/Game/ResultLayout'
+import { useTranslation } from 'react-i18next';
+
+import ResultLayout from '@components/Game/ResultLayout';
 
 interface IPropsResultModal {
-    inputVal: string // 名字字符串
-    bestScore: number // 最高分
-    score: number // 当前分数
-    isError: boolean // 是否提交异常
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void // 名字改变
-    onSubmit: () => void // 提交名字
-    onPageChange: (e: number) => void // 更改页码
+    inputVal: string; // 名字字符串
+    bestScore: number; // 最高分
+    score: number; // 当前分数
+    isError: boolean; // 是否提交异常
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // 名字改变
+    onSubmit: () => void; // 提交名字
+    onPageChange: (e: number) => void; // 更改页码
 }
 
 /**
  * modal第一页内容
- **/ 
+ **/
 const ResultModalFirstPage: React.FC<IPropsResultModal> = (props) => {
+    const { t, i18n } = useTranslation();
     return (
         <>
             <ResultLayout score={props.score} bestScore={props.bestScore} />
             <div className="input-wrap">
-                <input 
-                    className="scorer" 
-                    type="text" 
-                    placeholder="Enter your name" 
-                    maxLength={20} 
+                <input
+                    className="scorer"
+                    type="text"
+                    placeholder={t('Enter your name')}
+                    maxLength={20}
                     autoFocus
                     value={props.inputVal}
-                    onChange={props.onChange} 
-                />    
+                    onChange={props.onChange}
+                />
             </div>
-            <button className="btn btn-submit" onClick={() => props.onSubmit()}>Save Record</button>
+            <button className="btn btn-submit" onClick={() => props.onSubmit()}>{t('Save Record')}</button>
             {
-                props.isError 
-                    ? <p className="error">Opps! Something wrong. Please try again later.</p>
+                props.isError
+                    ? <p className="error">{t('Opps! Something wrong. Please try again later.')}</p>
                     : null
             }
-            
-            <button className="btn btn-no-submit" onClick={() => props.onPageChange(2)}>No, thanks</button>
-        </>
-    )
-}
 
-export default ResultModalFirstPage
+            <button className="btn btn-no-submit" onClick={() => props.onPageChange(2)}>{t('No, thanks')}</button>
+        </>
+    );
+};
+
+export default ResultModalFirstPage;
