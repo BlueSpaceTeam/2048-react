@@ -33,7 +33,6 @@ import {
 	Direction,
 	IAHistoryOfSquares,
 	STORAGE_GAME_HISTORY,
-	STORAGE_GAME_SCORES,
 	STORAGE_BEST_SCORE,
 } from '@utils/constants';
 
@@ -43,7 +42,11 @@ import '@scss/game.scss';
 interface IGame { }
 
 // 初始化的方块历史
-const initialHistory = { squares: new Array(16).fill(0) };
+const initialHistory = { 
+	squares: new Array(16).fill(0),
+	score: 0,
+	randomNumIdx: -1 
+};
 
 /**
  * 游戏
@@ -51,10 +54,6 @@ const initialHistory = { squares: new Array(16).fill(0) };
 const Game: React.FC<IGame> = (props) => {
 	// 游戏移动记录：[初始记录,(上一步记录,)当前记录]。只记录最近操作的2步，故包括初始数组最多长度为3
 	const [history, setHistory] = useState<IAHistoryOfSquares[]>([initialHistory]);
-	// 随机生产的数字所处数组的下标
-	const [randomNumIdx, setRandomNumIdx] = useState<number>(-1);
-	// 分数：[(上一步分数,)当前分数]
-	const [scores, setScores] = useState<number[]>([0]);
 	// 总耗时（毫秒）
 	const [timeSpent, setTimeSpent] = useState<number>(0);
 	// 游戏是否结束
@@ -75,14 +74,13 @@ const Game: React.FC<IGame> = (props) => {
 		// 结束时间差计算
 		setTimeSpent(endTimeDiff());
 
-		const curScore: number = scores[scores.length - 1];
+		const curScore: number = history[history.length - 1].score;
 		if (curScore > preBestScore) {
 			setBestScore(curScore);
 			localStorage.setItem(STORAGE_BEST_SCORE, curScore + '');
 		}
 		setIsOver(true);
 		localStorage.removeItem(STORAGE_GAME_HISTORY);
-		localStorage.removeItem(STORAGE_GAME_SCORES);
 	};
 
 	/**
@@ -119,17 +117,13 @@ const Game: React.FC<IGame> = (props) => {
 		if (newHistory.length > 3) {
 			newHistory.splice(1, 1);
 		}
-		newHistory.splice(newHistory.length, 1, { squares: squareNew });
+		newHistory.splice(newHistory.length, 1, { 
+			squares: squareNew,
+			score: newHistory[newHistory.length - 1].score + scoreDelta,
+			randomNumIdx: idxNew 
+		});
+
 		setHistory(newHistory);
-		setRandomNumIdx(idxNew);
-		// 计算分数
-		if (scoreDelta) {
-			setScores((scores: string | any[]) => {
-				const prevScore = scores[scores.length - 1];
-				const nowScore = prevScore + scoreDelta;
-				return [prevScore, nowScore];
-			});
-		}
 	}
 
 
@@ -137,8 +131,11 @@ const Game: React.FC<IGame> = (props) => {
 		// 生成新数字
 		const { idx: idxNew, arr: squareNew } = genNewNum(initialHistory.squares);
 		// 设置历史记录
-		setHistory([initialHistory, { squares: squareNew }]);
-		setRandomNumIdx(idxNew);
+		setHistory([initialHistory, { 
+			squares: squareNew,
+			score: 0,
+			randomNumIdx: idxNew
+		}]);
 	};
 
 	/**
@@ -155,7 +152,6 @@ const Game: React.FC<IGame> = (props) => {
 			setHistory(SHistory);
 		} else {
 			resetHistory();
-			setScores([0]);
 		}
 	};
 
@@ -163,11 +159,10 @@ const Game: React.FC<IGame> = (props) => {
 	const undoGame: () => void = () => {
 		if (history.length > 2) { // 除了初始数组外，存在上一步方可撤销
 			setHistory((oldHistory: IAHistoryOfSquares[]) => oldHistory.slice(0, oldHistory.length - 1));
-			setScores((scores: number[]) => scores.slice(0, 1));
 		}
 	};
 
-	// 初始化游戏界面-board及计时
+	// 初始化游戏界面
 	useEffect(() => {
 		const StorageHistoryStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || '';
 		if (StorageHistoryStr) {
@@ -178,32 +173,17 @@ const Game: React.FC<IGame> = (props) => {
 		}
 	}, []);
 
-	// 初始化游戏界面-分数
-	useEffect(() => {
-		const StorageScoresStr: string = localStorage.getItem(STORAGE_GAME_SCORES) || '';
-		if (StorageScoresStr) {
-			const SScores: number[] = JSON.parse(StorageScoresStr);
-			if (SScores.length > 1) {
-				setScores(SScores);
-			}
-		}
-	}, []);
-
 	// 记录操作至缓存
 	useEffect(() => {
 		localStorage.setItem(STORAGE_GAME_HISTORY, JSON.stringify(history));
 	}, [history]);
-	// 记录操作至缓存
-	useEffect(() => {
-		localStorage.setItem(STORAGE_GAME_SCORES, JSON.stringify(scores));
-	}, [scores]);
 
 	// 控制Modal
 	const ModalUI: JSX.Element | null = isOver ? (
 		<Portal>
 			<ResultModal
 				isShow={isOver}
-				score={scores[scores.length - 1]}
+				score={history[history.length - 1].score}
 				timeSpent={timeSpent}
 				bestScore={preBestScore}
 				onRestart={() => startGame()}
@@ -217,7 +197,7 @@ const Game: React.FC<IGame> = (props) => {
 		<div className="game">
 			<header>
 				<LogoButton />
-				<Score name="SCORE" num={scores[scores.length - 1]} />
+				<Score name="SCORE" num={history[history.length - 1].score} />
 				<Score name="YOUR BEST" num={bestScore} />
 				<GameButton name="NEW" onClick={() => startGame()} />
 				<GameButton name="UNDO" btnDisabled={disabledUndo} onClick={() => undoGame()} />
@@ -226,7 +206,7 @@ const Game: React.FC<IGame> = (props) => {
 			<main>
 				<p className="desc">Join the numbers and get to the 2048 tile!</p>
 				<Board
-					randomNumIdx={randomNumIdx}
+					randomNumIdx={history[history.length - 1].randomNumIdx}
 					squares={history[history.length - 1].squares}
 					onMove={(dir: Direction) => handleMove(dir)}
 				/>

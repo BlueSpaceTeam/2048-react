@@ -19,25 +19,6 @@ const getRow: (col: number, squareIdx: number) => number = (col, squareIdx) => (
 // 获取列号
 const getCol: (row: number, squareIdx: number) => number = (row, squareIdx) => squareIdx + 1 - (row - 1) * MATRIX_COL;
 
-// 随机选一为0的square随机设置2或4
-/* export function genNewNum1(squares: number[]): number[] {
-	const arr = squares.slice();
-	const emptyIdxs: number[] = [];
-	for (let i: number = 0; i < arr.length; i++) {
-		if (!arr[i]) {
-			emptyIdxs.push(i);
-		}
-	}
-	if (!emptyIdxs.length) { // 返回自身，避免用空数组覆盖原来结果
-		return arr;
-	}
-	// 从1到coutZero里随机生成一个位置
-	const idx = emptyIdxs[Math.round(Math.random() * (emptyIdxs.length - 1))];
-	// 随机设置2或4
-	arr[idx] = Math.round(Math.random()) ? 2 : 4;
-	return arr;
-} */
-
 // 随机生产的数字的值和位置
 interface IGenNewNumObj {
 	idx: number; // 随机生产的块数组元素的下标
