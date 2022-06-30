@@ -1,0 +1,34 @@
+{
+    "home": {
+        "play": "スタート",
+        "ranking": "ランキング"
+    },
+    "game": {
+        "new": "新しい",
+        "undo": "元に戻す",
+        "unmuted": "ミュート解除",
+        "muted": "ミュート",
+        "introduce": "数字のブロックをマージして2048にします！"
+    },
+    "score": {
+        "score": "スコア",
+        "your_best": "ベスト"
+    },
+    "game_over": {
+        "congratulations": "おめでとうございます",
+        "you_has_got_a_best_score": "最高のスコアを持っています：",
+        "game_over": "ゲームオーバー",
+        "current_score": "最新のスコア：",
+        "best_score": "ベストスコア：",
+        "enter_your_name": "お名前を入力してください",
+        "save_record": "レコードを保存",
+        "no_thanks": "結構です",
+        "please_enter_your_name": "お名前を入力してください",
+        "play_again": "再びプレー",
+        "home": "ホームページ"
+    },
+    "error": {
+        "opps_something_wrong_please_try_again_later": "あっ！何か問題があるようです。後でもう一度やり直してください。",
+        "response_is_error": "応答はエラーです。"
+    }
+}

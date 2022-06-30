@@ -1,7 +1,7 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-28 11:48:00
+ * @LastEditTime: 2022-06-30 18:34:52
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/components/Game/ResultModalFirstPage.tsx
@@ -34,21 +34,21 @@ const ResultModalFirstPage: React.FC<IPropsResultModal> = (props) => {
                 <input
                     className="scorer"
                     type="text"
-                    placeholder={t('Enter your name')}
+                    placeholder={t('game_over.enter_your_name')}
                     maxLength={20}
                     autoFocus
                     value={props.inputVal}
                     onChange={props.onChange}
                 />
             </div>
-            <button className="btn btn-submit" onClick={() => props.onSubmit()}>{t('Save Record')}</button>
+            <button className="btn btn-submit" onClick={() => props.onSubmit()}>{t('game_over.save_record')}</button>
             {
                 props.isError
-                    ? <p className="error">{t('Opps! Something wrong. Please try again later.')}</p>
+                    ? <p className="error">{t('error.opps_something_wrong_please_try_again_later')}</p>
                     : null
             }
 
-            <button className="btn btn-no-submit" onClick={() => props.onPageChange(2)}>{t('No, thanks')}</button>
+            <button className="btn btn-no-submit" onClick={() => props.onPageChange(2)}>{t('game_over.no_thanks')}</button>
         </>
     );
 };

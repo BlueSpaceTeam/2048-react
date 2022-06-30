@@ -1,0 +1,34 @@
+{
+    "home": {
+        "play": "開始遊戲",
+        "ranking": "全球排行榜"
+    },
+    "game": {
+        "new": "新遊戲",
+        "undo": "撤銷",
+        "unmuted": "取消靜音",
+        "muted": "靜音",
+        "introduce": "合併數字方塊，使它們變成2048！"
+    },
+    "score": {
+        "score": "分數",
+        "your_best": "你的最佳"
+    },
+    "game_over": {
+        "congratulations": "恭喜！",
+        "you_has_got_a_best_score": "你得到了一個高分：",
+        "game_over": "遊戲結束",
+        "current_score": "當前分數：",
+        "best_score": "最佳分數：",
+        "enter_your_name": "輸入您的名字",
+        "save_record": "保存記錄",
+        "no_thanks": "不，謝謝",
+        "please_enter_your_name": "請輸入您的名字",
+        "play_again": "再玩一次",
+        "home": "首頁"
+    },
+    "error": {
+        "opps_something_wrong_please_try_again_later": "啊！似乎遇到了什麼問題。請稍後再試一次。",
+        "response_is_error": "響應錯誤。"
+    }
+}
