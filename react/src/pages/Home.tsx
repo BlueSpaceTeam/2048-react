@@ -1,13 +1,15 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-28 11:32:13
+ * @LastEditTime: 2022-06-30 17:51:44
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/pages/Home.tsx
  */
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import Languages from '@components/common/Languages';
 
 import { useTranslation } from 'react-i18next';
 
@@ -51,12 +53,14 @@ const Home: React.FC<IHome> = (props) => {
 
             <ul>
                 <li>
-                    <button className="btn" onClick={() => navigate('/game')}>{t('play').toUpperCase()}</button>
+                    <button className="btn" onClick={() => navigate('/game')}>{t('home.play').toUpperCase()}</button>
                 </li>
                 <li>
-                    <button className="btn" onClick={() => navigate('/ranking')}>{t('ranking').toUpperCase()}</button>
+                    <button className="btn" onClick={() => navigate('/ranking')}>{t('home.ranking').toUpperCase()}</button>
                 </li>
             </ul>
+
+            <Languages />
 
             <footer>
                 <p><a className="link" href="https://github.com/BlueSpaceTeam/2048-react">README</a></p>

@@ -1,7 +1,7 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-28 11:20:43
+ * @LastEditTime: 2022-06-30 18:36:51
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/pages/Game.tsx
@@ -15,6 +15,7 @@ import Score from '@components/Game/Score';
 import Board from '@components/Game/Board';
 import GameButton from '@components/Game/GameButton';
 
+import Languages from '@components/common/Languages';
 import Portal from '@components/common/Portal';
 import ResultModal from '@components/Game/ResultModal';
 
@@ -207,13 +208,15 @@ const Game: React.FC<IGame> = (props) => {
 				<GameButton name={isMuted ? 'MUTED' : 'UNMUTED'} onClick={() => setMuted(!isMuted)} />
 			</header>
 			<main>
-				<p className="desc">{t('Join the numbers and get to the 2048 tile!')}</p>
+				<p className="desc">{t('game.introduce')}</p>
 				<Board
 					randomNumIdx={history[history.length - 1].randomNumIdx}
 					squares={history[history.length - 1].squares}
 					onMove={(dir: Direction) => handleMove(dir)}
 				/>
 			</main>
+
+			<Languages />
 
 			{ModalUI}
 		</div>

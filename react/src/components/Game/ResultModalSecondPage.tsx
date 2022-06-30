@@ -1,7 +1,7 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-28 11:54:15
+ * @LastEditTime: 2022-06-30 18:36:12
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/components/Game/ResultModalSecondPage.tsx
@@ -47,8 +47,8 @@ const ResultModalSecondPage: React.FC<IPropsResultModal> = (props) => {
                     ? RankUI
                     : <ResultLayout score={props.score} bestScore={props.bestScore} />
             }
-            <button className="btn btn-restart" onClick={() => props.onClose('restart')}>{t('Play Again')}</button>
-            <button className="btn btn-home" onClick={() => props.onClose('home')}>{t('Home')}</button>
+            <button className="btn btn-restart" onClick={() => props.onClose('restart')}>{t('game_over.play_again')}</button>
+            <button className="btn btn-home" onClick={() => props.onClose('home')}>{t('game_over.home')}</button>
         </>   
     )
 }

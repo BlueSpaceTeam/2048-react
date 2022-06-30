@@ -1,7 +1,7 @@
 /*
  * @Author: fantiga
  * @Date: 2022-04-28 15:18:31
- * @LastEditTime: 2022-06-28 11:17:22
+ * @LastEditTime: 2022-06-30 18:24:15
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/index.tsx
@@ -9,13 +9,13 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import './utils/i18n';
+import '@utils/i18n';
+import '@utils/fontSize';
 import Home from './pages/Home';
 import Game from './pages/Game';
 import Ranking from './pages/Ranking';
 
 import './scss/modal.scss';
-import './utils/fontSize';
 
 /**
  * React 18 新写法
@@ -31,9 +31,6 @@ root.render(
                 <Route path="/" element={<Home />} />
                 <Route path="/game" element={<Game />} />
                 <Route path="/ranking" element={<Ranking />} />
-                {/* <Route path="/" render={() => <Home />} />
-                <Route path="/game" render={() => <Game />} />
-                <Route path="/ranking" render={() => <Ranking />} /> */}
                 <Route path="*" element={
                     <main style={{ padding: "1rem" }}>
                         <p>There's nothing here!</p>

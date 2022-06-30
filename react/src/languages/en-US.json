@@ -1,0 +1,34 @@
+{
+    "home": {
+        "play": "play",
+        "ranking": "ranking"
+    },
+    "game": {
+        "new": "new",
+        "undo": "undo",
+        "unmuted": "unmuted",
+        "muted": "muted",
+        "introduce": "Join the numbers and get to the 2048 tile!"
+    },
+    "score": {
+        "score": "score",
+        "your best": "your best"
+    },
+    "game_over": {
+        "congratulations": "Congratulations",
+        "you_has_got_a_best_score": "You has got a best score:",
+        "game_over": "Game Over",
+        "current_score": "Current Score:",
+        "best_score": "Best Score:",
+        "enter_your_name": "Enter your name",
+        "save_record": "Save Record",
+        "no_thanks": "No, thanks",
+        "please_enter_your_name": "Please enter your name",
+        "play_again": "Play Again",
+        "home": "Home"
+    },
+    "error": {
+        "opps_something_wrong_please_try_again_later": "Opps! Something wrong. Please try again later.",
+        "response_is_error": "Response is error."
+    }
+}

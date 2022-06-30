@@ -1,7 +1,7 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-28 11:49:30
+ * @LastEditTime: 2022-06-30 18:34:00
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/components/Game/ResultModal.tsx
@@ -88,7 +88,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
     const onSubmit: () => void = () => {
         if (isLoading) return;
         if (!scorer) {
-            setError(t('Please enter your name'));
+            setError(t('game_over.please_enter_your_name'));
             return;
         }
         if (error) {
@@ -114,7 +114,7 @@ const ResultModal: React.FC<IPropsResultModal> = (props) => {
                     setPageNum(2);
                     localStorage.setItem(STORAGE_GAME_PLAYER, scorer);
                 } else {
-                    throw new Error(t('response is error'));
+                    throw new Error(t('error.response_is_error'));
                 }
             })
             .catch(err => {
