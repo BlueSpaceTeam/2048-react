@@ -1,7 +1,7 @@
 /*
  * @Author: tim.wen
  * @Date: 2022-06-28 17:01:44
- * @LastEditTime: 2022-06-28 19:36:02
+ * @LastEditTime: 2022-06-30 19:59:07
  * @LastEditors: tim.wen
  * @Description: file content
  * @FilePath: /2048-react/react/.eslintrc.js
@@ -19,13 +19,13 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
     // 'plugin:react-hooks/recommended',
     // 'plugin:import/recommended',
     'plugin:prettier/recommended',
     'plugin:jsx-a11y/recommended',
+    'plugin:react/jsx-runtime',
   ],
-  // parser: '@typescript-eslint/parser',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -46,6 +46,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-uses-react': 'off',
     'react/jsx-uses-vars': 'off',
+    'jsx-a11y/no-autofocus': 'off',
     // 'import/no-unresolved': 'off',
     // 'jsx-a11y/rule-name': 2,
   },

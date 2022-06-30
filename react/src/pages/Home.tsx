@@ -1,13 +1,13 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-30 20:08:35
+ * @LastEditTime: 2022-06-30 20:29:11
  * @LastEditors: tim.wen
  * @Description:
  * @FilePath: /2048-react/react/src/pages/Home.tsx
  */
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Languages from '@components/common/Languages';

@@ -1,7 +1,7 @@
 /*
  * @Author: tim.wen
  * @Date: 2022-06-28 16:33:54
- * @LastEditTime: 2022-06-28 17:57:08
+ * @LastEditTime: 2022-06-30 16:30:26
  * @LastEditors: tim.wen
  * @Description: file content
  * @FilePath: /2048-react/react/.prettierrc.js
@@ -19,7 +19,7 @@ module.exports = {
   semi: true,
   singleQuote: true,
   quoteProps: 'as-needed',
-  jsxSingleQuote: true,
+  jsxSingleQuote: false,
   trailingComma: 'es5',
   bracketSpacing: true,
   // jsxBracketSameLine: false,
