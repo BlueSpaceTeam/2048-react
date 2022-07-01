@@ -1,7 +1,8 @@
 {
     "home": {
-        "play": "play",
-        "ranking": "ranking"
+        "continue": "CONTINUE",
+        "play": "PLAY",
+        "ranking": "RANKING"
     },
     "game": {
         "new": "New",
