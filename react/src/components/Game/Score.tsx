@@ -1,10 +1,10 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-07-01 09:41:19
- * @LastEditors: swancai
+ * @LastEditTime: 2022-07-01 12:36:11
+ * @LastEditors: fantiga
  * @Description:
- * @FilePath: \2048-react\react\src\components\Game\Score.tsx
+ * @FilePath: /2048-react/react/src/components/Game/Score.tsx
  */
 
 import React from 'react';
@@ -23,7 +23,7 @@ const Score: React.FC<IPropScore> = (props) => {
   const { t } = useTranslation();
   return (
     <div className="score">
-      <span className="key">{t(props.name) || ''}</span>
+      <span className="key">{t(props.name).toUpperCase() || ''}</span>
       <span>{props.num || 0}</span>
     </div>
   );

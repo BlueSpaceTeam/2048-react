@@ -1,10 +1,10 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-07-01 11:26:00
- * @LastEditors: swancai
+ * @LastEditTime: 2022-07-01 12:50:55
+ * @LastEditors: fantiga
  * @Description:
- * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\pages\Game.tsx
+ * @FilePath: /2048-react/react/src/pages/Game.tsx
  */
 
 import { useState, useEffect } from 'react';
@@ -177,7 +177,9 @@ const Game: React.FC = (props) => {
   const undoGame: () => void = () => {
     if (history.length > 1 && act === 'move') {
       // 除了初始数组外，存在上一步方可撤销
-      setHistory((oldHistory: IAHistoryOfSquares[]) => oldHistory.slice(0, oldHistory.length - 1));
+      setHistory((oldHistory: IAHistoryOfSquares[]) =>
+        oldHistory.slice(0, oldHistory.length - 1)
+      );
       setAct('undo');
     }
   };
@@ -219,7 +221,11 @@ const Game: React.FC = (props) => {
         <Score name="score.score" num={history[history.length - 1].score} />
         <Score name="score.your_best" num={bestScore} />
         <GameButton name="game.new" onClick={() => startGame()} />
-        <GameButton name="game.undo" btnDisabled={disabledUndo} onClick={() => undoGame()} />
+        <GameButton
+          name="game.undo"
+          btnDisabled={disabledUndo}
+          onClick={() => undoGame()}
+        />
         <GameButton
           name={isMuted ? 'game.muted' : 'game.unmuted'}
           className={isMuted ? '' : 'btn-unmuted'}

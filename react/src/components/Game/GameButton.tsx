@@ -1,10 +1,10 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-07-01 10:55:43
- * @LastEditors: swancai
+ * @LastEditTime: 2022-07-01 12:35:23
+ * @LastEditors: fantiga
  * @Description:
- * @FilePath: \2048-react\react\src\components\Game\GameButton.tsx
+ * @FilePath: /2048-react/react/src/components/Game/GameButton.tsx
  */
 
 import React from 'react';
@@ -21,12 +21,10 @@ interface IPropGameButton {
  */
 const GameButton: React.FC<IPropGameButton> = (props) => {
   const { t } = useTranslation();
-  const classStr = `btn ${props.className || ''} ${
-    props.btnDisabled ? 'disabled' : ''
-  }`;
+  const classStr = `btn ${props.className || ''} ${props.btnDisabled ? 'disabled' : ''}`;
   return (
     <button className={classStr} onClick={props.onClick}>
-      {t(props.name) || ''}
+      {t(props.name).toUpperCase() || ''}
     </button>
   );
 };

@@ -1,8 +1,8 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-30 18:13:42
- * @LastEditors: tim.wen
+ * @LastEditTime: 2022-07-01 13:06:24
+ * @LastEditors: fantiga
  * @Description:
  * @FilePath: /2048-react/react/src/components/Game/Square.tsx
  */
