@@ -1,4 +1,4 @@
-@import './base.scss';
+@import '@scss/base.scss';
 
 %text {
     color      : #756f68;
@@ -16,8 +16,6 @@
 
     header {
         display            : grid;
-        grid-template-areas: "logo score bestScore"
-            "logo btnNew btnUndo";
         grid-template-columns: repeat(3, 2.18rem);
         grid-gap             : 0.18rem;
         height               : 2.18rem;

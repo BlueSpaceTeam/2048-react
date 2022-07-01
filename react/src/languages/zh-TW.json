@@ -28,7 +28,7 @@
         "home": "首頁"
     },
     "error": {
-        "opps_something_wrong_please_try_again_later": "啊！似乎遇到了什麼問題。請稍後再試一次。",
+        "opps_something_wrong_please_try_again_later": "噢！似乎遇到了什麼問題。請稍後再試一次。",
         "response_is_error": "回應錯誤。"
     }
 }

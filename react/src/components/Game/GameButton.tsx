@@ -1,16 +1,17 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-30 20:20:58
- * @LastEditors: tim.wen
+ * @LastEditTime: 2022-07-01 09:48:27
+ * @LastEditors: swancai
  * @Description:
- * @FilePath: /2048-react/react/src/components/Game/GameButton.tsx
+ * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\components\Game\GameButton.tsx
  */
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 interface IPropGameButton {
   name: string; // 按钮名称
+  className?: string; // 自定义样式类名
   btnDisabled?: boolean; // 按钮是否可用
   onClick: () => void; // 点击事件
 }
@@ -20,19 +21,12 @@ interface IPropGameButton {
  */
 const GameButton: React.FC<IPropGameButton> = (props) => {
   const { t, i18n } = useTranslation();
-  const classStr = `btn btn-${props.name.toLowerCase()} ${
+  const classStr = `btn ${props.className || ''} ${
     props.btnDisabled ? 'disabled' : ''
   }`;
   return (
-    /**
-     * TODO：按钮文案和样式分离
-     * 分离后（供参考）：t('game.new').toUpperCase()
-     * 分离后（供参考）：t('game.undo').toUpperCase()
-     * 分离后（供参考）：t('game.unmuted').toUpperCase()
-     * 分离后（供参考）：t('game.muted').toUpperCase()
-     */
     <button className={classStr} onClick={props.onClick}>
-      {t(props.name.toLowerCase()).toUpperCase()}
+      {t(props.name) || ''}
     </button>
   );
 };

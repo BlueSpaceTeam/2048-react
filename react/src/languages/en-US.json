@@ -4,15 +4,15 @@
         "ranking": "ranking"
     },
     "game": {
-        "new": "new",
-        "undo": "undo",
-        "unmuted": "unmuted",
-        "muted": "muted",
+        "new": "NEW",
+        "undo": "UNDO",
+        "unmuted": "UNMUTED",
+        "muted": "MUTED",
         "introduce": "Join the numbers and get to the 2048 tile!"
     },
     "score": {
-        "score": "score",
-        "your_best": "your best"
+        "score": "Score",
+        "your_best": "Your best"
     },
     "game_over": {
         "congratulations": "Congratulations",

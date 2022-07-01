@@ -1,10 +1,10 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-30 20:28:37
- * @LastEditors: tim.wen
+ * @LastEditTime: 2022-07-01 10:52:57
+ * @LastEditors: swancai
  * @Description:
- * @FilePath: /2048-react/react/src/pages/Game.tsx
+ * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\pages\Game.tsx
  */
 
 import { useState, useEffect } from 'react';
@@ -73,8 +73,11 @@ const Game: React.FC = (props) => {
   const [isMuted, setMuted] = useState<boolean>(false);
   const [playSfx] = useSound(beepSfx, { soundEnabled: !isMuted });
 
+  // 记录上一步操作, 其值有 new：新建，move: 移动，undo: 撤销
+  const [act, setAct] = useState<string>('new');
+
   // btn-undo是否可点击
-  const disabledUndo: boolean = isOver || history.length < 3;
+  const disabledUndo: boolean = isOver || history.length <= 1 || act != 'move';
 
   // 从垂直于当前操作方向的方向来检查没有机会合并，game over的回调处理
   const gameOverCallback: () => void = () => {
@@ -134,6 +137,7 @@ const Game: React.FC = (props) => {
     });
 
     setHistory(newHistory);
+    setAct('move');
   }
 
   const resetHistory: () => void = () => {
@@ -148,6 +152,7 @@ const Game: React.FC = (props) => {
         randomNumIdx: idxNew,
       },
     ]);
+    setAct('new');
   };
 
   /**
@@ -162,6 +167,7 @@ const Game: React.FC = (props) => {
 
     if (SHistory && SHistory.length > 1) {
       setHistory(SHistory);
+      setAct(SHistory.length > 2 ? 'move' : 'new');
     } else {
       resetHistory();
     }
@@ -169,11 +175,10 @@ const Game: React.FC = (props) => {
 
   // 撤销上一步
   const undoGame: () => void = () => {
-    if (history.length > 2) {
+    if (history.length > 1 && act === 'move') {
       // 除了初始数组外，存在上一步方可撤销
-      setHistory((oldHistory: IAHistoryOfSquares[]) =>
-        oldHistory.slice(0, oldHistory.length - 1)
-      );
+      setHistory((oldHistory: IAHistoryOfSquares[]) => oldHistory.slice(0, oldHistory.length - 1));
+      setAct('undo');
     }
   };
 
@@ -211,12 +216,13 @@ const Game: React.FC = (props) => {
     <div className="game">
       <header>
         <LogoButton />
-        <Score name="SCORE" num={history[history.length - 1].score} />
-        <Score name="YOUR BEST" num={bestScore} />
-        <GameButton name="NEW" onClick={() => startGame()} />
-        <GameButton name="UNDO" btnDisabled={disabledUndo} onClick={() => undoGame()} />
+        <Score name="score.score" num={history[history.length - 1].score} />
+        <Score name="score.your_best" num={bestScore} />
+        <GameButton name="game.new" onClick={() => startGame()} />
+        <GameButton name="game.undo" btnDisabled={disabledUndo} onClick={() => undoGame()} />
         <GameButton
-          name={isMuted ? 'MUTED' : 'UNMUTED'}
+          name={isMuted ? 'game.unmuted' : 'game.muted'}
+          className={isMuted ? 'btn-unmuted' : ''}
           onClick={() => setMuted(!isMuted)}
         />
       </header>
