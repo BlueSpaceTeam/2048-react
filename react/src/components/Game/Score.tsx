@@ -4,7 +4,7 @@
  * @LastEditTime: 2022-07-01 09:41:19
  * @LastEditors: swancai
  * @Description:
- * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\components\Game\Score.tsx
+ * @FilePath: \2048-react\react\src\components\Game\Score.tsx
  */
 
 import React from 'react';
