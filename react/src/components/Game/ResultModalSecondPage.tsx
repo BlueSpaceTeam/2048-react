@@ -1,8 +1,8 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-30 20:24:30
- * @LastEditors: tim.wen
+ * @LastEditTime: 2022-07-01 09:38:38
+ * @LastEditors: fantiga
  * @Description:
  * @FilePath: /2048-react/react/src/components/Game/ResultModalSecondPage.tsx
  */
@@ -29,14 +29,14 @@ interface IPropsResultModal {
  * modal第一页内容
  **/
 const ResultModalSecondPage: React.FC<IPropsResultModal> = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const RankUI: JSX.Element = (
     <>
       <div className="my-rank">
         <span className="position blue">{props.myInfo.rank_num || 0}</span>
         <span className="name">{props.myInfo.user_name || '-'}</span>
         <span className="score">{(props.myInfo.user_score || 0).toLocaleString()}</span>
-        <span className="flag blue">Yours</span>
+        <span className="flag blue">{t('game_over.yours')}</span>
       </div>
       <RankList list={props.list} isShort />
     </>

@@ -25,10 +25,14 @@
         "no_thanks": "不，谢谢",
         "please_enter_your_name": "请输入您的名字",
         "play_again": "再玩一次",
-        "home": "首页"
+        "home": "首页",
+        "yours": "你"
     },
     "error": {
         "opps_something_wrong_please_try_again_later": "噢！似乎遇到了什么问题。请稍后再试一次。",
         "response_is_error": "响应错误。"
+    },
+    "ranking": {
+        "ranking": "全球排行榜"
     }
 }

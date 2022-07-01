@@ -1,7 +1,7 @@
 /*
  * @Author: fantiga
  * @Date: 2022-06-30 16:25:56
- * @LastEditTime: 2022-06-30 18:29:24
+ * @LastEditTime: 2022-07-01 09:32:13
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/react/src/components/common/Languages.tsx
@@ -16,7 +16,7 @@ import '@scss/languages.scss';
 interface ILanguages { }
 
 const Languages: React.FC<ILanguages> = props => {
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
     return (
         <section className='languages'>
             <button onClick={() => i18n.changeLanguage('en_US')}>English</button>

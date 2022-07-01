@@ -1,10 +1,10 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-07-01 09:48:27
+ * @LastEditTime: 2022-07-01 10:55:43
  * @LastEditors: swancai
  * @Description:
- * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\components\Game\GameButton.tsx
+ * @FilePath: \2048-react\react\src\components\Game\GameButton.tsx
  */
 
 import React from 'react';
@@ -20,7 +20,7 @@ interface IPropGameButton {
  * 游戏按钮
  */
 const GameButton: React.FC<IPropGameButton> = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const classStr = `btn ${props.className || ''} ${
     props.btnDisabled ? 'disabled' : ''
   }`;

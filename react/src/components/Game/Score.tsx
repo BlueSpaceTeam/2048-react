@@ -20,7 +20,7 @@ interface IPropScore {
  * 分数
  */
 const Score: React.FC<IPropScore> = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className="score">
       <span className="key">{t(props.name) || ''}</span>

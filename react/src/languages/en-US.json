@@ -25,10 +25,14 @@
         "no_thanks": "No, thanks",
         "please_enter_your_name": "Please enter your name",
         "play_again": "Play Again",
-        "home": "Home"
+        "home": "Home",
+        "yours": "Yours"
     },
     "error": {
         "opps_something_wrong_please_try_again_later": "Opps! Something wrong. Please try again later.",
         "response_is_error": "Response is error."
+    },
+    "ranking": {
+        "ranking": "ranking"
     }
 }

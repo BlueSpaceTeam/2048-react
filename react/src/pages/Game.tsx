@@ -1,10 +1,10 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-07-01 10:52:57
+ * @LastEditTime: 2022-07-01 10:57:47
  * @LastEditors: swancai
  * @Description:
- * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\pages\Game.tsx
+ * @FilePath: 2048-react\react\src\pages\Game.tsx
  */
 
 import { useState, useEffect } from 'react';
@@ -56,7 +56,7 @@ const initialHistory = {
  */
 // const Game: React.FC<IGame> = (props) => {
 const Game: React.FC = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   // 游戏移动记录：[初始记录,(上一步记录,)当前记录]。只记录最近操作的2步，故包括初始数组最多长度为3
   const [history, setHistory] = useState<IAHistoryOfSquares[]>([initialHistory]);
   // 总耗时（毫秒）

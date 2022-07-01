@@ -1,14 +1,15 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-30 18:26:27
- * @LastEditors: tim.wen
+ * @LastEditTime: 2022-07-01 09:43:20
+ * @LastEditors: fantiga
  * @Description:
  * @FilePath: /2048-react/react/src/pages/Ranking.tsx
  */
 
 import { useEffect, useState } from 'react';
 import axios, { formatFormUrlencoded } from '@utils/axios';
+import { useTranslation } from 'react-i18next';
 
 import RankList from '@components/common/RankList';
 import Portal from '@components/common/Portal';
@@ -25,6 +26,7 @@ import '@scss/ranking.scss';
  **/
 // const Ranking: React.FC<IRanking> = (props) => {
 const Ranking: React.FC = () => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(null);
   const [list, setList] = useState<IRankItem[]>([]);
@@ -66,7 +68,7 @@ const Ranking: React.FC = () => {
 
   return (
     <div className="ranking">
-      <h1 className="title">RANKING</h1>
+      <h1 className="title">{t('ranking.ranking').toUpperCase()}</h1>
 
       {isLoading ? (
         <Portal>
