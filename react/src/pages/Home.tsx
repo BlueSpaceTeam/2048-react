@@ -1,13 +1,13 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-07-01 15:58:18
+ * @LastEditTime: 2022-07-01 18:53:26
  * @LastEditors: fantiga
  * @Description:
  * @FilePath: /2048-react/react/src/pages/Home.tsx
  */
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Languages from '@components/common/Languages';
@@ -25,15 +25,23 @@ const Home: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const [showContinue, setShowConitinue] = useState<boolean>(false);
+
   useEffect(() => {
     const StorageStr: string = localStorage.getItem(STORAGE_GAME_HISTORY) || '';
     if (StorageStr) {
       const SHistory: IAHistoryOfSquares[] = JSON.parse(StorageStr);
       if (SHistory.length > 1) {
-        navigate('/game');
+        setShowConitinue(true);
       }
     }
   }, []);
+
+  // 开始新游戏
+  const startGame: () => void = () => {
+    localStorage.removeItem(STORAGE_GAME_HISTORY);
+    navigate('/game');
+  };
 
   return (
     <div className="home">
@@ -48,14 +56,21 @@ const Home: React.FC = () => {
       </header>
 
       <ul>
+        {showContinue ? (
+          <li>
+            <button className="btn" onClick={() => navigate('/game')}>
+              {t('home.continue')}
+            </button>
+          </li>
+        ) : null}
         <li>
-          <button className="btn" onClick={() => navigate('/game')}>
-            {t('home.play').toUpperCase()}
+          <button className="btn" onClick={() => startGame()}>
+            {t('home.play')}
           </button>
         </li>
         <li>
           <button className="btn" onClick={() => navigate('/ranking')}>
-            {t('home.ranking').toUpperCase()}
+            {t('home.ranking')}
           </button>
         </li>
       </ul>

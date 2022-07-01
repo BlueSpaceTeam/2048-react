@@ -1,10 +1,10 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-07-01 12:50:55
- * @LastEditors: fantiga
+ * @LastEditTime: 2022-07-01 15:36:47
+ * @LastEditors: swancai
  * @Description:
- * @FilePath: /2048-react/react/src/pages/Game.tsx
+ * @FilePath: \ts\2048-react\react\src\pages\Game.tsx
  */
 
 import { useState, useEffect } from 'react';
@@ -69,15 +69,15 @@ const Game: React.FC = (props) => {
   );
   // 最高分原始值
   const preBestScore: number = usePrevious(bestScore) || 0;
-  // 音效播放，isMuted默认false（不静音）
-  const [isMuted, setMuted] = useState<boolean>(false);
-  const [playSfx] = useSound(beepSfx, { soundEnabled: !isMuted });
 
   // 记录上一步操作, 其值有 new：新建，move: 移动，undo: 撤销
   const [act, setAct] = useState<string>('new');
-
   // btn-undo是否可点击
   const disabledUndo: boolean = isOver || history.length <= 1 || act != 'move';
+  
+  // 音效播放，isMuted默认false（不静音）
+  const [isMuted, setMuted] = useState<boolean>(false);
+  const [playSfx] = useSound(beepSfx, { soundEnabled: !isMuted });
 
   // 从垂直于当前操作方向的方向来检查没有机会合并，game over的回调处理
   const gameOverCallback: () => void = () => {
@@ -127,7 +127,7 @@ const Game: React.FC = (props) => {
     const { idx: idxNew, arr: squareNew } = genNewNum(arr);
     const newHistory: IAHistoryOfSquares[] = history.slice();
     // 只保留初始记录 和 最近2次的操作记录
-    if (newHistory.length > 3) {
+    if (newHistory.length > 2) {
       newHistory.splice(1, 1);
     }
     newHistory.splice(newHistory.length, 1, {
