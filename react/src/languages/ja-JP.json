@@ -25,10 +25,14 @@
         "no_thanks": "結構です",
         "please_enter_your_name": "お名前を入力してください",
         "play_again": "再びプレー",
-        "home": "ホームページ"
+        "home": "ホームページ",
+        "yours": "貴方"
     },
     "error": {
         "opps_something_wrong_please_try_again_later": "あっ！何か問題があるようです。後でもう一度やり直してください。",
         "response_is_error": "応答はエラーです。"
+    },
+    "ranking": {
+        "ranking": "ランキング"
     }
 }

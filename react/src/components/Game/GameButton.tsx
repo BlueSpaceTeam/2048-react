@@ -1,8 +1,8 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-30 20:20:58
- * @LastEditors: tim.wen
+ * @LastEditTime: 2022-07-01 09:30:00
+ * @LastEditors: fantiga
  * @Description:
  * @FilePath: /2048-react/react/src/components/Game/GameButton.tsx
  */
@@ -19,7 +19,7 @@ interface IPropGameButton {
  * 游戏按钮
  */
 const GameButton: React.FC<IPropGameButton> = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const classStr = `btn btn-${props.name.toLowerCase()} ${
     props.btnDisabled ? 'disabled' : ''
   }`;

@@ -20,7 +20,7 @@ interface IPropScore {
  * 分数
  */
 const Score: React.FC<IPropScore> = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     /**
      * TODO：按钮文案和样式分离

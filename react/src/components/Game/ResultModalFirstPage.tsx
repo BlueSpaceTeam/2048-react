@@ -26,7 +26,7 @@ interface IPropsResultModal {
  * modal第一页内容
  **/
 const ResultModalFirstPage: React.FC<IPropsResultModal> = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <>
       <ResultLayout score={props.score} bestScore={props.bestScore} />

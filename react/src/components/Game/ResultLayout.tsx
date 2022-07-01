@@ -1,8 +1,8 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-06-30 20:21:47
- * @LastEditors: tim.wen
+ * @LastEditTime: 2022-07-01 09:30:30
+ * @LastEditors: fantiga
  * @Description:
  * @FilePath: /2048-react/react/src/components/Game/ResultLayout.tsx
  */
@@ -17,7 +17,7 @@ interface IResultLayout {
 }
 
 const ResultLayout: React.FC<IResultLayout> = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   // 是否现得分数超越过去最高分 展示不同的结果
   return props.score > props.bestScore ? (
     <>
