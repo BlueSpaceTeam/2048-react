@@ -1,10 +1,10 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-07-01 10:57:47
+ * @LastEditTime: 2022-07-01 11:26:00
  * @LastEditors: swancai
  * @Description:
- * @FilePath: 2048-react\react\src\pages\Game.tsx
+ * @FilePath: \zjgp_zjhye:\job\ts\2048-react\react\src\pages\Game.tsx
  */
 
 import { useState, useEffect } from 'react';
@@ -221,8 +221,8 @@ const Game: React.FC = (props) => {
         <GameButton name="game.new" onClick={() => startGame()} />
         <GameButton name="game.undo" btnDisabled={disabledUndo} onClick={() => undoGame()} />
         <GameButton
-          name={isMuted ? 'game.unmuted' : 'game.muted'}
-          className={isMuted ? 'btn-unmuted' : ''}
+          name={isMuted ? 'game.muted' : 'game.unmuted'}
+          className={isMuted ? '' : 'btn-unmuted'}
           onClick={() => setMuted(!isMuted)}
         />
       </header>
