@@ -1,8 +1,8 @@
 /*
  * @Author: fantiga
  * @Date: 2022-06-28 10:39:12
- * @LastEditTime: 2022-06-30 20:30:11
- * @LastEditors: tim.wen
+ * @LastEditTime: 2022-07-01 18:32:06
+ * @LastEditors: fantiga
  * @Description:
  * @FilePath: /2048-react/react/src/utils/i18n.tsx
  */
