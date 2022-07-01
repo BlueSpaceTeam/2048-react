@@ -1,7 +1,7 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-07-01 18:59:10
+ * @LastEditTime: 2022-07-01 19:28:54
  * @LastEditors: fantiga
  * @Description:
  * @FilePath: /2048-react/react/src/pages/Home.tsx
@@ -20,6 +20,7 @@ import '@scss/home.scss';
  * 首页
  * */
 const Home: React.FC = () => {
+  // const [language, setLanguage] = useState<string>('en_US');
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
@@ -35,50 +36,52 @@ const Home: React.FC = () => {
     }
   }, []);
 
+  // 自动判断用户语言
+  useEffect(() => {
+    const user_lang: string = navigator.language;
+    switch (user_lang) {
+      case 'en-US': // 英语-美国
+      case 'en-AU': // 英语-澳洲
+      case 'en-BZ': // 英语-伯利兹
+      case 'en-CA': // 英语-加拿大
+      case 'en-CB': // 英语-加勒比海
+      case 'en-IE': // 英语-爱尔兰
+      case 'en-JM': // 英语-牙买加
+      case 'en-NZ': // 英语-新西兰
+      case 'en-PH': // 英语-菲律宾
+      case 'en-ZA': // 英语-南非
+      case 'en-TT': // 英语-特立尼达和多巴哥
+      case 'en-GB': // 英语-英国
+      case 'en-ZW': // 英语-津巴布韦
+      case 'en': // 英语
+        i18n.changeLanguage('en_US');
+        break;
+      case 'zh-CN': // 简体中文-中国大陆
+      case 'zh-SG': // 简体中文-新加坡
+      case 'zh-CHS': // 简体中文
+        i18n.changeLanguage('zh_CN');
+        break;
+      case 'zh-TW': // 繁体中文-台湾
+      case 'zh-HK': // 繁体中文-香港
+      case 'zh-MO': // 繁体中文-澳门
+      case 'zh-CHT': // 繁体中文
+        i18n.changeLanguage('zh_TW');
+        break;
+      case 'ja-JP': // 日语-日本
+      case 'ja': // 日语
+        i18n.changeLanguage('ja_JP');
+        break;
+      default:
+        i18n.changeLanguage('en_US');
+        break;
+    }
+  }, []);
+
   // 开始新游戏
   const startGame: () => void = () => {
     localStorage.removeItem(STORAGE_GAME_HISTORY);
     navigate('/game');
   };
-
-  // 自动判断用户语言
-  const user_lang: string = navigator.language;
-  switch (user_lang) {
-    case 'en-US': // 英语-美国
-    case 'en-AU': // 英语-澳洲
-    case 'en-BZ': // 英语-伯利兹
-    case 'en-CA': // 英语-加拿大
-    case 'en-CB': // 英语-加勒比海
-    case 'en-IE': // 英语-爱尔兰
-    case 'en-JM': // 英语-牙买加
-    case 'en-NZ': // 英语-新西兰
-    case 'en-PH': // 英语-菲律宾
-    case 'en-ZA': // 英语-南非
-    case 'en-TT': // 英语-特立尼达和多巴哥
-    case 'en-GB': // 英语-英国
-    case 'en-ZW': // 英语-津巴布韦
-    case 'en': // 英语
-      i18n.changeLanguage('en_US');
-      break;
-    case 'zh-CN': // 简体中文-中国大陆
-    case 'zh-SG': // 简体中文-新加坡
-    case 'zh-CHS': // 简体中文
-      i18n.changeLanguage('zh_CN');
-      break;
-    case 'zh-TW': // 繁体中文-台湾
-    case 'zh-HK': // 繁体中文-香港
-    case 'zh-MO': // 繁体中文-澳门
-    case 'zh-CHT': // 繁体中文
-      i18n.changeLanguage('zh_TW');
-      break;
-    case 'ja-JP': // 日语-日本
-    case 'ja': // 日语
-      i18n.changeLanguage('ja_JP');
-      break;
-    default:
-      i18n.changeLanguage('en_US');
-      break;
-  }
 
   return (
     <div className="home">
