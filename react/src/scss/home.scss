@@ -1,50 +1,54 @@
 @import '@scss/base.scss';
 
 .home {
-    margin: 0 auto;
+    margin   : 0 auto;
     transform: translateY(20%);
+
     header {
-        display: flex;
+        display        : flex;
         justify-content: center;
-        align-items: flex-end;
-        padding: 0.6rem 0.4rem 1.2rem;
+        align-items    : flex-end;
+        padding        : 0.6rem 0.4rem 1.2rem;
     }
-    
+
     .hd-l {
         margin-right: 0.2rem;
-        color: #696662;
-        font-size: 0.5rem;
-        line-height: 1;
+        color       : #696662;
+        font-size   : 0.5rem;
+        line-height : 1;
     }
 
     .hd-r {
-        display: inline-flex;
-        align-content: space-between;
+        display        : inline-flex;
+        align-content  : space-between;
         justify-content: space-between;
-        flex-wrap: wrap;
-        width: 2.5rem;
-        height: 2.5rem;
+        flex-wrap      : wrap;
+        width          : 2.5rem;
+        height         : 2.5rem;
 
         .square {
-            width: 1.2rem;
-            height: 1.2rem;
-            line-height: 1.2rem;
-            color: #fff;
-            font-size: .56rem;
-            font-weight: 600;
-            text-align: center;
+            width        : 1.2rem;
+            height       : 1.2rem;
+            line-height  : 1.2rem;
+            color        : #fff;
+            font-size    : .56rem;
+            font-weight  : 600;
+            text-align   : center;
             border-radius: 0.08rem;
 
             &_1 {
                 background-color: #f4e4db;
             }
+
             &_2 {
                 background-color: #ca850e;
-                transform: translate(16%, -15%) rotate(-30deg);
+                transform       : translate(16%, -15%) rotate(-30deg);
             }
+
             &_3 {
                 background-color: #deb628;
             }
+
             &_4 {
                 background-color: #d3a685;
             }
@@ -52,37 +56,41 @@
     }
 
     li {
-        display: flex;
+        display        : flex;
         justify-content: center;
-        align-items: center;
+        align-items    : center;
 
-        & + li {
+        &+li {
             margin-top: 0.6rem;
         }
     }
 
     .btn {
-        width: 4.2rem;
-        height: 1rem;
-        line-height: 1rem;
+        width           : 4.2rem;
+        height          : 1rem;
+        line-height     : 1rem;
         background-color: #f89e62;
-        color: #fff;
-        font-size: 0.32rem;
-        font-weight: 600;
-        border-radius: 0.08rem;
-        letter-spacing: 0.02rem;
+        color           : #fff;
+        font-size       : 0.32rem;
+        font-weight     : 600;
+        border-radius   : 0.08rem;
+        letter-spacing  : 0.02rem;
     }
 
     footer {
-        margin: 0 0.8rem;
-        color: #8f8e8c;
-        font-size: 0.2rem;
+        margin     : 0 0.8rem;
+        color      : #8f8e8c;
+        font-size  : 0.2rem;
         line-height: 0.44rem;
-        text-align: center;
-        word-wrap: break-word;
+        text-align : center;
+        word-wrap  : break-word;
     }
 
     .link {
         color: #366dd8;
+    }
+
+    .nav {
+        margin: 0 0.1rem;
     }
 }
