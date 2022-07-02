@@ -1,7 +1,7 @@
 <!--
  * @Author: fantiga
  * @Date: 2022-07-02 15:40:37
- * @LastEditTime: 2022-07-02 17:03:56
+ * @LastEditTime: 2022-07-02 17:12:23
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/CHANGELOG.md
@@ -26,11 +26,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Feature/compile by [@FantiGA] in https://github.com/BlueSpaceTeam/2048-react/pull/2
+- Feature/compile by [@timtimwen] in https://github.com/BlueSpaceTeam/2048-react/pull/2
 
 ### New Contributors
 
-- [@FantiGA] made their first contribution in https://github.com/BlueSpaceTeam/2048-react/pull/2
+- [@timtimwen] made their first contribution in https://github.com/BlueSpaceTeam/2048-react/pull/2
 
 ## [1.4.0] - 2022-06-22
 
