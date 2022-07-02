@@ -1,7 +1,7 @@
 <!--
  * @Author: fantiga
  * @Date: 2022-07-02 15:40:37
- * @LastEditTime: 2022-07-02 16:47:12
+ * @LastEditTime: 2022-07-02 17:02:29
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/CHANGELOG.md
@@ -26,11 +26,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Feature/compile by @FantiGA in https://github.com/BlueSpaceTeam/2048-react/pull/2
+- Feature/compile by [@FantiGA] in https://github.com/BlueSpaceTeam/2048-react/pull/2
 
 ### New Contributors
 
-- @FantiGA made their first contribution in https://github.com/BlueSpaceTeam/2048-react/pull/2
+- [@FantiGA] made their first contribution in https://github.com/BlueSpaceTeam/2048-react/pull/2
 
 ## [1.4.0] - 2022-06-22
 
@@ -75,7 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Init the whole game and basic page structure by @swancai in https://github.com/BlueSpaceTeam/2048-react/pull/1
+- Init the whole game and basic page structure by [@swancai] in https://github.com/BlueSpaceTeam/2048-react/pull/1
 - Made a project icon.
 - Implemented reading and writing between backend and SQLite database with Python.
 
@@ -84,7 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Problems with cross-domain communication.
 
 ### New Contributors
-- @swancai made their first contribution in https://github.com/BlueSpaceTeam/2048-react/pull/1
+- [@swancai] made their first contribution in https://github.com/BlueSpaceTeam/2048-react/pull/1
 
 [2.0.0]: https://github.com/BlueSpaceTeam/2048-react/compare/v1.4.0...v2.0.0
 [1.4.0]: https://github.com/BlueSpaceTeam/2048-react/compare/v1.3.0...v1.4.0
