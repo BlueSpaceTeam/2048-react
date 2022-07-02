@@ -1,10 +1,10 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-07-01 15:36:47
- * @LastEditors: swancai
+ * @LastEditTime: 2022-07-02 15:20:29
+ * @LastEditors: fantiga
  * @Description:
- * @FilePath: \ts\2048-react\react\src\pages\Game.tsx
+ * @FilePath: /2048-react/react/src/pages/Game.tsx
  */
 
 import { useState, useEffect } from 'react';
@@ -74,7 +74,7 @@ const Game: React.FC = (props) => {
   const [act, setAct] = useState<string>('new');
   // btn-undo是否可点击
   const disabledUndo: boolean = isOver || history.length <= 1 || act != 'move';
-  
+
   // 音效播放，isMuted默认false（不静音）
   const [isMuted, setMuted] = useState<boolean>(false);
   const [playSfx] = useSound(beepSfx, { soundEnabled: !isMuted });
@@ -104,8 +104,9 @@ const Game: React.FC = (props) => {
     // 生成移动结果及得分
     const { arr = [], scoreDelta = 0 } = getMoveResult(
       direction,
-      currentHistory.squares!.slice()
+      currentHistory.squares?.slice()
     );
+
     // 如果完全相同，则不发生变化
     if (JSON.stringify(currentHistory.squares) === JSON.stringify(arr)) {
       // 从垂直于当前操作方向的方向来检查是否仍然有机会合并，如果没有则认为游戏结束
@@ -123,6 +124,7 @@ const Game: React.FC = (props) => {
 
     // 播放音效
     playSfx();
+
     // 随机生成方块并替换当前历史
     const { idx: idxNew, arr: squareNew } = genNewNum(arr);
     const newHistory: IAHistoryOfSquares[] = history.slice();

@@ -1,7 +1,7 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-07-01 19:28:54
+ * @LastEditTime: 2022-07-02 15:19:31
  * @LastEditors: fantiga
  * @Description:
  * @FilePath: /2048-react/react/src/pages/Home.tsx
@@ -38,8 +38,7 @@ const Home: React.FC = () => {
 
   // 自动判断用户语言
   useEffect(() => {
-    const user_lang: string = navigator.language;
-    switch (user_lang) {
+    switch (navigator.language) {
       case 'en-US': // 英语-美国
       case 'en-AU': // 英语-澳洲
       case 'en-BZ': // 英语-伯利兹
