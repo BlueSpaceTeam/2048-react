@@ -1,7 +1,7 @@
 <!--
  * @Author: fantiga
  * @Date: 2022-06-16 12:51:39
- * @LastEditTime: 2022-07-02 17:00:41
+ * @LastEditTime: 2022-07-02 17:08:45
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/README.zh-CN.md
@@ -35,7 +35,7 @@
 
 ## 变更日志
 
-[变更日志](https://github.com/BlueSpaceTeam/2048-react/blob/main/CHANGELOG.md)
+[变更日志](CHANGELOG.md)
 
 ## 维护者
 

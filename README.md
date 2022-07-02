@@ -1,7 +1,7 @@
 <!--
  * @Author: fantiga
  * @Date: 2022-06-22 17:27:34
- * @LastEditTime: 2022-07-02 17:00:29
+ * @LastEditTime: 2022-07-02 17:08:19
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/README.md
@@ -35,7 +35,7 @@ Welcome to 2048-react. An online digital game written in React18, Typescript, Py
 
 ## Changelog
 
-[Changelog](https://github.com/BlueSpaceTeam/2048-react/blob/main/CHANGELOG.md)
+[Changelog](CHANGELOG.md)
 
 ## Maintainers
 
