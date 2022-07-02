@@ -1,7 +1,7 @@
 <!--
  * @Author: fantiga
  * @Date: 2022-06-16 12:51:39
- * @LastEditTime: 2022-06-22 17:28:17
+ * @LastEditTime: 2022-07-02 17:00:43
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/README.zh-TW.md
@@ -20,7 +20,7 @@
 ## 目錄
 
 - [用法](#用法)
-- [待辦事項](#待辦事項)
+- [變更日誌](#變更日誌)
 - [維護者](#維護者)
 - [貢獻](#貢獻)
 - [執照](#執照)
@@ -33,12 +33,15 @@
 4. 相同編號的瓷磚在接觸時會合二為一。
 5. 將它們加起來達到 2048！
 
-## 待辦事項
+## 變更日誌
+
+[變更日誌](https://github.com/BlueSpaceTeam/2048-react/blob/main/CHANGELOG.md)
 
 ## 維護者
 
 [@swancai](https://github.com/swancai)
 [@FantiGA](https://github.com/FantiGA)
+[@timtimwen](https://github.com/timtimwen)
 
 ## 貢獻
 

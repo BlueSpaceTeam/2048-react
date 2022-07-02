@@ -1,7 +1,7 @@
 <!--
  * @Author: fantiga
  * @Date: 2022-06-16 12:51:39
- * @LastEditTime: 2022-06-22 17:28:21
+ * @LastEditTime: 2022-07-02 16:59:44
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/README.ja.md
@@ -20,7 +20,7 @@
 ## 目次
 
 - [使用法](#使用法)
-- [やること](#やること)
+- [変更ログ](#変更ログ)
 - [メンテナ](#メンテナ)
 - [貢献](#貢献)
 - [ライセンス](#ライセンス)
@@ -33,12 +33,15 @@
 4. 同じ番号のタイルは、触れると1つに統合されます。
 5. それらを合計して2048に到達します！
 
-## やること
+## 変更ログ
+
+[変更ログ](https://github.com/BlueSpaceTeam/2048-react/blob/main/CHANGELOG.md)
 
 ## メンテナ
 
 [@swancai](https://github.com/swancai)
 [@FantiGA](https://github.com/FantiGA)
+[@timtimwen](https://github.com/timtimwen)
 
 ## 貢献
 

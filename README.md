@@ -1,3 +1,11 @@
+<!--
+ * @Author: fantiga
+ * @Date: 2022-06-22 17:27:34
+ * @LastEditTime: 2022-07-02 17:00:29
+ * @LastEditors: fantiga
+ * @Description: 
+ * @FilePath: /2048-react/README.md
+-->
 # 2048-react
 
 - [English](README.md)
@@ -12,7 +20,7 @@ Welcome to 2048-react. An online digital game written in React18, Typescript, Py
 ## Table of Contents
 
 - [Usage](#usage)
-- [Todo](#todo)
+- [Changelog](#changelog)
 - [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
@@ -25,14 +33,15 @@ Welcome to 2048-react. An online digital game written in React18, Typescript, Py
 4. Tiles with the same number merge into one when they touch.
 5. Add them up to reach 2048!
 
-## Todo
+## Changelog
 
-Nothing is here.
+[Changelog](https://github.com/BlueSpaceTeam/2048-react/blob/main/CHANGELOG.md)
 
 ## Maintainers
 
 [@swancai](https://github.com/swancai)
 [@FantiGA](https://github.com/FantiGA)
+[@timtimwen](https://github.com/timtimwen)
 
 ## Contributing
 
