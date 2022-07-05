@@ -1,0 +1,2 @@
+<!--index.wxml-->
+<web-view src="http://2048.ued.team/"></web-view>
