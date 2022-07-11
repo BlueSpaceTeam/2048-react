@@ -1,7 +1,7 @@
 <!--
  * @Author: fantiga
  * @Date: 2022-07-02 15:40:37
- * @LastEditTime: 2022-07-02 17:20:55
+ * @LastEditTime: 2022-07-11 17:55:41
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/CHANGELOG.md
@@ -27,6 +27,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
+
+## [2.1.0] - 2022-07-11
+
+### Changed
+
+- Update from http to https.
 
 ## [2.0.0] - 2022-06-23
 
@@ -100,7 +106,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### New Contributors
 - [@swancai] made their first contribution in https://github.com/BlueSpaceTeam/2048-react/pull/1
 
-[Unreleased]: https://github.com/BlueSpaceTeam/2048-react/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/BlueSpaceTeam/2048-react/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/BlueSpaceTeam/2048-react/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/BlueSpaceTeam/2048-react/compare/v1.4.0...v2.0.0
 [1.4.0]: https://github.com/BlueSpaceTeam/2048-react/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/BlueSpaceTeam/2048-react/compare/v1.2.0...v1.3.0
