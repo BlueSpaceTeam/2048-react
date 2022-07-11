@@ -9,7 +9,7 @@
 
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://2048.ued.team/server';
+axios.defaults.baseURL = 'https://2048.ued.team/server';
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 

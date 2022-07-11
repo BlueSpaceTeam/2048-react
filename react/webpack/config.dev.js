@@ -27,7 +27,7 @@ module.exports = merge(baseConfig, {
     historyApiFallback: true,
     proxy: {
       '/query': {
-        target: 'http://2048.ued.team/server',
+        target: 'https://2048.ued.team/server',
         changeOrigin: true,
         pathRewrite: {
           '^/query': '',

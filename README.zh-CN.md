@@ -27,7 +27,7 @@
 
 ## 用法
 
-1. 打开 [http://2048.ued.team/](http://2048.ued.team/).
+1. 打开 [https://2048.ued.team/](https://2048.ued.team/).
 2. 触碰 `Play` 开始游戏，点击 `Ranking` 查看全球排名。
 3. 使用 `arrow keys` 或滑动屏幕移动瓷砖。
 4. 相同编号的瓷砖在接触时会合二为一。
