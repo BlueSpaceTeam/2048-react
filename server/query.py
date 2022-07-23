@@ -1,18 +1,20 @@
 '''
 Author: fantiga
 Date: 2022-06-02 18:05:59
-LastEditTime: 2022-06-23 18:53:41
+LastEditTime: 2022-07-23 16:43:53
 LastEditors: fantiga
 Description:
 FilePath: /2048-react/server/query.py
 '''
 
-from flask import Flask, request as flask_request
-import flask
+import json
 import os
 import sqlite3
 import time
-import json
+
+import flask
+from flask import Flask
+from flask import request as flask_request
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -21,7 +23,6 @@ app = Flask(__name__)
     跨域支持
  """
 CORS(app, resources=r'/*')
-
 
 headers = {
     'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -139,16 +140,16 @@ def query():
 
         # 拼接sql语句
         sql = "INSERT INTO \"main\".\"bs_2048_server_rankdata\" (\"user_name\", \"user_score\", \"created_time\", \"user_ip\", \"user_agent\", \"time_spent\") VALUES('" + \
-            user_name + "', '" + \
-            str(user_score) + "', '" + now + "', '" + \
-            user_ip + "', '" + user_agent + "', '" + str(time_spent) + "')"
+              user_name + "', '" + \
+              str(user_score) + "', '" + now + "', '" + \
+              user_ip + "', '" + user_agent + "', '" + str(time_spent) + "')"
 
         # 最新的id
         lastrowid = db.insertTableData(sql)
 
         # 获取排名值
         sql = "SELECT COUNT(*) FROM (SELECT * FROM \"main\".\"bs_2048_server_rankdata\" WHERE \"user_score\" > '" + \
-            str(user_score) + "' GROUP BY user_score)"
+              str(user_score) + "' GROUP BY user_score)"
         rank_num = db.selectRankNum(sql)
 
         db.closeDatabase()
