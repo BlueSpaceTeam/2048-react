@@ -1,7 +1,7 @@
 <!--
  * @Author: fantiga
  * @Date: 2022-06-16 12:51:39
- * @LastEditTime: 2022-07-02 17:08:51
+ * @LastEditTime: 2022-08-31 15:31:12
  * @LastEditors: fantiga
  * @Description: 
  * @FilePath: /2048-react/README.ja.md
@@ -27,9 +27,9 @@
 
 ## 使用法
 
-1. 開ける [https://2048.ued.team/](https://2048.ued.team/)。
+1. [https://2048.ued.team/](https://2048.ued.team/) へアクセスする。
 2. `Play` をタッチすると、ゲームを開始し、`Ranking` をタッチすると、グローバルランキングが表示されます。
-3. 使用`arrow keys`または、画面をスワイプしてタイルを移動します。
+3. 使用 `arrow keys` または、画面をスワイプしてタイルを移動します。
 4. 同じ番号のタイルは、触れると1つに統合されます。
 5. それらを合計して2048に到達します！
 
