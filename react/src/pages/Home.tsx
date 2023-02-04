@@ -1,7 +1,7 @@
 /*
  * @Author: swancai
  * @Date: 2022-05-24 16:58:00
- * @LastEditTime: 2022-07-02 16:53:20
+ * @LastEditTime: 2023-02-04 19:16:38
  * @LastEditors: fantiga
  * @Description:
  * @FilePath: /2048-react/react/src/pages/Home.tsx
@@ -132,9 +132,10 @@ const Home: React.FC = () => {
           <a className="link" href="https://github.com/BlueSpaceTeam">
             @BlueSpaceTeam
           </a>
-          , since Apr 28, 2022.
+          , 2022 - Present.
         </p>
         <p>Written in React18 / Typescript / Python3 / SQLite3.</p>
+        <p>v2.1.1 2023-02-04</p>
       </footer>
     </div>
   );
