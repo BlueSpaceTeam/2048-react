@@ -1,11 +1,3 @@
-<!--
- * @Author: fantiga
- * @Date: 2022-06-16 12:51:39
- * @LastEditTime: 2022-08-31 15:31:12
- * @LastEditors: fantiga
- * @Description: 
- * @FilePath: /2048-react/README.ja.md
--->
 # 2048-react
 
 - [English](README.md)
@@ -19,11 +11,13 @@
 
 ## 目次
 
-- [使用法](#使用法)
-- [変更ログ](#変更ログ)
-- [メンテナ](#メンテナ)
-- [貢献](#貢献)
-- [ライセンス](#ライセンス)
+- [2048-react](#2048-react)
+  - [目次](#目次)
+  - [使用法](#使用法)
+  - [変更ログ](#変更ログ)
+  - [メンテナ](#メンテナ)
+  - [貢献](#貢献)
+  - [ライセンス](#ライセンス)
 
 ## 使用法
 
@@ -49,4 +43,4 @@
 
 ## ライセンス
 
-[MIT](LICENSE)  © 2022 [@BlueSpaceTeam](https://github.com/BlueSpaceTeam)
+[MIT](LICENSE)  © 2022 - Present [@BlueSpaceTeam](https://github.com/BlueSpaceTeam)

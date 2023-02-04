@@ -1,11 +1,3 @@
-<!--
- * @Author: fantiga
- * @Date: 2022-06-22 17:27:34
- * @LastEditTime: 2022-07-11 17:27:54
- * @LastEditors: fantiga
- * @Description: 
- * @FilePath: /2048-react/README.md
--->
 # 2048-react
 
 - [English](README.md)
@@ -19,11 +11,13 @@ Welcome to 2048-react. An online digital game written in React18, Typescript, Py
 
 ## Table of Contents
 
-- [Usage](#usage)
-- [Changelog](#changelog)
-- [Maintainers](#maintainers)
-- [Contributing](#contributing)
-- [License](#license)
+- [2048-react](#2048-react)
+  - [Table of Contents](#table-of-contents)
+  - [Usage](#usage)
+  - [Changelog](#changelog)
+  - [Maintainers](#maintainers)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Usage
 
@@ -49,4 +43,4 @@ Welcome to 2048-react. An online digital game written in React18, Typescript, Py
 
 ## License
 
-[MIT](LICENSE)  © 2022 [@BlueSpaceTeam](https://github.com/BlueSpaceTeam)
+[MIT](LICENSE)  © 2022 - Present [@BlueSpaceTeam](https://github.com/BlueSpaceTeam)

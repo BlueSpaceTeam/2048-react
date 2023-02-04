@@ -1,14 +1,22 @@
 /*
  * @Author: fantiga
  * @Date: 2022-06-28 10:39:12
- * @LastEditTime: 2022-07-01 18:32:06
+ * @LastEditTime: 2023-02-04 18:31:40
  * @LastEditors: fantiga
  * @Description:
  * @FilePath: /2048-react/react/src/utils/i18n.tsx
  */
 
+// import 'i18next';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+
+// declare custom type options so the return is always a string.
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    returnNull: false;
+  }
+}
 
 // the translations
 // (tip move them in a JSON file and import them,
@@ -40,6 +48,9 @@ i18n
     lng: 'en_US', // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
     // you can use the i18n.changeLanguage function to change the language manually: https://www.i18next.com/overview/api#changelanguage
     // if you're using a language detector, do not define the lng option
+
+    // fixed the TypeScript's return null bug.
+    returnNull: false,
 
     interpolation: {
       escapeValue: false, // react already safes from xss

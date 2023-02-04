@@ -1,12 +1,3 @@
-<!--
- * @Author: fantiga
- * @Date: 2022-07-02 15:40:37
- * @LastEditTime: 2022-07-11 17:55:41
- * @LastEditors: fantiga
- * @Description: 
- * @FilePath: /2048-react/CHANGELOG.md
--->
-
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -27,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
+
+## [2.1.1] - 2023-02-04
+
+### Changed
+
+- Fixed a bug about `TypeScript` in the `react-i18next` module.
 
 ## [2.1.0] - 2022-07-11
 
